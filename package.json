@@ -1,0 +1,19 @@
+{
+  "name": "devcourses-store",
+  "version": "1.0.0",
+  "description": "**DevCourses Store** es un proyecto **full-stack e-commerce** para la venta de **cursos de programación online**.  \r Está desarrollado como **trabajo final** del curso Fullstack Nivel 2 en **Academia ForIT**.",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}
