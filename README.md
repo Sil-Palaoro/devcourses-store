@@ -20,8 +20,7 @@ Su objetivo es mostrar el **flujo de compra de cursos online**.
 
 ## 📂 Estructura del proyecto
 
-yaml
-Copiar código
+```
 
 devcourses-store/
 ├── domain/
@@ -42,7 +41,7 @@ devcourses-store/
 ├── package.json
 └── README.md
 
-yaml
+```
 
 ---
 
