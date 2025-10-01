@@ -13,7 +13,7 @@ export interface Course extends Entity {
     name: string;
     description: string;
     price: number;
-    category: Category["id"];
+    category: Category["name"];
     level: CourseLevel;
     imageUrl: string;
     published: boolean;
