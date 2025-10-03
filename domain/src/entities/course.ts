@@ -1,5 +1,4 @@
 import type { Entity } from "../utils/index.js";
-import type { Category } from "./category.js";
 
 export const CourseLevels = {
     BEGINNER: "beginner",
@@ -13,7 +12,7 @@ export interface Course extends Entity {
     title: string;
     description: string;
     price: number;
-    categoryId: Category["id"];
+    categoryId: Entity["id"];
     courseLevel: CourseLevel;
     published: boolean;
     instructorId: Entity["id"];
