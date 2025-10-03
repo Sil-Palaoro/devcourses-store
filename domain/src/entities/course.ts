@@ -10,12 +10,14 @@ export const CourseLevels = {
 export type CourseLevel = (typeof CourseLevels)[keyof typeof CourseLevels]; 
 
 export interface Course extends Entity {
-    name: string;
+    title: string;
     description: string;
     price: number;
-    category: Category["name"];
-    level: CourseLevel;
-    imageUrl: string;
+    categoryId: Category["id"];
+    courseLevel: CourseLevel;
     published: boolean;
     instructorId: Entity["id"];
+    tags: string[];
+    createdAt: Date;
+    updatedAt: Date;
 };
