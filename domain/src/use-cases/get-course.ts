@@ -6,7 +6,11 @@ interface GetCourseData {
     payload: {id: string}
 };
 
-export async function getCourse({dependencies, payload}: GetCourseData) {
+export async function getCourse({dependencies, payload}: GetCourseData) {   
+
     const course = await dependencies.courseService.getById(payload.id)
+
+    if (!course) return new Error();
+
     return  course;
 };

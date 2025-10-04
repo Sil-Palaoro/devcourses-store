@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { getCourse } from "./get-course";
-import { courseService } from "../services/course-service"
+import { courseService } from "../services/course-service";
 
 
 describe("getCourse", async () =>{
@@ -23,5 +23,11 @@ describe("getCourse", async () =>{
         })
     })
 
-    test("Given an invalid id, should return an error", async () => {})
+    test("Given an invalid id, should return an error", async () => {
+        const result = await getCourse({
+            dependencies: {courseService},
+            payload: {id: "4"}}
+        ); 
+        expect(result).toBeInstanceOf(Error)
+    })
 });
