@@ -17,6 +17,6 @@ export interface Course extends Entity {
     published: boolean;
     instructorId: Entity["id"];
     tags: string[];
-    createdAt: Date;
-    updatedAt: Date;
+    // createdAt: Date;
+    // updatedAt: Date;
 };
