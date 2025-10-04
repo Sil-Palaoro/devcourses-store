@@ -1,8 +1,5 @@
-import { Course } from "src/entities";
+import { CourseService } from "src/services/course-service";
 
-interface CourseService {
-    getById: (id: string) => Promise<Course | undefined>;
-}
 
 interface GetCourseData {
     dependencies: {courseService: CourseService};
