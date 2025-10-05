@@ -32,3 +32,5 @@ export const dataCourses: Course[] = [
     tags: ["sql"]
     }
 ];
+
+export const emptyDataCourses: Course[] = []
