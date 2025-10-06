@@ -12,11 +12,11 @@ export const dataCourses: Course[] = [
     tags: ["javascript"]
     },
     {id: "2",
-    title: "Python para principiantes",
-    description: "Aprende Python desde 0",
+    title: "Python nivel intermedio",
+    description: "Aprende Python nivel intermedio",
     price: 30000,
     categoryId: "2",
-    courseLevel: "beginner",
+    courseLevel: "intermediate",
     published: true,
     instructorId: "1",
     tags: ["python"]
