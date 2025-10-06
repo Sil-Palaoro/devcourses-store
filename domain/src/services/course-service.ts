@@ -1,6 +1,7 @@
-import { Course } from "src/entities";
+import { Course, CourseLevel } from "src/entities";
+import { Service } from "src/utils/types/service";
 
-export interface CourseService {
-    getById: (id: string) => Promise<Course | undefined>;
-    getAll: () => Promise<Course[]>
+export interface CourseService extends Service<Course> {
+    getByTag: (tag: string) => Promise<Course[]>;
+    getByCourseLevel: (courseLevel: CourseLevel) => Promise<Course[]>
 };
