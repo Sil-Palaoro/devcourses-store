@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { getCourse } from "./get-course";
-import { courseService } from "../services/mocks/course-service-mock";
+import { courseService } from "../../services/mocks/course-service-mock";
 
 
 describe("getCourse", async () =>{
