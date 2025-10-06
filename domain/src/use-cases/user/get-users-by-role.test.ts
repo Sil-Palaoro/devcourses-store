@@ -32,6 +32,12 @@ describe("getUsersByRole", async () =>{
              email: "aye@gmail.com",
              role: "student",
             },
+            {id: "5",
+             name: "juli",
+             surname: "Pala",
+             email: "juli@gmail.com",
+             role: "student",
+            },
         ])
     })
 

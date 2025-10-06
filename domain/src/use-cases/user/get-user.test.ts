@@ -22,7 +22,7 @@ describe("getUser", async () =>{
     test("Given an invalid id, should return an error", async () => {
         const result = await getUser({
             dependencies: {userService},
-            payload: {id: "4"}}
+            payload: {id: "6"}}
         ); 
         expect(result).toBeInstanceOf(Error)
     })
