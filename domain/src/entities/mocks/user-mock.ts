@@ -18,7 +18,19 @@ export const dataUsers: SafeUser[] = [
      surname: "Dea",
      email: "oli@gmail.com",
      role: "instructor",
-    }
+    },
+    {id: "4",
+     name: "silvina",
+     surname: "Oro",
+     email: "silvinaoro@gmail.com",
+     role: "instructor",
+    },
+    {id: "5",
+     name: "juli",
+     surname: "Pala",
+     email: "juli@gmail.com",
+     role: "student",
+    },
 ];
 
 export const emptyDataUsers: SafeUser[] = []
