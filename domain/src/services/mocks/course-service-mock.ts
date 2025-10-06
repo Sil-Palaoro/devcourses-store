@@ -1,4 +1,4 @@
-import { Course, CourseLevel } from "src/entities";
+import { Course, CourseLevel, Tag } from "src/entities";
 import { dataCourses } from "../../entities/mocks/course-mock";
 
 export const courseService = {
@@ -8,9 +8,9 @@ export const courseService = {
         getAll: async () => {
             return dataCourses;
         },
-        getByTag: async (tag: string) => {
+        getByTag: async (tag: Tag) => {
                     let coursesByTags: Course[] = [];
-                    dataCourses.map((course: Course) => {if (tag in course.tags ) {coursesByTags.push(course)}});
+                    dataCourses.map((course: Course) => {if (course.tag == tag) {coursesByTags.push(course)}});
                     return coursesByTags;
         },
         getByCourseLevel: async (courseLevel: CourseLevel) => {
