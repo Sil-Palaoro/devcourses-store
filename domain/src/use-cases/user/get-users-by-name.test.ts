@@ -1,0 +1,44 @@
+import { describe, expect, test } from "vitest";
+import { getUsersByName } from "./get-users-by-name"
+import { userService } from "../../services/mocks/user-service-mock";
+
+
+describe("getUsersByName", async () =>{
+
+    test("Should return the list of users with the same name", async () => {
+        const result = await getUsersByName({
+            dependencies: {userService},
+            payload: {name: "silvina"}}
+            ); 
+        expect(result).toStrictEqual([
+            {id: "1",
+             name: "silvina",
+             surname: "Pal",
+             email: "silvi@gmail.com",
+             role: "admin",
+            }, 
+            {id: "4",
+             name: "silvina",
+             surname: "Oro",
+             email: "silvinaoro@gmail.com",
+             role: "instructor",
+            },           
+        ])
+    })
+
+    // test("Should return the list of users with role: student", async () => {
+    //     const result = await getUsersByRole({
+    //         dependencies: {userService},
+    //         payload: {role: "student"}}
+    //         ); 
+    //     expect(result).toStrictEqual([
+    //         {id: "2",
+    //          name: "aye",
+    //          surname: "Pala",
+    //          email: "aye@gmail.com",
+    //          role: "student",
+    //         },
+    //     ])
+    // })
+
+});
