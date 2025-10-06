@@ -20,8 +20,9 @@ export const userService = {
             return usersByName;
         },
         getBySurname: async (surname: string) => {
-            return dataUsers.find((user: SafeUser) => user.surname == surname);
-        },
+            let usersBySurname: SafeUser[] = [];
+            dataUsers.map((user: SafeUser) => {if (user.surname == surname) {usersBySurname.push(user)}});
+            return usersBySurname;        },
         getByEmail: async (email: string) => {
             return dataUsers.find((user: SafeUser) => user.email == email);
         }
