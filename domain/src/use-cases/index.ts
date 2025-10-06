@@ -6,5 +6,5 @@ export * from "./user/get-user.js";
 export * from "./user/get-user-list.js";
 export * from "./user/get-users-by-role.js";
 export * from "./user/get-users-by-name.js";
-//export * from "./user/get-user-by-surname.js";
+export * from "./user/get-users-by-surname.js";
 export * from "./user/get-user-by-email.js";
