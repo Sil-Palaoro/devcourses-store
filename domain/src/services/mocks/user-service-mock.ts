@@ -1,24 +1,12 @@
-import { SafeUser } from "src/entities/user";
+import { SafeUser } from "src/entities";
+import { dataUsers, emptyDataUsers } from "../../entities/mocks/user-mock";
 
-export const dataUsers: SafeUser[] = [
-    {id: "1",
-     name: "silvina",
-     surname: "Pal",
-     email: "silvi@gmail.com",
-     role: "admin",
-    },
-    {id: "2",
-     name: "aye",
-     surname: "Pala",
-     email: "aye@gmail.com",
-     role: "student",
-    },
-    {id: "3",
-     name: "olivia",
-     surname: "Dea",
-     email: "oli@gmail.com",
-     role: "instructor",
-    }
-];
 
-export const emptyDataUsers: SafeUser[] = []
+export const userService = {
+        getById: async (id: string) => {
+            return dataUsers.find((user: SafeUser) => user.id == id );
+        },
+        getAll: async () => {
+            return dataUsers;
+        }
+    };

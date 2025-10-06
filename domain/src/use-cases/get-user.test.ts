@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { userService } from "../services/user-service";
+import { userService } from "../services/mocks/user-service-mock";
 import { getUser } from "./get-user";
 
 
