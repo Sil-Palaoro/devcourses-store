@@ -7,8 +7,8 @@ describe("getCourseList", async () =>{
 
     test("Should return the list of courses", async () => {
         const result = await getCourseList({dependencies: {courseService}}); 
-        expect(result).toStrictEqual([{
-            id: "1",
+        expect(result).toStrictEqual([    
+            {id: "1",
             title: "Javascript para principiantes",
             description: "Aprende Javascript desde 0",
             price: 30000,
@@ -16,7 +16,7 @@ describe("getCourseList", async () =>{
             courseLevel: "beginner",
             published: true,
             instructorId: "1",
-            tags: ["javascript"],
+            tag: "javascript",
             },
             {id: "2",
             title: "Python nivel intermedio",
@@ -26,7 +26,7 @@ describe("getCourseList", async () =>{
             courseLevel: "intermediate",
             published: true,
             instructorId: "1",
-            tags: ["python"]
+            tag: "python"
             },
             {id: "3",
             title: "SQL para principiantes",
@@ -36,7 +36,7 @@ describe("getCourseList", async () =>{
             courseLevel: "beginner",
             published: true,
             instructorId: "1",
-            tags: ["sql"]
+            tag: "sql"
             }
         ])
     })

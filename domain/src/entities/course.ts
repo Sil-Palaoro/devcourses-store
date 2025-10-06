@@ -8,6 +8,15 @@ export const CourseLevels = {
 
 export type CourseLevel = (typeof CourseLevels)[keyof typeof CourseLevels]; 
 
+export const Tags = {
+    JAVASCRIPT: "javascript",
+    PYTHON: "python",
+    SQL: "sql",
+} as const;
+
+export type Tag = (typeof Tags)[keyof typeof Tags]; 
+
+
 export interface Course extends Entity {
     title: string;
     description: string;
@@ -16,7 +25,7 @@ export interface Course extends Entity {
     courseLevel: CourseLevel;
     published: boolean;
     instructorId: Entity["id"];
-    tags: string[];
+    tag: Tag;
     // createdAt: Date;
     // updatedAt: Date;
 };

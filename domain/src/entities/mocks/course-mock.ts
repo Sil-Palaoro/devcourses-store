@@ -9,7 +9,7 @@ export const dataCourses: Course[] = [
     courseLevel: "beginner",
     published: true,
     instructorId: "1",
-    tags: ["javascript"]
+    tag: "javascript",
     },
     {id: "2",
     title: "Python nivel intermedio",
@@ -19,7 +19,7 @@ export const dataCourses: Course[] = [
     courseLevel: "intermediate",
     published: true,
     instructorId: "1",
-    tags: ["python"]
+    tag: "python"
     },
     {id: "3",
     title: "SQL para principiantes",
@@ -29,7 +29,7 @@ export const dataCourses: Course[] = [
     courseLevel: "beginner",
     published: true,
     instructorId: "1",
-    tags: ["sql"]
+    tag: "sql"
     }
 ];
 

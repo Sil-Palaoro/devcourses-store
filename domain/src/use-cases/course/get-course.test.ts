@@ -19,7 +19,7 @@ describe("getCourse", async () =>{
             courseLevel: "beginner",
             published: true,
             instructorId: "1",
-            tags: ["javascript"],
+            tag: "javascript",
         })
     })
 
