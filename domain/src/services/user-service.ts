@@ -3,7 +3,7 @@ import { Service } from "src/utils/types/service";
 
 export interface UserService extends Service<SafeUser> {
     getByRole: (role: UserRole) => Promise<SafeUser[]>;
-    getByName: (name: string) => Promise<SafeUser | undefined>;
+    getByName: (name: string) => Promise<SafeUser[]>;
     getBySurname: (surname: string) => Promise<SafeUser | undefined>;
     getByEmail: (email: string) => Promise<SafeUser | undefined>;
 };

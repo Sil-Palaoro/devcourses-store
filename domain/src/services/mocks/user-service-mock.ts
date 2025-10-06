@@ -15,7 +15,9 @@ export const userService = {
             return usersByRole;
         },
         getByName: async (name: string) => {
-            return dataUsers.find((user: SafeUser) => user.name == name);
+            let usersByName: SafeUser[] = [];
+            dataUsers.map((user: SafeUser) => {if (user.name == name) {usersByName.push(user)}});
+            return usersByName;
         },
         getBySurname: async (surname: string) => {
             return dataUsers.find((user: SafeUser) => user.surname == surname);
