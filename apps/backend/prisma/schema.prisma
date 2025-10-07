@@ -1,9 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
@@ -12,4 +9,79 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  surname   String?
+  email     String   @unique
+  password  String
+  role      Role     @default(STUDENT)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  courses   Course[] @relation("InstructorCourses")
+  cart      Cart?
+}
+
+enum Role {
+  ADMIN
+  INSTRUCTOR
+  STUDENT
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  courses     Course[]
+}
+
+enum CourseLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum Tags {
+  JAVASCRIPT
+  PYTHON
+  SQL
+}
+
+model Course {
+  id           String      @id @default(cuid())
+  title        String
+  description  String?
+  price        Float
+  categoryId   String
+  category     Category    @relation(fields: [categoryId], references: [id])
+  courseLevel  CourseLevel
+  published    Boolean     @default(false)
+  instructor   User        @relation("InstructorCourses", fields: [instructorId], references: [id])
+  instructorId String
+  tags         Tags
+  cartItems    CartItem[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  @@index([categoryId])
+}
+
+model Cart {
+  id        String     @id @default(cuid())
+  userId    String     @unique
+  user      User       @relation(fields: [userId], references: [id])
+  items     CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model CartItem {
+  id       String @id @default(cuid())
+  cartId   String
+  courseId String
+  quantity Int    @default(1)
+  cart     Cart   @relation(fields: [cartId], references: [id])
+  course   Course @relation(fields: [courseId], references: [id])
 }
