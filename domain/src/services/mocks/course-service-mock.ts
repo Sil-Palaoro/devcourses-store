@@ -1,4 +1,4 @@
-import { Course, CourseLevel, Tag } from "src/entities";
+import { Course, CourseLevel, Tag } from "../../entities/course";
 import { dataCourses } from "../../entities/mocks/course-mock";
 
 export const courseService = {

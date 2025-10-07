@@ -1,5 +1,5 @@
-import { SafeUser, UserRole } from "src/entities";
-import { dataUsers, emptyDataUsers } from "../../entities/mocks/user-mock";
+import { SafeUser, User, UserRole } from "../../entities/user";
+import { dataUsers, newUsers } from "../../entities/mocks/user-mock";
 
 
 export const userService = {

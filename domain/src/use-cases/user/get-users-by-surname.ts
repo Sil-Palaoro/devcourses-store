@@ -1,4 +1,4 @@
-import { UserService } from "src/services";
+import { UserService } from "../../services/user-service";
 
 
 interface GetUsersDataBySurname {

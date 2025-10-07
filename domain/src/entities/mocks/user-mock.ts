@@ -1,4 +1,4 @@
-import { SafeUser } from "src/entities/user";
+import { SafeUser, User } from "../../entities/user";
 
 export const dataUsers: SafeUser[] = [
     {id: "1",
@@ -33,4 +33,6 @@ export const dataUsers: SafeUser[] = [
     },
 ];
 
-export const emptyDataUsers: SafeUser[] = []
+export const emptyDataUsers: SafeUser[] = [];
+
+export const newUsers: User[] = [];

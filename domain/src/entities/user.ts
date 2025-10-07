@@ -1,4 +1,4 @@
-import type { Entity } from "../utils/index.js"
+import type { Entity } from "../utils/types/entity"
 
 export const UserRoles = {
     ADMIN: "admin",
@@ -9,11 +9,11 @@ export const UserRoles = {
 export type UserRole = (typeof UserRoles)[keyof typeof UserRoles]; 
 
 export interface User extends Entity {
-    name: string;
-    surname: string;
-    email: string;
-    password: string;
-    role: UserRole;
+    name: string,
+    surname: string,
+    email: string,
+    password: string,
+    role: UserRole,
     // createdAt: Date;         //Commented to simplify first tests
     // updatedAt: Date;
 }

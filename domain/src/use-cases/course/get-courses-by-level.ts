@@ -1,5 +1,5 @@
-import { CourseLevel } from "src/entities";
-import { CourseService } from "src/services/course-service";
+import { CourseLevel } from "../../entities/course";
+import { CourseService } from "../../services/course-service";
 
 
 interface GetCourseDataByLevel {

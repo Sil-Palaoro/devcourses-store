@@ -1,4 +1,4 @@
-import { CourseService } from "src/services/course-service";
+import { CourseService } from "../../services/course-service";
 
 
 interface GetCourseData {

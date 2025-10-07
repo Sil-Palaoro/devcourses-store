@@ -1,4 +1,4 @@
-import type { Entity } from "../utils/index.js";
+import type { Entity } from "../utils/types/entity";
 
 export const CourseLevels = {
     BEGINNER: "beginner",

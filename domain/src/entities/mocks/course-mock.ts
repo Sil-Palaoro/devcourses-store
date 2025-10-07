@@ -1,4 +1,4 @@
-import { Course } from "src/entities";
+import { Course } from "../../entities/course";
 
 export const dataCourses: Course[] = [
     {id: "1",

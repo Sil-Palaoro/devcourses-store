@@ -1,5 +1,5 @@
-import { Tag } from "src/entities";
-import { CourseService } from "src/services/course-service";
+import { Tag } from "../../entities/course";
+import { CourseService } from "../../services/course-service";
 
 
 interface GetCourseDataByTag {

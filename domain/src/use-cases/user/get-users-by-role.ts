@@ -1,5 +1,5 @@
-import { UserRole } from "src/entities/user";
-import { UserService } from "src/services";
+import { UserRole } from "../../entities/user";
+import { UserService } from "../../services/user-service";
 
 
 interface GetUsersDataByRole {
