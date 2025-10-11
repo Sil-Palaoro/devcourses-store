@@ -1,6 +1,6 @@
 import { UserService } from "../../services/user-service";
 import { SafeUser } from "../../entities/user";
-import toSafeUser from "../../utils/to-safe-user";
+import { toSafeUser } from "../../utils/to-safe-user";
 
 
 interface GetUserData {
