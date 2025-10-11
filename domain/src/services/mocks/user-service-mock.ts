@@ -1,29 +1,19 @@
 import { SafeUser, User, UserRole } from "../../entities/user";
-import { dataUsers, newUsers } from "../../entities/mocks/user-mock";
+import { dataCompleteUsers } from "../../entities/mocks/user-mock";
+import { vi } from "vitest";
 
-
-export const userService = {
-        getAll: async () => {
-            return dataUsers;
-        },
-        getById: async (id: string) => {
-            return dataUsers.find((user: SafeUser) => user.id == id );
-        },        
-        getByRole: async (role: UserRole) => {
-            let usersByRole: SafeUser[] = [];
-            dataUsers.map((user: SafeUser) => {if (user.role == role) {usersByRole.push(user)}});
-            return usersByRole;
-        },
-        getByName: async (name: string) => {
-            let usersByName: SafeUser[] = [];
-            dataUsers.map((user: SafeUser) => {if (user.name == name) {usersByName.push(user)}});
-            return usersByName;
-        },
-        getBySurname: async (surname: string) => {
-            let usersBySurname: SafeUser[] = [];
-            dataUsers.map((user: SafeUser) => {if (user.surname == surname) {usersBySurname.push(user)}});
-            return usersBySurname;        },
-        getByEmail: async (email: string) => {
-            return dataUsers.find((user: SafeUser) => user.email == email);
-        }
+export const userServiceMock = {
+        getAll: async () => dataCompleteUsers,
+        getById: async (id: string) => dataCompleteUsers.find((u) => u.id == id ),        
+        getByRole: async (role: UserRole) =>
+            dataCompleteUsers.filter((u) => (u.role === role)),
+        getByName: async (name: string) =>
+            dataCompleteUsers.filter((u) => (u.name === name)),
+        getBySurname: async (surname: string) =>
+            dataCompleteUsers.filter((u) => (u.surname === surname)),
+        getByEmail: async (email: string) => 
+            dataCompleteUsers.find((u) => u.email == email),
+        create: vi.fn(async (user:User) => {
+            if (user) dataCompleteUsers.push(user); 
+        }),
     };
