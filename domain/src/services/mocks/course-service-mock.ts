@@ -1,7 +1,8 @@
 import { Course, CourseLevel, Tag } from "../../entities/course";
 import { dataCourses } from "../../entities/mocks/course-mock";
+import { vi } from "vitest";
 
-export const courseService = {
+export const courseServiceMock = {
         getById: async (id: string) => {
             return dataCourses.find((course: Course) => course.id == id );
         },
@@ -17,5 +18,12 @@ export const courseService = {
                     let coursesByLevel: Course[] = [];
                     dataCourses.map((course: Course) => {if (course.courseLevel == courseLevel) {coursesByLevel.push(course)}});
                     return coursesByLevel;
-        }
+        },
+        create: vi.fn(async (course:Course) => {
+            if (course) dataCourses.push(course); 
+        }),
+        delete: vi.fn(async (id: string) => {
+            const index = dataCourses.findIndex((u) => u.id === id);
+            if (index !== -1) dataCourses.splice(index, 1);
+        }),
     };
