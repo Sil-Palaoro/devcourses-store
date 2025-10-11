@@ -1,4 +1,6 @@
 import { UserService } from "../../services/user-service";
+import { SafeUser } from "../../entities/user";
+import toSafeUser from "../../utils/to-safe-user";
 
 
 interface GetUsersDataByName {
@@ -12,5 +14,7 @@ export async function getUsersByName({dependencies, payload}: GetUsersDataByName
 
     if (!users) return new Error();
 
-    return  users;
+    const usersView: SafeUser[] = users.map(toSafeUser)
+    
+    return usersView;
 };

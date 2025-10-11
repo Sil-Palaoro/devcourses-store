@@ -1,4 +1,6 @@
 import { UserService } from "../../services/user-service";
+import { SafeUser } from "../../entities/user";
+import toSafeUser from "../../utils/to-safe-user";
 
 
 interface GetUserList {
@@ -12,5 +14,7 @@ export async function getUserList({dependencies}: GetUserList) {
     if (allUsers.length === 0) 
         return new Error("No hay ningún usuario");
 
-    return allUsers;
+    const allUsersView: SafeUser[] = allUsers.map(toSafeUser)
+    
+    return allUsersView;
 };

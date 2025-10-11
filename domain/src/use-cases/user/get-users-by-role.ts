@@ -1,5 +1,6 @@
-import { UserRole } from "../../entities/user";
+import { UserRole, SafeUser } from "../../entities/user";
 import { UserService } from "../../services/user-service";
+import toSafeUser from "../../utils/to-safe-user";
 
 
 interface GetUsersDataByRole {
@@ -13,5 +14,7 @@ export async function getUsersByRole({dependencies, payload}: GetUsersDataByRole
 
     if (!users) return new Error();
 
-    return  users;
+    const usersView: SafeUser[] = users.map(toSafeUser)
+    
+    return usersView;
 };
