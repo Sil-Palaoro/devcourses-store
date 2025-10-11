@@ -1,13 +1,13 @@
 import { describe, expect, test } from "vitest";
 import { getCourse } from "./get-course";
-import { courseService } from "../../services/mocks/course-service-mock";
+import { courseServiceMock } from "../../services/mocks/course-service-mock";
 
 
 describe("getCourse", async () =>{
 
     test("Given an id, should return the course information", async () => {
         const result = await getCourse({
-            dependencies: {courseService},
+            dependencies: {courseService: courseServiceMock},
             payload: {id: "1"}}
         ); 
         expect(result).toStrictEqual({
@@ -25,7 +25,7 @@ describe("getCourse", async () =>{
 
     test("Given an invalid id, should return an error", async () => {
         const result = await getCourse({
-            dependencies: {courseService},
+            dependencies: {courseService: courseServiceMock},
             payload: {id: "4"}}
         ); 
         expect(result).toBeInstanceOf(Error)

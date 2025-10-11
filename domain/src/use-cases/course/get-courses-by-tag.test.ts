@@ -1,13 +1,13 @@
 import { describe, expect, test } from "vitest";
 import { getCoursesByTag } from "./get-courses-by-tag"
-import { courseService } from "../../services/mocks/course-service-mock";
+import { courseServiceMock } from "../../services/mocks/course-service-mock";
 
 
 describe("getCoursesByTag", async () =>{
 
     test("Should return the list of courses with the same tag: javascript", async () => {
         const result = await getCoursesByTag({
-            dependencies: {courseService},
+            dependencies: {courseService: courseServiceMock},
             payload: {tag: "javascript"}}
             ); 
         expect(result).toStrictEqual([
@@ -26,7 +26,7 @@ describe("getCoursesByTag", async () =>{
 
     test("Should return the list of courses with the same tag: python", async () => {
         const result = await getCoursesByTag({
-            dependencies: {courseService},
+            dependencies: {courseService: courseServiceMock},
             payload: {tag: "python"}}
             ); 
         expect(result).toStrictEqual([

@@ -1,12 +1,12 @@
 import { describe, expect, test } from "vitest";
 import { getCourseList } from "./get-course-list";
-import { courseService } from "../../services/mocks/course-service-mock";
+import { courseServiceMock } from "../../services/mocks/course-service-mock";
 
 
 describe("getCourseList", async () =>{
 
     test("Should return the list of courses", async () => {
-        const result = await getCourseList({dependencies: {courseService}}); 
+        const result = await getCourseList({dependencies: {courseService: courseServiceMock}}); 
         expect(result).toStrictEqual([    
             {id: "1",
             title: "Javascript para principiantes",

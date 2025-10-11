@@ -1,13 +1,13 @@
 import { describe, expect, test } from "vitest";
 import { getCoursesByLevel } from "./get-courses-by-level"
-import { courseService } from "../../services/mocks/course-service-mock";
+import { courseServiceMock } from "../../services/mocks/course-service-mock";
 
 
 describe("getCoursesByLevel", async () =>{
 
     test("Should return the list of courses with courseLevel: beginner", async () => {
         const result = await getCoursesByLevel({
-            dependencies: {courseService},
+            dependencies: {courseService: courseServiceMock},
             payload: {courseLevel: "beginner"}}
             ); 
         expect(result).toStrictEqual([
@@ -36,7 +36,7 @@ describe("getCoursesByLevel", async () =>{
 
     test("Should return the list of courses with courseLevel: intermediate", async () => {
         const result = await getCoursesByLevel({
-            dependencies: {courseService},
+            dependencies: {courseService: courseServiceMock},
             payload: {courseLevel: "intermediate"}}
             ); 
         expect(result).toStrictEqual([
