@@ -1,13 +1,13 @@
 import { describe, expect, test } from "vitest";
 import { getUsersByRole } from "./get-users-by-role"
-import { userService } from "../../services/mocks/user-service-mock";
+import { userServiceMock } from "../../services/mocks/user-service-mock";
 
 
 describe("getUsersByRole", async () =>{
 
     test("Should return the list of users with role: admin", async () => {
         const result = await getUsersByRole({
-            dependencies: {userService},
+            dependencies: {userService: userServiceMock},
             payload: {role: "admin"}}
             ); 
         expect(result).toStrictEqual([
@@ -22,7 +22,7 @@ describe("getUsersByRole", async () =>{
 
     test("Should return the list of users with role: student", async () => {
         const result = await getUsersByRole({
-            dependencies: {userService},
+            dependencies: {userService: userServiceMock},
             payload: {role: "student"}}
             ); 
         expect(result).toStrictEqual([

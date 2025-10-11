@@ -1,13 +1,13 @@
 import { describe, expect, test } from "vitest";
 import { getUsersByName } from "./get-users-by-name"
-import { userService } from "../../services/mocks/user-service-mock";
+import { userServiceMock } from "../../services/mocks/user-service-mock";
 
 
 describe("getUsersByName", async () =>{
 
     test("Should return the list of users with the same name", async () => {
         const result = await getUsersByName({
-            dependencies: {userService},
+            dependencies: {userService: userServiceMock},
             payload: {name: "silvina"}}
             ); 
         expect(result).toStrictEqual([
