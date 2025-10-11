@@ -1,4 +1,4 @@
-import { SafeUser, User, UserRole } from "../../entities/user";
+import { User, UserRole } from "../../entities/user";
 import { dataCompleteUsers } from "../../entities/mocks/user-mock";
 import { vi } from "vitest";
 
@@ -15,5 +15,9 @@ export const userServiceMock = {
             dataCompleteUsers.find((u) => u.email == email),
         create: vi.fn(async (user:User) => {
             if (user) dataCompleteUsers.push(user); 
+        }),
+        delete: vi.fn(async (id: string) => {
+            const index = dataCompleteUsers.findIndex((u) => u.id === id);
+            if (index !== -1) dataCompleteUsers.splice(index, 1);
         }),
     };
