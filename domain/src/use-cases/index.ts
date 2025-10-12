@@ -3,6 +3,8 @@ export * from "./course/get-course.js";
 export * from "./course/get-course-list.js";
 export * from "./course/get-courses-by-level.js";
 export * from "./course/get-courses-by-tag.js";
+export * from "./course/create-course.js";
+
 
 //user use-cases
 export * from "./user/get-user.js";
