@@ -17,3 +17,5 @@ export * from "./course/create-course.js";
 
 //category use-cases
 export * from "./category/get-category-list.js";
+export * from "./category/get-category.js";
+export * from "./category/get-category-by-name.js";
