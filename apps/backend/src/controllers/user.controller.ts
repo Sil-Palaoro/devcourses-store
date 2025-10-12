@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { getUserList } from "@devcourses/domain";
+import { getUserList, createUser } from "@devcourses/domain";
 import { prismaUserServiceImplementation } from "../services/prisma-user-service-implementation"
 
 
@@ -18,7 +18,22 @@ export class UserController {
             res.status(500).json({ message: error.message});
         }
     }
+
+    static async createUser(req: Request, res: Response) {
+        try {
+            const user = req.body;
+            await createUser({ 
+                dependencies: { userService: prismaUserServiceImplementation }, 
+                payload: user });
+            
+            return res.status(201).json({ message: "User created successfully"});
+
+        } catch (error: any) {
+            res.status(500).json({ message: error.message});
+        }
+    }
 }
+
 
 
 //   static async getUserById(req: Request, res: Response) {

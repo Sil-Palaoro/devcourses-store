@@ -18,7 +18,7 @@ describe("createUser", async () =>{
         
         await createUser({
             dependencies: { userService: userServiceMock },
-            payload: { user },
+            payload: user,
         });
 
         expect(userServiceMock.create).toHaveBeenCalledTimes(1);
