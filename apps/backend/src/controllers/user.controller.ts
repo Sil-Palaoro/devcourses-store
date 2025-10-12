@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express";
-import { getUserList, createUser } from "@devcourses/domain";
+import { Request, Response } from "express";
+import { getUserList, createUser, getUser } from "@devcourses/domain";
 import { prismaUserServiceImplementation } from "../services/prisma-user-service-implementation"
 
 
@@ -19,6 +19,24 @@ export class UserController {
         }
     }
 
+    static async getUserById(req: Request, res: Response) {
+        try {
+          const id = req.params.id!;
+          const user = await getUser({ 
+            dependencies: { userService: prismaUserServiceImplementation }, 
+            payload: {id: id} 
+            });
+
+          if (user instanceof Error) {
+            return res.status(404).json({ message: user.message });
+          }
+          res.status(200).json(user);
+        } catch (error: any) {
+          res.status(500).json({ message: error.message });
+        }
+    }
+
+
     static async createUser(req: Request, res: Response) {
         try {
             const user = req.body;
@@ -33,19 +51,3 @@ export class UserController {
         }
     }
 }
-
-
-
-//   static async getUserById(req: Request, res: Response) {
-//     try {
-//       const id = Number(req.params.id);
-//       const user = await getUserByIdUseCase.execute(id);
-//       if (!user) {
-//         return res.status(404).json({ message: 'User not found' });
-//       }
-//       res.status(200).json(user);
-//     } catch (error: any) {
-//       res.status(500).json({ message: error.message });
-//     }
-//   }
-// }

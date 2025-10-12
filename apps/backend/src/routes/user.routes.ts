@@ -4,7 +4,7 @@ import { UserController } from "../controllers/user.controller";
 const router = Router();
 
 router.get("/", UserController.getAllUsers);
-// router.get('/:id', UserController.getUserById);
+router.get('/:id', UserController.getUserById);
 
 router.post("/", UserController.createUser);
 
