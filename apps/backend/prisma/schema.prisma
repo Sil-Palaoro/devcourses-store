@@ -32,9 +32,18 @@ enum Role {
 
 model Category {
   id          String   @id @default(cuid())
-  name        String
-  description String?
+  name        CategoryName
+  description String
   courses     Course[]
+}
+
+enum CategoryName {
+    Frontend
+    Backend
+    FullStack
+    Databases
+    DevOps 
+    Testing
 }
 
 enum CourseLevel {
