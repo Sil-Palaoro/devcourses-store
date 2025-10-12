@@ -7,7 +7,8 @@ export const prismaCourseServiceImplementation: CourseService = {
         return db.course.findMany();
     },
     async getById(id) {
-        return db.course.findUnique({ where: { id: Number(id) } }) ?? undefined;
+        const course = await db.course.findUnique({ where: { id: id } })
+        return course ?? undefined;
     },
     async getByTag(tag) {
         return db.course.findMany({ where: { tag } });
@@ -15,4 +16,12 @@ export const prismaCourseServiceImplementation: CourseService = {
     async getByCourseLevel(courseLevel) {
         return db.course.findMany({ where: { courseLevel } });
     },
+    async create(data) {
+        await db.course.create({data});
+        return;
+    },
+    async delete(id) {
+        await db.course.delete({ where: { id: id } });
+        return;
+    }
 }

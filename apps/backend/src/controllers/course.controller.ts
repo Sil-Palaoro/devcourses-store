@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { getCourseList } from "@devcourses/domain";
+import { getCourseList, createCourse } from "@devcourses/domain";
 import { prismaCourseServiceImplementation } from "../services/prisma-course-service-implementation";
 
 
@@ -14,6 +14,20 @@ export class CourseController {
             }
 
             res.status(200).json(result);
+        } catch (error: any) {
+            res.status(500).json({ message: error.message});
+        }
+    }
+
+    static async createCourse(req: Request, res: Response) {
+        try {
+            const course = req.body;
+            await createCourse({ 
+                dependencies: { courseService: prismaCourseServiceImplementation }, 
+                payload: course });
+            
+            return res.status(201).json({ message: "Course created successfully"});
+
         } catch (error: any) {
             res.status(500).json({ message: error.message});
         }
