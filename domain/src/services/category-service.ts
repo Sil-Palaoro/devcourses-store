@@ -1,6 +1,6 @@
 import { Category, CategoryName } from "../entities/category";
-import { Service } from "../utils/types/service";
+import { ReadOnlyService } from "../utils/types/service";
 
-export interface CategoryService extends Service<Category> {
+export interface CategoryService extends ReadOnlyService<Category> {
     getByName: (name: CategoryName) => Promise<Category | undefined>;
 };
