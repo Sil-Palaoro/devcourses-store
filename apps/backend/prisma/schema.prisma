@@ -32,7 +32,7 @@ enum Role {
 
 model Category {
   id          String   @id @default(cuid())
-  name        CategoryName
+  name        CategoryName  @unique
   description String
   courses     Course[]
 }
