@@ -6,6 +6,7 @@ import { getUserList,
     getUsersByName, 
     getUsersBySurname,
     getUserByEmail,
+    deleteUser,
     UserRole } from "@devcourses/domain";
 import { prismaUserServiceImplementation } from "../services/prisma-user-service-implementation"
 
@@ -159,4 +160,18 @@ export class UserController {
             res.status(500).json({ message: error.message});
         }
     }
+
+    static async deleteUser(req: Request, res: Response) {
+      try {
+        const id = req.params.id!;
+        await deleteUser({ 
+          dependencies: { userService: prismaUserServiceImplementation }, 
+          payload: {id: id} 
+          });
+        res.status(200).json({ message: "User deleted successfully"});
+      } catch (error: any) {
+        res.status(500).json({ message: error.message });
+      }
+    }
+
 }
