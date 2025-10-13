@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getUserList, createUser, getUser } from "@devcourses/domain";
+import { getUserList, createUser, getUser, getUsersByRole } from "@devcourses/domain";
 import { prismaUserServiceImplementation } from "../services/prisma-user-service-implementation"
 
 
@@ -25,6 +25,23 @@ export class UserController {
           const user = await getUser({ 
             dependencies: { userService: prismaUserServiceImplementation }, 
             payload: {id: id} 
+            });
+
+          if (user instanceof Error) {
+            return res.status(404).json({ message: user.message });
+          }
+          res.status(200).json(user);
+        } catch (error: any) {
+          res.status(500).json({ message: error.message });
+        }
+    }
+
+    static async getByRole(req: Request, res: Response) {
+        try {
+          const role = req.body;
+          const user = await getUsersByRole({ 
+            dependencies: { userService: prismaUserServiceImplementation }, 
+            payload: {role: role} 
             });
 
           if (user instanceof Error) {
