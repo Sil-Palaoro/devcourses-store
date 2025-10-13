@@ -8,6 +8,7 @@ router.get('/:id', UserController.getUserById);
 router.get("/", UserController.getByRole);
 router.get("/", UserController.getByName);
 router.get("/", UserController.getBySurname);
+router.get("/", UserController.getByEmail);
 
 router.post("/", UserController.createUser);
 
