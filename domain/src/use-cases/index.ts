@@ -14,6 +14,7 @@ export * from "./course/get-course-list.js";
 export * from "./course/get-courses-by-level.js";
 export * from "./course/get-courses-by-tag.js";
 export * from "./course/create-course.js";
+export * from "./course/delete-course.js";
 
 //category use-cases
 export * from "./category/get-category-list.js";
