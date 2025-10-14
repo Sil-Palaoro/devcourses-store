@@ -4,6 +4,7 @@ import { getCourseList,
     getCourse, 
     getCoursesByTag, 
     getCoursesByLevel,
+    updateCourse,
     deleteCourse,
     Tag,
     CourseLevel
@@ -117,6 +118,29 @@ export class CourseController {
             res.status(500).json({ message: error.message});
         }
     }
+
+
+  static async updateCourse(req: Request, res: Response) {
+        try {
+          const id = req.params.id!;
+          const data = req.body;
+
+          const updatedCourse = await updateCourse({ 
+            dependencies: { courseService: prismaCourseServiceImplementation }, 
+            payload: {
+              id: id, 
+              data: data} 
+            });
+
+          if (updatedCourse instanceof Error) {
+            return res.status(404).json({ message: updatedCourse.message });
+          }
+          res.status(200).json(updatedCourse);
+        } catch (error: any) {
+          res.status(500).json({ message: error.message });
+        }
+    }
+
 
     static async deleteCourse(req: Request, res: Response) {
       try {

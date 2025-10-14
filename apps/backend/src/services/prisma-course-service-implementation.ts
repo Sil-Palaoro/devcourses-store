@@ -20,6 +20,17 @@ export const prismaCourseServiceImplementation: CourseService = {
         await db.course.create({data});
         return;
     },
+    async update(id, data) {
+        const existingCourse = await db.course.findUnique({ where: { id: id } });
+        if (!existingCourse) return undefined;
+
+        const updatedCourse = await db.course.update({ 
+            where: {id: id}, 
+            data
+        });
+
+        return updatedCourse;
+    },
     async delete(id) {
         await db.course.delete({ where: { id: id } });
         return;
