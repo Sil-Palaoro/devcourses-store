@@ -16,6 +16,14 @@ export const userServiceMock = {
         create: vi.fn(async (user:User) => {
             if (user) dataCompleteUsers.push(user); 
         }),
+        update: async (id: string, data: Partial<User>) => {
+            const user = dataCompleteUsers.find((u) => u.id == id );
+            if (!user) return undefined;
+
+            Object.assign(user, data);
+
+            return user;
+        },  
         delete: vi.fn(async (id: string) => {
             const index = dataCompleteUsers.findIndex((u) => u.id === id);
             if (index !== -1) dataCompleteUsers.splice(index, 1);
