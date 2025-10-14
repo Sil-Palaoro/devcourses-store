@@ -22,6 +22,14 @@ export const courseServiceMock = {
         create: vi.fn(async (course:Course) => {
             if (course) dataCourses.push(course); 
         }),
+        update: async (id: string, data: Partial<Course>) => {
+            const course = dataCourses.find((u) => u.id == id );
+            if (!course) return undefined;
+
+            Object.assign(course, data);
+
+            return course;
+        },
         delete: vi.fn(async (id: string) => {
             const index = dataCourses.findIndex((u) => u.id === id);
             if (index !== -1) dataCourses.splice(index, 1);
