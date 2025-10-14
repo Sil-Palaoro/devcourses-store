@@ -27,6 +27,17 @@ export const prismaUserServiceImplementation: UserService = {
         await db.user.create({data});
         return;
     },
+    async update(id, data) {
+        const existingUser = await db.user.findUnique({ where: { id: id } });
+        if (!existingUser) return undefined;
+
+        const updatedUser = await db.user.update({ 
+            where: {id: id}, 
+            data
+        });
+
+        return updatedUser;
+    },
     async delete(id) {
         await db.user.delete({ where: { id: id } });
         return;

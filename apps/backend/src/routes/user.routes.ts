@@ -12,8 +12,9 @@ router.get("/by-email", UserController.getByEmail);
 
 router.get('/:id', UserController.getUserById);
 
-
 router.post("/", UserController.createUser);
+
+router.patch('/update/:id', UserController.updateUser);
 
 router.delete('/delete/:id', UserController.deleteUser);
 

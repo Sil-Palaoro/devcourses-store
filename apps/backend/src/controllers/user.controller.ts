@@ -7,6 +7,7 @@ import { getUserList,
     getUsersBySurname,
     getUserByEmail,
     deleteUser,
+    updateUser,
     UserRole } from "@devcourses/domain";
 import { prismaUserServiceImplementation } from "../services/prisma-user-service-implementation"
 
@@ -160,6 +161,29 @@ export class UserController {
             res.status(500).json({ message: error.message});
         }
     }
+
+    
+    static async updateUser(req: Request, res: Response) {
+        try {
+          const id = req.params.id!;
+          const data = req.body;
+
+          const updatedUser = await updateUser({ 
+            dependencies: { userService: prismaUserServiceImplementation }, 
+            payload: {
+              id: id, 
+              data: data} 
+            });
+
+          if (updatedUser instanceof Error) {
+            return res.status(404).json({ message: updatedUser.message });
+          }
+          res.status(200).json(updatedUser);
+        } catch (error: any) {
+          res.status(500).json({ message: error.message });
+        }
+    }
+
 
     static async deleteUser(req: Request, res: Response) {
       try {
