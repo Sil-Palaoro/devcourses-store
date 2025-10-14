@@ -11,5 +11,6 @@ export interface ReadOnlyService<TEntity extends Entity> {
 
 export interface MutableService<TEntity extends Entity> {
     create: (data: TEntity) => Promise<void>;
+    update: (id: string, data: Partial<TEntity>) => Promise<TEntity | undefined>;
     delete: (id: string) => Promise<void>;   
 };
