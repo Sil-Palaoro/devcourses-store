@@ -9,6 +9,7 @@ export * from "./user/create-user.js";
 export * from "./user/update-user.js";
 export * from "./user/delete-user.js";
 export * from "./user/register-user.js";
+export * from "./user/login-user.js";
 
 
 //course use-cases
