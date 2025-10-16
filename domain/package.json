@@ -6,13 +6,21 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "vitest",
-    "test:coverage": "vitest run --coverage"  },
+    "test:coverage": "vitest run --coverage"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
     "typescript": "^5.9.3",
     "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "uuid": "^13.0.0"
   }
 }
