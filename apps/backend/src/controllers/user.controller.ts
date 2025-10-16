@@ -223,8 +223,8 @@ export class UserController {
                 dependencies: { userService: prismaUserServiceImplementation }, 
                 payload: user });
 
-            if (!token) {
-              return res.status(404).json({ message: user.message });
+            if (token instanceof Error) {
+              return res.status(404).json({ message: token.message });
             }
             
             return res.status(201).json({token, message: "Login exitoso"});
