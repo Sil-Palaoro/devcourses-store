@@ -15,15 +15,13 @@ export async function loginUser({ dependencies, payload }: LoginUserData) {
     const existingUser = await dependencies.userService.getByEmail(payload.email);
 
     if(!existingUser) {
-        new Error("El usuario no existe")
-        return undefined;
+        return new Error("El usuario no existe");
     };
 
     const comparePasswordResult = await comparePasswords(payload.password, existingUser.password);
 
-    if(!comparePasswordResult) {
-        new Error("Contraseña incorrecta")
-        return undefined;
+    if(!comparePasswordResult) {        
+        return new Error("Contraseña incorrecta");
     }
 
     const generatedToken = generateToken({
