@@ -12,7 +12,7 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
+  id        String   @id @default(uuid())
   name      String
   surname   String
   email     String   @unique
@@ -31,7 +31,7 @@ enum Role {
 }
 
 model Category {
-  id          String   @id @default(cuid())
+  id          String   @id @default(uuid())
   name        CategoryName  @unique
   description String
   courses     Course[]
@@ -59,7 +59,7 @@ enum Tag {
 }
 
 model Course {
-  id           String      @id @default(cuid())
+  id           String      @id @default(uuid())
   title        String
   description  String
   price        Float
@@ -78,7 +78,7 @@ model Course {
 }
 
 model Cart {
-  id        String     @id @default(cuid())
+  id        String     @id @default(uuid())
   userId    String     @unique
   user      User       @relation(fields: [userId], references: [id])
   items     CartItem[]
@@ -87,7 +87,7 @@ model Cart {
 }
 
 model CartItem {
-  id       String @id @default(cuid())
+  id       String @id @default(uuid())
   cartId   String
   courseId String
   quantity Int    @default(1)
