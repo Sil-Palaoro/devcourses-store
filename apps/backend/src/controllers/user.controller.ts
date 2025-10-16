@@ -8,6 +8,8 @@ import { getUserList,
     getUserByEmail,
     deleteUser,
     updateUser,
+    registerUser,
+    loginUser,
     UserRole } from "@devcourses/domain";
 import { prismaUserServiceImplementation } from "../services/prisma-user-service-implementation"
 
@@ -52,13 +54,13 @@ export class UserController {
           const { role } = req.query;
 
           if (!role || typeof role !== "string") {
-            return res.status(400).json({ message: "Role is required" });
+            return res.status(400).json({ message: "El rol es requerido" });
           } 
 
           const validRoles: UserRole[] = ["admin", "student", "instructor"]
 
           if (!validRoles.includes(role as UserRole)) {
-            return res.status(400).json({ message: "Invalid role value"});
+            return res.status(400).json({ message: "Valor del rol invalido"});
           }
 
           const users = await getUsersByRole({ 
@@ -81,7 +83,7 @@ export class UserController {
           const { name } = req.query;
 
           if (!name || typeof name !== "string") {
-            return res.status(400).json({ message: "Name is required" });
+            return res.status(400).json({ message: "El nombre es requerido" });
           } 
 
 
@@ -105,7 +107,7 @@ export class UserController {
           const { surname } = req.query;
 
           if (!surname || typeof surname !== "string") {
-            return res.status(400).json({ message: "Surname is required" });
+            return res.status(400).json({ message: "El apellido es requerido" });
           } 
 
           const user = await getUsersBySurname({ 
@@ -128,10 +130,8 @@ export class UserController {
           const { email } = req.query;
 
           if(!email ||typeof email!== "string") {
-            return res.status(400).json({ message: "Email is required" });
+            return res.status(400).json({ message: "El Email es requerido" });
           }
-
-          console.log("Email recibido", email)
 
           const user = await getUserByEmail({ 
             dependencies: { userService: prismaUserServiceImplementation }, 
@@ -155,7 +155,7 @@ export class UserController {
                 dependencies: { userService: prismaUserServiceImplementation }, 
                 payload: user });
             
-            return res.status(201).json({ message: "User created successfully"});
+            return res.status(201).json({ message: "Usuario creado exitósamente"});
 
         } catch (error: any) {
             res.status(500).json({ message: error.message});
@@ -192,10 +192,45 @@ export class UserController {
           dependencies: { userService: prismaUserServiceImplementation }, 
           payload: {id: id} 
           });
-        res.status(200).json({ message: "User deleted successfully"});
+        res.status(200).json({ message: "Usuario borrado exitósamente"});
       } catch (error: any) {
         res.status(500).json({ message: error.message });
       }
     }
 
+
+    static async registerUser(req: Request, res: Response) {
+        try {
+            const user = req.body;
+
+            await registerUser({ 
+                dependencies: { userService: prismaUserServiceImplementation }, 
+                payload: user });
+
+            return res.status(201).json({ message: "Usuario registrado exitósamente"});
+
+        } catch (error: any) {
+            res.status(500).json({ message: error.message});
+        }
+    }
+    
+
+    static async loginUser(req: Request, res: Response) {
+        try {
+            const user = req.body;
+
+            const token = await loginUser({ 
+                dependencies: { userService: prismaUserServiceImplementation }, 
+                payload: user });
+
+            if (!token) {
+              return res.status(404).json({ message: user.message });
+            }
+            
+            return res.status(201).json({token, message: "Login exitoso"});
+
+        } catch (error: any) {
+            res.status(500).json({ message: error.message});
+        }
+    }
 }

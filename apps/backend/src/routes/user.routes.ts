@@ -13,6 +13,9 @@ router.get("/by-email", UserController.getByEmail);
 router.get('/:id', UserController.getUserById);
 
 router.post("/", UserController.createUser);
+router.post("/register", UserController.registerUser);
+router.post("/login", UserController.loginUser);
+
 
 router.patch('/update/:id', UserController.updateUser);
 

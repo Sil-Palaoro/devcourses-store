@@ -1,7 +1,6 @@
 import { UserService } from "../../services/user-service";
 import { createUser } from "./create-user";
 import { hashPassword } from "../../utils/crypto/hash-password";
-import { v4 as uuid } from "uuid";
 
 interface RegisterUserData {
     dependencies: { userService: UserService},
@@ -14,9 +13,12 @@ interface RegisterUserData {
 } 
 
 export async function registerUser({ dependencies, payload }: RegisterUserData) {
+    const { v4: uuid } = await import("uuid");
+
+    
     const existingUser = await dependencies.userService.getByEmail(payload.email);
 
-    if(existingUser) new Error("El usuario ya existe");
+    if(existingUser) throw new Error("El usuario ya existe");
 
     const hashed = await hashPassword(payload.password);
 
