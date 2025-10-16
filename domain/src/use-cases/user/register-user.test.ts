@@ -4,7 +4,7 @@ import { registerUser } from "./register-user";
 import { hashPassword } from "../../utils/crypto/hash-password";
 
 
-vi.mock("../../utils/hash-password", () => ({
+vi.mock("../../utils/crypto/hash-password", () => ({
     hashPassword: vi.fn(async(p:string) => `hashed-${p}`)
 }));
 
