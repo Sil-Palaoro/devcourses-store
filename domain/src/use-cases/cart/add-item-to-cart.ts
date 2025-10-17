@@ -1,5 +1,6 @@
 import { CartService } from "../../services/cart-service";
 import { CartItem } from "../../entities/cartItem";
+import { updateCart } from "./update-cart";
 
 
 interface AddItemToCartData {
@@ -29,13 +30,23 @@ export async function addItemToCart({ dependencies, payload }: AddItemToCartData
             priceSnapshot, 
         };
 
-
-    const updatedCart = {
-        ...cart,
-        items: [...cart.items, newItem],
-    };
-
-    await dependencies.cartService.update(cart.id, updatedCart)
+    const updatedCart = await updateCart({ dependencies, payload: {
+            id: cart.id,
+            data: {
+                items: [...cart.items, newItem]
+            }
+        }
+    });
 
     return updatedCart;
 }
+
+
+
+
+    // const updatedCart = {
+    //     ...cart,
+    //     items: [...cart.items, newItem],
+    // };
+
+    // await dependencies.cartService.update(cart.id, updatedCart)
