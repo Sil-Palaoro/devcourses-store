@@ -34,6 +34,11 @@ describe("addItemtoCart", async () =>{
                 currency: "ARS",
                 }    
         ); 
+
+        if(updatedCart instanceof Error) {
+          throw updatedCart;
+        }
+
         expect(updatedCart.items).toHaveLength(1);
     });
 
