@@ -25,3 +25,8 @@ export * from "./course/delete-course.js";
 export * from "./category/get-category-list.js";
 export * from "./category/get-category.js";
 export * from "./category/get-category-by-name.js";
+
+//cart use-cases
+export * from "./cart/get-cart.js";
+export * from "./cart/add-item-to-cart.js";
+
