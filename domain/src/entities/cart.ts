@@ -5,7 +5,7 @@ export interface Cart extends Entity {
     userId: Entity["id"];
     items: CartItem[];
     currency: "ARS";
-    createdAt: Date;
-    updatedAt: Date;
+    // createdAt: Date;
+    // updatedAt: Date;
 }
 
