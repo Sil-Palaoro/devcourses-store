@@ -13,7 +13,11 @@ export const cartServiceMock = {
             return dataCartMock.find((cart: Cart) => cart.userId == userId );
         },
         create: vi.fn(async (cart:Cart) => {
-            if (cart) dataCartMock.push(cart); 
+            const existingCart = dataCartMock.find((c) => c.userId === cart.userId);
+             if (existingCart) {
+               throw new Error("El usuario ya posee un carrito de compras");
+            }
+            dataCartMock.push(cart);                     
         }),
         update: async (id: string, data: Partial<Cart>) => {
             const cart = dataCartMock.find((u) => u.id == id );
