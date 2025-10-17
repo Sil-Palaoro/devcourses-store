@@ -35,7 +35,7 @@ export const cartServiceMock = {
             priceSnapshot: number) => {
                 const existingCart = dataCartMock.find((c) => c.userId === userId);
                  if (!existingCart) {
-                   throw new Error("El usuario no posee un carrito de compras");
+                   throw new Error("El usuario no tiene un carrito de compras");
                 }
 
                 const existingItem = existingCart.items.find((item) => item.courseId === courseId);
@@ -52,5 +52,21 @@ export const cartServiceMock = {
                 
                 return existingCart;
             },
-        removeItemFromCart: vi.fn()
+        removeItemFromCart: async (userId: string, cartItemId: string) => {
+                let existingCart = dataCartMock.find((c) => c.userId === userId);
+                 if (!existingCart) {
+                   throw new Error("El usuario no tiene un carrito de compras");
+                }
+
+                const existingItem = existingCart.items.find((item) => item.id === cartItemId);
+                if(!existingItem) throw new Error("El item no existe en el carrito de compras");
+  
+                const updatedCartItems = existingCart.items.filter((item) => item.id !== cartItemId)
+
+                existingCart = {
+                    ...existingCart, 
+                    items: updatedCartItems
+                }
+                return existingCart;
+            }
     };
