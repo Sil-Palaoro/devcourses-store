@@ -11,7 +11,6 @@ export * from "./user/delete-user.js";
 export * from "./user/register-user.js";
 export * from "./user/login-user.js";
 
-
 //course use-cases
 export * from "./course/get-course.js";
 export * from "./course/get-course-list.js";
@@ -28,5 +27,11 @@ export * from "./category/get-category-by-name.js";
 
 //cart use-cases
 export * from "./cart/get-cart.js";
+export * from "./cart/get-cart-list.js";
+// export * from "./cart/create-cart.js";
+// export * from "./cart/update-cart.js";
+// export * from "./cart/delete-cart.js";
 export * from "./cart/add-item-to-cart.js";
+// export * from "./cart/remove-item-from-cart.js";
+
 
