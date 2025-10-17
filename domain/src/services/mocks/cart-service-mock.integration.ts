@@ -29,6 +29,28 @@ export const cartServiceMock = {
             const index = dataCartMock.findIndex((u) => u.id === id);
             if (index !== -1) dataCartMock.splice(index, 1);
         }),
-        addItemToCart: vi.fn(),
+        addItemToCart: async (
+            userId: string, 
+            courseId: string, 
+            priceSnapshot: number) => {
+                const existingCart = dataCartMock.find((c) => c.userId === userId);
+                 if (!existingCart) {
+                   throw new Error("El usuario no posee un carrito de compras");
+                }
+
+                const existingItem = existingCart.items.find((item) => item.courseId === courseId);
+                if(existingItem) throw new Error("El item ya existe en el carrito de compras");
+                                
+                const newItem = {
+                    id: "4",
+                    cartId: existingCart.id,
+                    courseId,
+                    quantity: 1,
+                    priceSnapshot, 
+                };
+                existingCart.items.push(newItem);
+                
+                return existingCart;
+            },
         removeItemFromCart: vi.fn()
     };
