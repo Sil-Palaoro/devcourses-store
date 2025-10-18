@@ -62,7 +62,7 @@ model Course {
   id           String      @id @default(uuid())
   title        String
   description  String
-  price        Float
+  price        Int
   categoryId   String
   category     Category    @relation(fields: [categoryId], references: [id])
   courseLevel  CourseLevel
@@ -77,20 +77,26 @@ model Course {
   @@index([categoryId])
 }
 
+enum Currency {
+  ARS  
+}
+
 model Cart {
   id        String     @id @default(uuid())
   userId    String     @unique
   user      User       @relation(fields: [userId], references: [id])
   items     CartItem[]
+  currency  Currency   @default(ARS)
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
 }
 
 model CartItem {
-  id       String @id @default(uuid())
-  cartId   String
-  courseId String
-  quantity Int    @default(1)
-  cart     Cart   @relation(fields: [cartId], references: [id])
-  course   Course @relation(fields: [courseId], references: [id])
+  id            String @id @default(uuid())
+  cartId        String
+  courseId      String
+  quantity      Int    @default(1)
+  priceSnapshot Int
+  cart          Cart   @relation(fields: [cartId], references: [id])
+  course        Course @relation(fields: [courseId], references: [id])
 }
