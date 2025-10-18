@@ -11,6 +11,7 @@ describe("addItemtoCart", async () =>{
         const payload = {
             userId: "1",
             courseId: "3",
+            quantity: 1,
             priceSnapshot: 25000
         };
         
@@ -46,6 +47,7 @@ describe("addItemtoCart", async () =>{
       const payload = {
         userId: "999", 
         courseId: "3",
+        quantity: 1,
         priceSnapshot: 1200,
       };
 
@@ -61,6 +63,7 @@ describe("addItemtoCart", async () =>{
       const payload = {
         userId: "2",
         courseId: "2", 
+        quantity: 1,
         priceSnapshot: 1200,
       };
 

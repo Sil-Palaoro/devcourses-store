@@ -7,14 +7,15 @@ interface AddItemToCartData {
     dependencies: { cartService: CartService},
     payload: {
         userId: string; 
-        courseId: string; 
+        courseId: string;
+        quantity: number;
         priceSnapshot: number;
     }
 } 
 
 export async function addItemToCart({ dependencies, payload }: AddItemToCartData) {
     const { v4: uuid } = await import("uuid");
-    const { userId, courseId, priceSnapshot } = payload;
+    const { userId, courseId, quantity, priceSnapshot } = payload;
     
     let cart = await dependencies.cartService.getByUserId(userId);
     if(!cart) throw new Error("El usuario no tiene un carrito de compras");    
@@ -26,7 +27,7 @@ export async function addItemToCart({ dependencies, payload }: AddItemToCartData
             id: uuid(),
             cartId: cart.id,
             courseId,
-            quantity: 1,
+            quantity,
             priceSnapshot, 
         };
 

@@ -24,7 +24,8 @@ describe("getCartList", async () =>{
                 id: "1",
                 cartId: "3",
                 courseId: "2",
-                priceSnapshot: 25000
+                priceSnapshot: 25000,
+                quantity: 1,
             }],
             currency: "ARS",
             },
