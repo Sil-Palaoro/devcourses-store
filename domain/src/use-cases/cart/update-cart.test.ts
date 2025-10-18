@@ -14,6 +14,7 @@ describe("updateCart", async () =>{
                         {id: "1",
                         cartId: "3",
                         courseId: "2",
+                        quantity: 1,
                         priceSnapshot: 25000
                         }],                
                 }
@@ -26,6 +27,7 @@ describe("updateCart", async () =>{
                 {id: "1",
                 cartId: "3",
                 courseId: "2",
+                quantity: 1,
                 priceSnapshot: 25000
                 }
             ],

@@ -9,8 +9,7 @@ export async function getCartList({dependencies}: GetcartList) {
 
     const allcarts = await dependencies.cartService.getAll();
 
-    if (allcarts.length === 0) 
-        return new Error("No hay ningún curso");
+    if (allcarts.length === 0) throw new Error("No hay ningún carrito de compras");
 
     return  allcarts;
 };
