@@ -80,11 +80,15 @@ export const prismaCartServiceImplementation: CartService = {
         const existingItem = cart.items.find((item) => item.id === cartItemId);
         if(!existingItem) throw new Error("El item no existe en el carrito de compras");
         
-        const updatedCartItems = cart.items.filter((item) => item.id !== cartItemId)
-        cart = {
-            ...cart, 
-            items: updatedCartItems
-        }
-        return cart;
+        await db.cartItem.delete({ where: { id: cartItemId },});
+
+        const updatedCart = await db.cart.findUnique({ 
+            where: { userId },
+            include: { items: true },
+        });  
+
+        if (!updatedCart) throw new Error("Error al actualizar el carrito después de eliminar el item");
+
+        return updatedCart;
     }
 }
