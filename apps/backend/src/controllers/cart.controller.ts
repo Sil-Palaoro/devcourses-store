@@ -5,6 +5,8 @@ import { getCartList,
     getCartByUserId, 
     updateCart,
     deleteCart,
+    addItemToCart,
+    removeItemFromCart
   } from "@devcourses/domain";
 import { prismaCartServiceImplementation } from "../services/prisma-cart-service-implementation";
 
@@ -116,5 +118,51 @@ export class CartController {
         res.status(500).json({ message: error.message });
       }
     }
+
+
+  static async addItemToCart(req: Request, res: Response) {
+        try {
+          const {userId, courseId, quantity, priceSnapshot} = req.body;
+
+          const updatedCart = await addItemToCart({ 
+            dependencies: { cartService: prismaCartServiceImplementation }, 
+            payload: {
+              userId: userId, 
+              courseId: courseId, 
+              quantity: quantity, 
+              priceSnapshot: priceSnapshot
+            } 
+            });
+
+          if (updatedCart instanceof Error) {
+            return res.status(404).json({ message: updatedCart.message });
+          }
+          res.status(200).json(updatedCart);
+        } catch (error: any) {
+          res.status(500).json({ message: error.message });
+        }
+    }    
+
+
+  static async removeItemFromCart(req: Request, res: Response) {
+        try {
+          const {userId, cartItemId} = req.body;
+
+          const updatedCart = await removeItemFromCart({ 
+            dependencies: { cartService: prismaCartServiceImplementation }, 
+            payload: {
+              userId: userId, 
+              cartItemId: cartItemId, 
+            } 
+            });
+
+          if (updatedCart instanceof Error) {
+            return res.status(404).json({ message: updatedCart.message });
+          }
+          res.status(200).json(updatedCart);
+        } catch (error: any) {
+          res.status(500).json({ message: error.message });
+        }
+    }  
 }
 

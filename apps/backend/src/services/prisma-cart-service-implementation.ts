@@ -46,7 +46,7 @@ export const prismaCartServiceImplementation: CartService = {
         await db.cart.delete({ where: { id: id } });
         return;
     },
-    async addItemToCart(userId, courseId, priceSnapshot) {
+    async addItemToCart(userId, courseId, quantity, priceSnapshot) {
        const cart = await db.cart.findUnique({ 
             where: { userId },
             include: { items: true },
@@ -62,7 +62,7 @@ export const prismaCartServiceImplementation: CartService = {
             id: "4",
             cartId: cart.id,
             courseId,
-            quantity: 1,
+            quantity,
             priceSnapshot, 
         };
         cart.items.push(newItem);
