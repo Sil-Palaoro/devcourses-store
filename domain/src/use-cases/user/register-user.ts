@@ -12,10 +12,7 @@ interface RegisterUserData {
     }
 } 
 
-export async function registerUser({ dependencies, payload }: RegisterUserData) {
-    const { v4: uuid } = await import("uuid");
-
-    
+export async function registerUser({ dependencies, payload }: RegisterUserData) {    
     const existingUser = await dependencies.userService.getByEmail(payload.email);
 
     if(existingUser) throw new Error("El usuario ya existe");
@@ -23,10 +20,8 @@ export async function registerUser({ dependencies, payload }: RegisterUserData) 
     const hashed = await hashPassword(payload.password);
 
     const newUser = {
-        id: uuid(),
         ...payload,
         password: hashed,
-        role: "student" as const,
     };
 
     await createUser({ dependencies, payload: newUser});
