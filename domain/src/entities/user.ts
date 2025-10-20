@@ -27,3 +27,13 @@ export interface CreateUserDTO {
     password: string,
     role?: UserRole,
 }
+
+export interface UpdateUserDTO {
+    id: string,
+    data:{
+        name?: string,
+        surname?: string,
+        email?: string,
+        role?: UserRole,
+    }
+}
