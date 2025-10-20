@@ -16,12 +16,16 @@ describe("getUsersByName", async () =>{
              surname: "Pal",
              email: "silvi@gmail.com",
              role: "admin",
+             createdAt: expect.any(Date),
+             updatedAt: expect.any(Date),
             }, 
             {id: "4",
              name: "silvina",
              surname: "Oro",
              email: "silvinaoro@gmail.com",
              role: "instructor",
+             createdAt: expect.any(Date),
+             updatedAt: expect.any(Date),
             },           
         ])
     })

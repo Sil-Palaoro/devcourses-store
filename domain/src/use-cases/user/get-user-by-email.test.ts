@@ -16,6 +16,8 @@ describe("getUserByEmail", async () =>{
             surname: "Pal",
             email: "silvi@gmail.com",
             role: "admin",
+            createdAt: expect.any(Date),
+            updatedAt: expect.any(Date),
         })
     })
 

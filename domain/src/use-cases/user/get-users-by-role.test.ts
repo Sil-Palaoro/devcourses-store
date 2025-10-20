@@ -16,6 +16,8 @@ describe("getUsersByRole", async () =>{
              surname: "Pal",
              email: "silvi@gmail.com",
              role: "admin",
+             createdAt: expect.any(Date),
+             updatedAt: expect.any(Date),
             },            
         ])
     })
@@ -31,12 +33,16 @@ describe("getUsersByRole", async () =>{
              surname: "Pala",
              email: "aye@gmail.com",
              role: "student",
+             createdAt: expect.any(Date),
+             updatedAt: expect.any(Date),
             },
             {id: "5",
              name: "juli",
              surname: "Pala",
              email: "juli@gmail.com",
              role: "student",
+             createdAt: expect.any(Date),
+             updatedAt: expect.any(Date),
             },
         ])
     })
