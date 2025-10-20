@@ -12,7 +12,7 @@ import { getUserList,
     loginUser,
     UserRole } from "@devcourses/domain";
 import { prismaUserServiceImplementation } from "../services/prisma-user-service-implementation"
-import { createUserSchema, updateUserSchema } from "../validators/user.validator";
+import { createUserSchema, updateUserSchema, loginUserSchema } from "../validators/user.validator";
 
 
 export class UserController {
@@ -216,11 +216,11 @@ export class UserController {
 
     static async registerUser(req: Request, res: Response) {
         try {
-            const user = req.body;
+            const validatedUser = createUserSchema.parse(req.body);
 
             await registerUser({ 
                 dependencies: { userService: prismaUserServiceImplementation }, 
-                payload: user });
+                payload: validatedUser });
 
             return res.status(201).json({ message: "Usuario registrado exitósamente"});
 
@@ -232,11 +232,12 @@ export class UserController {
 
     static async loginUser(req: Request, res: Response) {
         try {
-            const user = req.body;
+          
+            const validatedUser = loginUserSchema.parse(req.body);
 
             const token = await loginUser({ 
                 dependencies: { userService: prismaUserServiceImplementation }, 
-                payload: user });
+                payload: validatedUser });
 
             if (token instanceof Error) {
               return res.status(404).json({ message: token.message });
