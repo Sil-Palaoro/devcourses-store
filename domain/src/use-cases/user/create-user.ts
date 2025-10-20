@@ -1,11 +1,20 @@
-import { User } from "../../entities/user";
+import { User, CreateUserDTO } from "../../entities/user";
 import { UserService } from "../../services/user-service";
+import { v4 as uuid } from "uuid";
 
 interface CreateUserData {
     dependencies: {userService: UserService};
-    payload: User
+    payload: CreateUserDTO
 };
 
 export async function createUser({dependencies, payload}: CreateUserData) {   
-    await dependencies.userService.create(payload);
+    const user: User = {
+        ...payload,
+        id: uuid(),
+        role: payload.role ?? "student",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    }
+    
+    await dependencies.userService.create(user);
 };

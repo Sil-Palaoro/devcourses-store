@@ -14,8 +14,16 @@ export interface User extends Entity {
     email: string,
     password: string,
     role: UserRole,
-    // createdAt: Date;         //Commented to simplify first tests
-    // updatedAt: Date;
+    createdAt: Date;        
+    updatedAt: Date;
 }
 
 export type SafeUser = Omit<User, "password">;
+
+export interface CreateUserDTO {
+    name: string,
+    surname: string,
+    email: string,
+    password: string,
+    role?: UserRole,
+}
