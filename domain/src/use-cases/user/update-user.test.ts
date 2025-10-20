@@ -21,6 +21,8 @@ describe("updateUser", async () =>{
             surname: "Pala",
             email: "silvi@gmail.com",
             role: "admin",
+            createdAt: expect.any(Date),
+            updatedAt: expect.any(Date),
         })
     })
 

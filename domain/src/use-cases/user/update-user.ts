@@ -1,13 +1,11 @@
 import { UserService } from "../../services/user-service";
-import { User, SafeUser } from "../../entities/user";
+import { User, SafeUser, UpdateUserDTO } from "../../entities/user";
 import { toSafeUser } from "../../utils/to-safe-user";
 
 
 interface UpdateUserData {
     dependencies: {userService: UserService};
-    payload: {
-        id: string,
-        data: Partial<User>}
+    payload: UpdateUserDTO;
 };
 
 export async function updateUser({dependencies, payload}: UpdateUserData) {   
