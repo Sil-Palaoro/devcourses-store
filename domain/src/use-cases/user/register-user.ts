@@ -1,15 +1,11 @@
 import { UserService } from "../../services/user-service";
 import { createUser } from "./create-user";
 import { hashPassword } from "../../utils/crypto/hash-password";
+import { CreateUserDTO } from "../../entities/user";
 
 interface RegisterUserData {
     dependencies: { userService: UserService},
-    payload: {
-        name: string; 
-        email: string; 
-        password: string; 
-        surname: string
-    }
+    payload: CreateUserDTO,
 } 
 
 export async function registerUser({ dependencies, payload }: RegisterUserData) {    
