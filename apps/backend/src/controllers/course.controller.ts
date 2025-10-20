@@ -10,6 +10,7 @@ import { getCourseList,
     CourseLevel
   } from "@devcourses/domain";
 import { prismaCourseServiceImplementation } from "../services/prisma-course-service-implementation";
+import { createCourseSchema } from "../validators/course.validator";
 
 
 export class CourseController {
@@ -107,12 +108,16 @@ export class CourseController {
 
     static async createCourse(req: Request, res: Response) {
         try {
-            const course = req.body;
-            await createCourse({ 
-                dependencies: { courseService: prismaCourseServiceImplementation }, 
-                payload: course });
-            
-            return res.status(201).json({ message: "Course created successfully"});
+          const { v4: uuid } = await import("uuid");
+
+          const validatedCourse = createCourseSchema.parse(req.body)  
+          const course = { id: uuid(), ...validatedCourse};
+          
+          await createCourse({ 
+              dependencies: { courseService: prismaCourseServiceImplementation }, 
+              payload: course });
+          
+          return res.status(201).json({ message: "Course created successfully"});
 
         } catch (error: any) {
             res.status(500).json({ message: error.message});
