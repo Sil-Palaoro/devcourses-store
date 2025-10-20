@@ -47,19 +47,21 @@ export const prismaCartServiceImplementation: CartService = {
         return;
     },
     async addItemToCart(userId, courseId, quantity, priceSnapshot) {
-       const cart = await db.cart.findUnique({ 
-            where: { userId },
-            include: { items: true },
-        });         
-        if (!cart) {
-           throw new Error("El usuario no tiene un carrito de compras");
-        }
-        
+        const { v4: uuid } = await import("uuid");
+
+        const cart = await db.cart.findUnique({ 
+             where: { userId },
+             include: { items: true },
+         });         
+         if (!cart) {
+            throw new Error("El usuario no tiene un carrito de compras");
+         }
+
         const existingItem = cart.items.find((item) => item.courseId === courseId);
         if(existingItem) throw new Error("El item ya existe en el carrito de compras");
                         
         const newItem = {
-            id: "4",
+            id: uuid(),
             cartId: cart.id,
             courseId,
             quantity,
