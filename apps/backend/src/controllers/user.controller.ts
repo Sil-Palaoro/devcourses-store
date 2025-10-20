@@ -12,6 +12,7 @@ import { getUserList,
     loginUser,
     UserRole } from "@devcourses/domain";
 import { prismaUserServiceImplementation } from "../services/prisma-user-service-implementation"
+import { createUserSchema, updateUserSchema } from "../validators/user.validator";
 
 
 export class UserController {
@@ -150,14 +151,21 @@ export class UserController {
 
     static async createUser(req: Request, res: Response) {
         try {
-            const user = req.body;
+            const validatedUser = createUserSchema.parse(req.body);
+
             await createUser({ 
                 dependencies: { userService: prismaUserServiceImplementation }, 
-                payload: user });
+                payload: validatedUser });
             
-            return res.status(201).json({ message: "Usuario creado exitósamente"});
+            return res.status(201).json({ message: "Usuario creado exitosamente"});
 
         } catch (error: any) {
+            if (error instanceof Error && "issues" in error) {
+              return res.status(400).json({
+                message: "Datos inválidos",
+                errors: (error as any).issues
+              });
+            }
             res.status(500).json({ message: error.message});
         }
     }
@@ -166,13 +174,13 @@ export class UserController {
     static async updateUser(req: Request, res: Response) {
         try {
           const id = req.params.id!;
-          const data = req.body;
+          const validatedData = updateUserSchema.parse(req.body);
 
           const updatedUser = await updateUser({ 
             dependencies: { userService: prismaUserServiceImplementation }, 
             payload: {
               id: id, 
-              data: data} 
+              data: validatedData} 
             });
 
           if (updatedUser instanceof Error) {
@@ -180,6 +188,13 @@ export class UserController {
           }
           res.status(200).json(updatedUser);
         } catch (error: any) {
+          if (error.name === "ZodError") {
+            return res.status(400).json({
+              message: "Datos inválidos",
+              errors: error.issues,
+            })
+          }
+
           res.status(500).json({ message: error.message });
         }
     }
