@@ -242,8 +242,10 @@ export class UserController {
             if (token instanceof Error) {
               return res.status(404).json({ message: token.message });
             }
+
+            res.setHeader("Authorization", `Bearer ${token}`);
             
-            return res.status(201).json({token, message: "Login exitoso"});
+            return res.status(200).json({token, message: "Login exitoso"});
 
         } catch (error: any) {
             res.status(500).json({ message: error.message});
