@@ -3,6 +3,10 @@ import { userServiceMock } from "../../services/mocks/user-service-mock";
 import { createUser } from "./create-user";
 import { User, CreateUserDTO } from "../../entities/user";
 
+vi.mock("../../utils/crypto/hash-password", () => ({
+    hashPassword: vi.fn(async(p:string) => `hashed-${p}`)
+}));
+
 
 describe("createUser", async () =>{
 
@@ -26,7 +30,9 @@ describe("createUser", async () =>{
                 surname: "Mir",
                 email: "luz@gmail.com",
                 role: "student",
-                password: "123456"
+                password: "hashed-123456",
+                createdAt: expect.any(Date),
+                updatedAt: expect.any(Date),
             })
         );
     })
