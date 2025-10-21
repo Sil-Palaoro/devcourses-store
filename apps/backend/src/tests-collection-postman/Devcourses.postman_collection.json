@@ -1,0 +1,985 @@
+{
+	"info": {
+		"_postman_id": "bf95617c-1f84-471e-a6bd-1223b380374f",
+		"name": "Devcourses",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29899711"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Fail cases",
+					"item": [
+						{
+							"name": "loginUser - wrong password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"email\": \"ari@gmail.com\",\r\n \"password\": \"wrong-password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/users/login",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "loginUser - wrong user",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"email\": \"julia@gmail.com\",\r\n \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/users/login",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "createUser wrong email",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"name\": \"lucas\",\r\n \"surname\": \"lao\",\r\n \"email\": \"lucasgmail.com\",\r\n \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/users",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "registerUser existingUser",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"name\": \"luciano\",\r\n \"surname\": \"Poli\",\r\n \"email\": \"luciano@gmail.com\",\r\n \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/users/register",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getUserList without token",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/users",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Success cases",
+					"item": [
+						{
+							"name": "getUserList",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE3NDU2YWJjLTk5NzAtNGYzOS1iMTFhLWRmZjIxMTAxMDEyOSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MTAwNzgzNiwiZXhwIjoxNzYxMDExNDM2fQ.HWofkBMh2ryCcHeTaDwnMueIbeXKGYc_ITMxxuHa9Is",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/users",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								},
+								"description": "getUserList"
+							},
+							"response": []
+						},
+						{
+							"name": "createUser",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"name\": \"sil\",\r\n \"surname\": \"Admin\",\r\n \"email\": \"siladmin@gmail.com\",\r\n \"password\": \"Pass1234\",\r\n \"role\": \"admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/users",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								},
+								"description": "createUser"
+							},
+							"response": []
+						},
+						{
+							"name": "getUserById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/users/cmgno1gyh0000ti5cmuicls8r",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"cmgno1gyh0000ti5cmuicls8r"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getByRole",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE3NDU2YWJjLTk5NzAtNGYzOS1iMTFhLWRmZjIxMTAxMDEyOSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MTAwNzgzNiwiZXhwIjoxNzYxMDExNDM2fQ.HWofkBMh2ryCcHeTaDwnMueIbeXKGYc_ITMxxuHa9Is",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/users/by-role?role=admin",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"by-role"
+									],
+									"query": [
+										{
+											"key": "role",
+											"value": "admin"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getByName",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/users/by-name?name=aye",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"by-name"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "aye"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getUsersBySurname",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/users/by-surname?surname=Pala",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"by-surname"
+									],
+									"query": [
+										{
+											"key": "surname",
+											"value": "Pala"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getUserByEmail",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/users/by-email?email=aye@gmail.com",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"by-email"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "aye@gmail.com"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteUser",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/users/delete/cmgp25bae0000tidcsv9kmt91",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"delete",
+										"cmgp25bae0000tidcsv9kmt91"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateUser",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE3NDU2YWJjLTk5NzAtNGYzOS1iMTFhLWRmZjIxMTAxMDEyOSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MTAwNzgzNiwiZXhwIjoxNzYxMDExNDM2fQ.HWofkBMh2ryCcHeTaDwnMueIbeXKGYc_ITMxxuHa9Is",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"Pass1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/users/update/cmgno1gyh0000ti5cmuicls8r",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"update",
+										"cmgno1gyh0000ti5cmuicls8r"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "registerUser",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"name\": \"luciano\",\r\n \"surname\": \"Mell\",\r\n \"email\": \"luciano@gmail.com\",\r\n \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/users/register",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "loginUser",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"email\": \"siladmin@gmail.com\",\r\n \"password\": \"Pass1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/users/login",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Course",
+			"item": [
+				{
+					"name": "getCourseList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/courses",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"courses"
+							]
+						},
+						"description": "getCourseList"
+					},
+					"response": []
+				},
+				{
+					"name": "createCourse",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Python nivel intermedio\",\r\n    \"description\": \"Aprende Python nivel intermedio\",\r\n    \"price\": 30000,\r\n    \"categoryId\": \"cmgpmtr6v0001tiocdrcgk68v\",\r\n    \"courseLevel\": \"intermediate\",\r\n    \"published\": true,\r\n    \"instructorId\": \"cmgqh46pm0000tidovn73ptd5\",\r\n    \"tag\": \"python\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/courses",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCourseById",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/courses/cmgqh8nvm0002tidoboa9iocz",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"courses",
+								"cmgqh8nvm0002tidoboa9iocz"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCourseByTag",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/courses/by-tag?tag=javascript",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"courses",
+								"by-tag"
+							],
+							"query": [
+								{
+									"key": "tag",
+									"value": "javascript"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCourseByLevel",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/courses/by-course-level?courseLevel=beginner",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"courses",
+								"by-course-level"
+							],
+							"query": [
+								{
+									"key": "courseLevel",
+									"value": "beginner"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCourse",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/courses/delete/cmgqh8nvm0002tidoboa9iocz",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"courses",
+								"delete",
+								"cmgqh8nvm0002tidoboa9iocz"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCourse",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"published\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/courses/update/cmgqgc15u0001ti7olxij8pxx",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"courses",
+								"update",
+								"cmgqgc15u0001ti7olxij8pxx"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "getAllCategories",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/categories",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCategoryByName",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/categories/by-name?name=Frontend",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								"by-name"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Frontend"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCategoryById",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/categories/cmgpmtr780002tiocm5oeixp0",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								"cmgpmtr780002tiocm5oeixp0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Success cases",
+					"item": [
+						{
+							"name": "getCartList",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/cart",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"cart"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "createCart",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userId\": \"cmgno1gyh0000ti5cmuicls8r\",\r\n    \"items\": [{\r\n        \"courseId\": \"cmgqhjfs80004tido6x37ko57\",\r\n        \"quantity\": 1,\r\n        \"priceSnapshot\": 30000\r\n    }],\r\n    \"currency\": \"ARS\"\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/cart",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"cart"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getCartByUserId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/cart/by-user-id/cmgqh46pm0000tidovn73ptd5",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"cart",
+										"by-user-id",
+										"cmgqh46pm0000tidovn73ptd5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getCart",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/cart/309bad70-423c-4bd9-98b9-1a05a905f874",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"cart",
+										"309bad70-423c-4bd9-98b9-1a05a905f874"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateCart",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"items\": [\r\n            {\r\n                \"id\": \"05b7f66f-b871-4d4c-89e9-b145dcdb7764\",\r\n                \"cartId\": \"309bad70-423c-4bd9-98b9-1a05a905f874\",\r\n                \"courseId\": \"cmgqgc15u0001ti7olxij8pxx\",\r\n                \"quantity\": 1,\r\n                \"priceSnapshot\": 35000\r\n            }\r\n        ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/cart/update/309bad70-423c-4bd9-98b9-1a05a905f874",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"cart",
+										"update",
+										"309bad70-423c-4bd9-98b9-1a05a905f874"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteCart",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/cart/delete/d6bbd88f-1fed-46a4-bfd4-9debdb5feafe",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"cart",
+										"delete",
+										"d6bbd88f-1fed-46a4-bfd4-9debdb5feafe"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "addItemToCart",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"userId\": \"cmgno1gyh0000ti5cmuicls8r\",\r\n  \"courseId\": \"cmgqhjfs80004tido6x37ko57\",\r\n  \"quantity\": 1,\r\n  \"priceSnapshot\": 30000\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/cart/add-item",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"cart",
+										"add-item"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "removeItemFromCart",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"userId\": \"cmgno1gyh0000ti5cmuicls8r\",\r\n  \"cartItemId\": \"a4358188-f0e5-44d5-aaed-f98272443570\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/cart/remove-item",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"cart",
+										"remove-item"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Fail cases",
+					"item": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
