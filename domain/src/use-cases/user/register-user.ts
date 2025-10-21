@@ -13,13 +13,6 @@ export async function registerUser({ dependencies, payload }: RegisterUserData) 
 
     if(existingUser) throw new Error("El usuario ya existe");
 
-    const hashed = await hashPassword(payload.password);
-
-    const newUser = {
-        ...payload,
-        password: hashed,
-    };
-
-    await createUser({ dependencies, payload: newUser});
+    await createUser({ dependencies, payload: payload});
     return { message: "Usuario registrado exitósamente."}
 }
