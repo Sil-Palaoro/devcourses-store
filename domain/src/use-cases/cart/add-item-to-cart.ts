@@ -18,10 +18,10 @@ export async function addItemToCart({ dependencies, payload }: AddItemToCartData
     const { userId, courseId, quantity, priceSnapshot } = payload;
     
     let cart = await dependencies.cartService.getByUserId(userId);
-    if(!cart) throw new Error("El usuario no tiene un carrito de compras");    
+    if(!cart) return new Error("El usuario no tiene un carrito de compras");    
 
     const existingItem = cart.items.find((item) => item.courseId === courseId);
-    if(existingItem) throw new Error("El item ya existe en el carrito de compras");
+    if(existingItem) return new Error("El item ya existe en el carrito de compras");
 
     const newItem: CartItem = {
             id: uuid(),

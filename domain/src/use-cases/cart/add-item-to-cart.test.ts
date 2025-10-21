@@ -51,12 +51,11 @@ describe("addItemtoCart", async () =>{
         priceSnapshot: 1200,
       };
 
-      await expect(
-        addItemToCart({
+      const result = await addItemToCart({
           dependencies: { cartService: cartServiceMock },
           payload: payload,
         })
-      ).rejects.toThrow("El usuario no tiene un carrito de compras");
+      expect(result).toBeInstanceOf(Error);
     });
 
     test("Given a courseId that already exists in the cart, should throw an error", async () => {
@@ -67,11 +66,12 @@ describe("addItemtoCart", async () =>{
         priceSnapshot: 1200,
       };
 
-      await expect(
-        addItemToCart({
+      const result = await addItemToCart({
           dependencies: { cartService: cartServiceMock },
           payload: payload,
         })
-      ).rejects.toThrow("El item ya existe en el carrito de compras");
+      
+
+      expect(result).toBeInstanceOf(Error);
     });
 });

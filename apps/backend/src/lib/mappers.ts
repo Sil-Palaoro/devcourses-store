@@ -25,8 +25,13 @@ export const cartMapper = {
 
         if(cart.currency) data.currency = cart.currency;
 
-        if(cart.items && cart.items.length > 0) {
+        if (cart.items&& cart.items.length > 0){
+            const itemIds = cart.items.map((item) => item.id);
+        
             data.items = {
+                deleteMany: {
+                    id: { notIn: itemIds }
+                },
                 upsert: cart.items.map(item => ({
                     where: { id: item.id },
                     update: {

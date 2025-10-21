@@ -1,4 +1,5 @@
 import { CartService } from "../../services/cart-service";
+import { updateCart } from "./update-cart";
 
 interface RemoveItemFromCartData {
     dependencies: { cartService: CartService},
@@ -11,25 +12,26 @@ interface RemoveItemFromCartData {
 export async function removeItemFromCart({ dependencies, payload }: RemoveItemFromCartData) {
     const { userId, cartItemId } = payload;
 
-    const updatedCart = await dependencies.cartService.removeItemFromCart(userId, cartItemId);
+    let cart = await dependencies.cartService.getByUserId(userId);
+    if(!cart) return new Error("El usuario no tiene un carrito de compras");   
+
+    const existingItem = cart.items.find((item) => item.id === cartItemId);
+    if(!existingItem) return new Error("El item no existe en el carrito de compras");
+
+    const updatedItems = cart.items.filter((item) =>item.id !== cartItemId)
+
+
+    const updatedCart = await updateCart({
+        dependencies: dependencies,
+        payload: {
+            id: cart.id,
+            data: {
+                items: updatedItems,
+            },
+        },
+    });
+
+    if (!updatedCart) return new Error("Error al actualizar el carrito después de eliminar el item");
 
     return updatedCart;
 }
-
-
-    
-    // let cart = await dependencies.cartService.getByUserId(userId);
-    // if(!cart) throw new Error("El usuario no tiene un carrito de compras");    
-
-    // const existingItem = cart.items.find((item) => item.id === cartItemId);
-    // if(!existingItem) throw new Error("El item no existe en el carrito de compras");
-
-    // const updatedCartItems = cart.items.filter((item) => item.id !== cartItemId)
-
-    // const updatedCart = await updateCart({ dependencies, payload: {
-    //         id: cart.id,
-    //         data: {
-    //             items: updatedCartItems
-    //         }
-    //     }
-    // });

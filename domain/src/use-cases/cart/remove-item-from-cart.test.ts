@@ -39,12 +39,13 @@ describe("removeItemFromCart", async () =>{
         cartItemId: "3",
       };
 
-      await expect(
-        removeItemFromCart({
+      const result = await removeItemFromCart({
           dependencies: { cartService: cartServiceMock },
           payload: payload,
         })
-      ).rejects.toThrow("El usuario no tiene un carrito de compras");
+
+      expect(result).toBeInstanceOf(Error)
+
     });
 
     test("Given a courseId that doesn't exists in the cart, should throw an error", async () => {
@@ -53,11 +54,12 @@ describe("removeItemFromCart", async () =>{
         cartItemId: "999", 
       };
 
-      await expect(
-        removeItemFromCart({
+      const result = await removeItemFromCart({
           dependencies: { cartService: cartServiceMock },
           payload: payload,
         })
-      ).rejects.toThrow("El item no existe en el carrito de compras");
+      
+      expect(result).toBeInstanceOf(Error)
+
     });
 });
