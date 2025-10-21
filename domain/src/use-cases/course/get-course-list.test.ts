@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { getCourseList } from "./get-course-list";
-import { courseServiceMock } from "../../services/mocks/course-service-mock";
+import { courseServiceMock } from "../../services/mocks/course-service-mock.integration";
+import { courseServiceMockUnit } from "../../services/mocks/course-service-mock.unit";
 
 
 describe("getCourseList", async () =>{
@@ -41,13 +42,13 @@ describe("getCourseList", async () =>{
         ])
     })
 
-//De esta forma pasan los tests que piden la lista completa, pero 
-// no pasa el test del error (más abajo) si la lista está vacía. Si cambio en getAll "dataCourses" por 
-// emptyDataCourses, pasa el test de error, pero no pasa el que pide la lista completa. FALTA arreglar esto
-//Porque no me deja poner en el test la condicion if(result.lenght === 0) porque dice que Error no tiene propiedad lenght
+    test("If there is no list should return an empty array", async () => {
+        courseServiceMockUnit.getAll.mockResolvedValueOnce([]);
 
-    // test("If there is no list should return an error", async () => {
-    //     const result = await getCourseList({dependencies: {courseService}}); 
-    //     expect(result).toBeInstanceOf(Error)
-    // })
+        const result = await getCourseList({
+            dependencies: {courseService: courseServiceMockUnit}}); 
+
+        expect(result).toEqual([]);
+        expect(Array.isArray(result)).toBe(true);
+    })
 });

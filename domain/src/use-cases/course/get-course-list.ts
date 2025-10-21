@@ -9,8 +9,7 @@ export async function getCourseList({dependencies}: GetCourseList) {
 
     const allCourses = await dependencies.courseService.getAll();
 
-    if (allCourses.length === 0) 
-        return new Error("No hay ningún curso");
+    if (allCourses.length === 0) return [];
 
     return  allCourses;
 };

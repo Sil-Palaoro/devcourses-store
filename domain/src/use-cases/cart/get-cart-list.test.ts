@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { getCartList } from "./get-cart-list";
 import { cartServiceMock } from "../../services/mocks/cart-service-mock.integration";
+import { cartServiceMockUnit } from "../../services/mocks/cart-service-mock.unit";
 
 
 describe("getCartList", async () =>{
@@ -31,4 +32,14 @@ describe("getCartList", async () =>{
             },
         ])
     })
-});
+
+    test("If there is no list should return an empty array", async () => {
+        cartServiceMockUnit.getAll.mockResolvedValueOnce([]);
+
+        const result = await getCartList({
+            dependencies: {cartService: cartServiceMockUnit}}); 
+
+        expect(result).toEqual([]);
+        expect(Array.isArray(result)).toBe(true);
+    })
+})

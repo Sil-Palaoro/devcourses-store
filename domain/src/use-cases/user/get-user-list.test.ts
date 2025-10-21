@@ -1,11 +1,12 @@
 import { describe, expect, test } from "vitest";
 import { getUserList } from "./get-user-list";
-import { userServiceMock } from "../../services/mocks/user-service-mock";
+import { userServiceMock } from "../../services/mocks/user-service-mock.integration";
+import { userServiceMockUnit } from "../../services/mocks/user-service-mock.unit";
 
 
 describe("getUserList", async () =>{
 
-    test("Should return the list of users", async () => {
+    test("Should return the list of users when there are users", async () => {
         const result = await getUserList({dependencies: {userService: userServiceMock}}); 
         expect(result).toStrictEqual([    
             {id: "1",
@@ -51,13 +52,13 @@ describe("getUserList", async () =>{
         ])
     })
 
-//De esta forma pasan los tests que piden la lista completa, pero 
-// no pasa el test del error (más abajo) si la lista está vacía. Si cambio en getAll "dataCourses" por 
-// emptyDataCourses, pasa el test de error, pero no pasa el que pide la lista completa. FALTA arreglar esto
-//Porque no me deja poner en el test la condicion if(result.lenght === 0) porque dice que Error no tiene propiedad lenght
+    test("If there is no list should return an empty array", async () => {
+        userServiceMockUnit.getAll.mockResolvedValueOnce([]);
 
-    // test("If there is no list should return an error", async () => {
-    //     const result = await getCourseList({dependencies: {courseService}}); 
-    //     expect(result).toBeInstanceOf(Error)
-    // })
+        const result = await getUserList({
+            dependencies: {userService: userServiceMockUnit}}); 
+
+        expect(result).toEqual([]);
+        expect(Array.isArray(result)).toBe(true);
+    })
 });

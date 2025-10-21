@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { getCategoryList } from "./get-category-list";
-import { categoryServiceMock } from "../../services/mocks/category-service-mock";
+import { categoryServiceMock } from "../../services/mocks/category-service-mock.integration";
+import { categoryServiceMockUnit } from "../../services/mocks/category-service-mock.unit";
 
 
 describe("getCategoryList", async () =>{
@@ -37,6 +38,18 @@ describe("getCategoryList", async () =>{
              name: "Testing",
              description: "Testing courses",  
              courses: [],  
-            },])
-            })
+            },
+        ])
+    })
+
+
+    test("If there is no list should return an empty array", async () => {
+        categoryServiceMockUnit.getAll.mockResolvedValueOnce([]);
+
+        const result = await getCategoryList({
+            dependencies: {categoryService: categoryServiceMockUnit}}); 
+
+        expect(result).toEqual([]);
+        expect(Array.isArray(result)).toBe(true);
+    })
 });
