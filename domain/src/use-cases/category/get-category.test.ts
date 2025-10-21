@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { getCategory } from "./get-category";
-import { categoryServiceMock } from "../../services/mocks/category-service-mock";
+import { categoryServiceMock } from "../../services/mocks/category-service-mock.integration";
 
 
 describe("getCategory", async () =>{

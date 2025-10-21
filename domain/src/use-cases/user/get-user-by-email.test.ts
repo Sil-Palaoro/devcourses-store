@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { userServiceMock } from "../../services/mocks/user-service-mock";
+import { userServiceMock } from "../../services/mocks/user-service-mock.integration";
 import { getUserByEmail } from "./get-user-by-email";
 
 

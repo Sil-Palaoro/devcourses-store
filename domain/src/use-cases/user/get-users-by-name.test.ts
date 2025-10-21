@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { getUsersByName } from "./get-users-by-name"
-import { userServiceMock } from "../../services/mocks/user-service-mock";
+import { userServiceMock } from "../../services/mocks/user-service-mock.integration";
 
 
 describe("getUsersByName", async () =>{

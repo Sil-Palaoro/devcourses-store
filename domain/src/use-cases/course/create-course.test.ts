@@ -1,5 +1,5 @@
 import { describe, expect, test, vi } from "vitest";
-import { courseServiceMock } from "../../services/mocks/course-service-mock";
+import { courseServiceMock } from "../../services/mocks/course-service-mock.integration";
 import { createCourse } from "./create-course";
 import { Course } from "../../entities/course";
 

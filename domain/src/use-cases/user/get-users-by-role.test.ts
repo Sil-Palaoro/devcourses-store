@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { getUsersByRole } from "./get-users-by-role"
-import { userServiceMock } from "../../services/mocks/user-service-mock";
+import { userServiceMock } from "../../services/mocks/user-service-mock.integration";
 
 
 describe("getUsersByRole", async () =>{
