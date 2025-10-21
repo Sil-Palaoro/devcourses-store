@@ -67,9 +67,13 @@ export const prismaCartServiceImplementation: CartService = {
             quantity,
             priceSnapshot, 
         };
-        cart.items.push(newItem);
         
-        return cart;
+       const updatedCart = await db.cart.update({ 
+            where: {id: cart.id}, 
+            data: cartMapper.toPrismaUpdate(newItem),
+            include: { items: true },
+        });
+        return cartMapper.toDomain(updatedCart);
     },
     async removeItemFromCart(userId, cartItemId) {
        let cart = await db.cart.findUnique({ 
