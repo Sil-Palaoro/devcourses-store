@@ -52,11 +52,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const login = async (email: string, password: string) => {
         setLoading(true);
         try {
-            const resp = await api.post<{ token: string; user: User }>("/login", { email, password });
-            setToken(resp.token);
-            setUser(resp.user);
-            localStorage.setItem("dc_token", resp.token);
-            localStorage.setItem("dc_user", JSON.stringify(resp.user));
+            const postResponse = await api.post<{ token: string; user: User }>("/api/login", { email, password });
+            setToken(postResponse.token);
+            setUser(postResponse.user);
+            localStorage.setItem("dc_token", postResponse.token);
+            localStorage.setItem("dc_user", JSON.stringify(postResponse.user));
         } finally {
             setLoading(false);
         };
