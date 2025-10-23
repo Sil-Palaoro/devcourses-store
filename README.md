@@ -52,13 +52,14 @@ devcourses-store/
 │   │   │   ├── server.ts  
 │   │   │   └── app.ts  
 |   ├── frontend/ 
-│   │   ├── tsconfig.json 
-│   │   ├── package.json 
-│   │   ├── public/ 
-|   |   └── src/
-│   │   │   ├── components/ 
-│   │   │   ├── app.tsx  
-│   │   │   └── main.tsx  
+│   │   ├── devcourses/  
+│   │   │   ├── tsconfig.json 
+│   │   │   ├── package.json 
+│   │   │   ├── public/ 
+|   │   |   └── src/
+│   │   │   │   ├── components/ 
+│   │   │   │   ├── app.tsx  
+│   │   │   │   └── main.tsx  
 ├── docker/ 
 ├── docker-compose.yml
 ├── .gitignore
@@ -114,7 +115,7 @@ Instalá las dependencias de la raíz y de cada paquete:
 ```
 npm install
 cd apps/backend && npm install
-cd ../frontend && npm install
+cd ../frontend/devcourses && npm install
 ```
 
 🔸 4. Configurar Prisma y la base de datos

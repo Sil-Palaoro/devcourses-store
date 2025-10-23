@@ -1,5 +1,5 @@
 "use client"
-import Link from "react";
+import { Link } from "react-router-dom";
 
 function NavBar() {
     return (
