@@ -1,34 +1,42 @@
-"use client"
+import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+
 
 function NavBar() {
+    const { user, logout, isAuthenticated } = useAuth();
     return (
-        <>
-            <header>
-                <h1>
-                    <Link href="/" title="Devcourses Store">
-                      Devcourses Store
-                    </Link>
-                </h1>
-
-                <nav>
-                    <ul >
-                        <li >
-                          <Link title="Home" href="/">Home</Link>
-                        </li>          
-                        <li>
-                          <Link href="#projects" title="Projects" ></Link>
-                        </li>
-                        <li>
-                          <Link href="#skills" title="Skills"></Link>
-                        </li>
-                        <li>
-                          <Link href="#about" title="About"></Link>
-                        </li>     
-                    </ul>
-                </nav>
-            </header>
-        </>
+        <header>
+            <h1>
+                <Link to="/" title="DevCourses Store">
+                  DevCourses Store
+                </Link>
+            </h1>
+            <nav>
+                <ul >
+                    <li >
+                      <Link title="Home" to="/">Home</Link>
+                    </li>          
+                    <li>
+                      <Link to="#courses" title="Cursos">Cursos</Link>
+                    </li>
+                    <li>
+                      <Link to="/cart" title="Carrito">Carrito</Link>
+                    </li>
+                    <li>
+                      {isAuthenticated ? (
+                        <>
+                          {user?.role === "admin" && <Link to="/admin">Admin</Link>}
+                          <button onClick={logout}>Cerrar Sesión</button>
+                        </>
+                        ): (
+                          <Link to="/login" title="Ingresar">Ingresar</Link>
+                        )
+                      }
+                    </li>     
+                </ul>
+            </nav>
+        </header>
     );
 };
 
