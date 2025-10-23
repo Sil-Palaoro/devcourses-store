@@ -17,7 +17,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const useAuth = () => {
     const ctx = useContext(AuthContext);
-    if(!ctx) return new Error("useAuth debe ser usado dentro de AuthProvider");
+    if(!ctx) throw new Error("useAuth debe ser usado dentro de AuthProvider");
     return ctx;
 };
 
@@ -55,7 +55,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             const resp = await api.post<{ token: string; user: User }>("/login", { email, password });
             setToken(resp.token);
             setUser(resp.user);
-            localStorage.setitem("dc_token", resp.token);
+            localStorage.setItem("dc_token", resp.token);
             localStorage.setItem("dc_user", JSON.stringify(resp.user));
         } finally {
             setLoading(false);
