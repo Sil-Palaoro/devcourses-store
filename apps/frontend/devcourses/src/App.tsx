@@ -1,14 +1,16 @@
-// import { useState } from 'react'
-
-import './App.css'
+import React from "react";
+import AppRoutes from "./routes/AppRoutes";
+import { AuthProvider } from "./contexts/AuthContext";
+import Layout from "./components/Layout";
 
 function App() {
-
   return (
-    <>
-      
-    </>
+    <AuthProvider>
+      <Layout>
+        <AppRoutes />
+      </Layout>      
+    </AuthProvider>
   )
 }
 
-export default App
+export default App;
