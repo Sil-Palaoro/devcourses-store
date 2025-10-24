@@ -38,7 +38,6 @@ function Login() {
       <>
         <div className="max-w-md mx-auto bg-white p-6 rounded shadow">               
             <h1 className="text-2xl font-semibold mb-4">Iniciar sesión</h1>
-            {error && <div className="text-red-600 mb-2">{error}</div>}
             <form onSubmit={handleLogin} className="space-y-4">
                 <div>
                   <label className="block text-sm">Email</label>
@@ -66,7 +65,8 @@ function Login() {
                     className="w-full py-2 rounded bg-indigo-600 text-white"
                     disabled={loading}>
                         {loading ? "Ingresando..." : "Ingresar"}
-                </button>                
+                </button>       
+                {error && <div className="text-red-600 mb-2">{error}</div>}         
             </form>
         </div>
       </>
