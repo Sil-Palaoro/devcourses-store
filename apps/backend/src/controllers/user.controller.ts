@@ -222,7 +222,7 @@ export class UserController {
                 dependencies: { userService: prismaUserServiceImplementation }, 
                 payload: validatedUser });
 
-            return res.status(201).json({ message: "Usuario registrado exitósamente"});
+            return res.status(201).json({ message: "Usuario registrado exitosamente"});
 
         } catch (error: any) {
             res.status(500).json({ message: error.message});
