@@ -56,7 +56,7 @@ function Register() {
           }
     } catch (error: unknown) {
       if (axios.isAxiosError<{ message: string }>(error)) {
-              setErrorMessage(error.response?.data.message || "Error en el registro.");
+              setErrorMessage(error.response?.data.message || "Error al registrarse.");
             } else if (error instanceof Error){
               setErrorMessage(error.message);
             } else {
