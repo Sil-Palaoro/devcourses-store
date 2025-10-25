@@ -1,6 +1,17 @@
-import type { Preview } from '@storybook/react-vite'
+import type { Preview } from '@storybook/react-vite';
+import { AuthProvider } from "../src/contexts/AuthContext";
+import { MemoryRouter } from "react-router-dom";
 
 const preview: Preview = {
+  decorators: [
+    (Story) => (
+      <MemoryRouter>
+        <AuthProvider>
+          <Story />
+        </AuthProvider>
+      </MemoryRouter>
+    ),
+  ],
   parameters: {
     controls: {
       matchers: {
