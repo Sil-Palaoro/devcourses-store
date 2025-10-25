@@ -18,11 +18,11 @@ const meta = {
     parameters: {
         layout: 'fullscreen',
       },
-      args: {
-        onLogin: fn(),
-        onLogout: fn(),
-        onCreateAccount: fn(),
-      },
+      // args: {
+      //   onLogin: fn(),
+      //   onLogout: fn(),
+      //   onCreateAccount: fn(),
+      // },
 
 } satisfies Meta<typeof NavBar>;
 
@@ -30,12 +30,25 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 
-export const LoggedIn: Story = {
+export const LoggedInStudent: Story = {
   decorators: [
      (Story) => (
         <MockAuthProvider
         isAuthenticated={true}
-        userRole="student"
+        userRole="student" 
+        >
+            <Story />
+        </MockAuthProvider>
+      ) 
+  ],
+};
+
+export const LoggedInInstructor: Story = {
+  decorators: [
+     (Story) => (
+        <MockAuthProvider
+        isAuthenticated={true}
+        userRole="instructor"
         >
             <Story />
         </MockAuthProvider>
