@@ -3,12 +3,12 @@ import NavBar from "./NavBar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
-        <div>
+        <div className="min-h-screen flex flex-col bg-dark text-white">
             <NavBar />
-            <main>
+            <main className="flex-grow pt-20 px-6">
                 {children}
             </main>
-            <footer>
+            <footer className="border-t border-purpleNeon py-4 text-center text-sm text-gray-400">
                 <div>© {new Date().getFullYear()} DevCourses Store by Silvina Palaoro</div>
             </footer>
         </div>
