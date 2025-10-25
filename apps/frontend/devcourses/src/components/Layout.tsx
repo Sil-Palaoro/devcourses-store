@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 {children}
             </main>
             <footer>
-                <div>© {new Date().getFullYear()} DevCourses Store</div>
+                <div>© {new Date().getFullYear()} DevCourses Store by Silvina Palaoro</div>
             </footer>
         </div>
     );
