@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import api from "../services/api";
-import { User } from "@devcourses/domain";
+import { UserRole } from "@devcourses/domain";
+import { tokenDecoder } from "../utils/jwt-decoder";
 
 type AuthContextType = {
-    user: User | null;
+    userRole: UserRole | null;
     token: string | null;
     loading: boolean;
     login: (email: string, password: string) => Promise<void>;
@@ -13,7 +14,7 @@ type AuthContextType = {
     isAdmin: boolean;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const useAuth = () => {
     const ctx = useContext(AuthContext);
@@ -23,25 +24,25 @@ export const useAuth = () => {
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [token, setToken] = useState<string | null>(() => localStorage.getItem("dc_token"));
-    const [user, setUser] = useState<User | null>(() => {
-        const raw = localStorage.getItem("dc_user");
-        return raw ? JSON.parse(raw) : null;
-    });
+    const [userRole, setUserRole] = useState<UserRole | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const init = async () => {
             if (token) {
                 try {
-                    const me = await api.get<User>("/:id");
-                    setUser(me);
-                    localStorage.setItem("dc_user", JSON.stringify(me));
+                    //TODO: Probar si funciona de esta forma
+                    const decodedUserRole = tokenDecoder(token)
+                    // const me = await api.get<UserRole>("/:id");
+                    // setUserRole(me);
+                    setUserRole(decodedUserRole);
+                    localStorage.setItem("dc_userRole", JSON.stringify(decodedUserRole));
                 } catch (err) {
                     console.warn("Token inválido o expirado, logout automático");
                     setToken(null);
-                    setUser(null);
+                    setUserRole(null);
                     localStorage.removeItem("dc_token");
-                    localStorage.removeItem("dc_user");                   
+                    localStorage.removeItem("dc_userRole");                   
                 }
             }
             setLoading(false);
@@ -52,11 +53,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const login = async (email: string, password: string) => {
         setLoading(true);
         try {
-            const postResponse = await api.post<{ token: string; user: User }>("/api/login", { email, password });
+            const postResponse = await api.post<{ token: string }>("/login", { email, password });
             setToken(postResponse.token);
-            setUser(postResponse.user);
             localStorage.setItem("dc_token", postResponse.token);
-            localStorage.setItem("dc_user", JSON.stringify(postResponse.user));
+            localStorage.setItem("dc_userRole", JSON.stringify(userRole));
         } finally {
             setLoading(false);
         };
@@ -64,19 +64,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const logout = () => {
         setToken(null);
-        setUser(null);
+        setUserRole(null);
         localStorage.removeItem("dc_token");
-        localStorage.removeItem("dc_user");
+        localStorage.removeItem("dc_userRole");
     };
 
     const value: AuthContextType = {
-        user,
+        userRole,
         token, 
         loading,
         login,
         logout,
         isAuthenticated: !!token,
-        isAdmin: user?.role === "admin",
+        isAdmin: userRole === "admin",
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

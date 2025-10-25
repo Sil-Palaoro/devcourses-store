@@ -1,10 +1,9 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 
 function NavBar() {
-    const { user, logout, isAuthenticated } = useAuth();
+    const { userRole, logout, isAuthenticated } = useAuth();
     return (
         <header>
             <h1>
@@ -26,7 +25,7 @@ function NavBar() {
                     <li>
                       {isAuthenticated ? (
                         <>
-                          {user?.role === "admin" && <Link to="/admin">Admin</Link>}
+                          {userRole === "admin" && <Link to="/admin">Admin</Link>}
                           <button onClick={logout}>Cerrar Sesión</button>
                         </>
                         ): (
