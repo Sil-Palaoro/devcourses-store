@@ -1,7 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
+import api from "../../services/api";
+import { AxiosResponse } from "axios";
+
 
 function Register() {
   const [name, setName] = useState("");
@@ -13,7 +16,7 @@ function Register() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const apiUrl: string = '/api/register/'; 
+  // const apiUrl: string = '/register/'; 
   const redirectToLogin = () => navigate('/login'); 
 
   const passwordsValidation = (password: string, password2: string ) => {
@@ -40,8 +43,10 @@ function Register() {
         setLoading(true);
         setErrorMessage("");
     try {        
-        if (passwordsValidation(password, password2)) {        
-          const postResponse = await axios.post(apiUrl, {name, surname, email, password});
+        if (passwordsValidation(password, password2)) {     
+            const postResponse = await api.post<AxiosResponse>("/register", { name, surname, email, password });
+   
+          // const postResponse = await axios.post(apiUrl, {name, surname, email, password});
 
           if (postResponse.status === 201) {
             alert("El registro fue exitoso!");
@@ -55,9 +60,10 @@ function Register() {
           }    
           }
     } catch (error: unknown) {
-      if (axios.isAxiosError<{ message: string }>(error)) {
-              setErrorMessage(error.response?.data.message || "Error al registrarse.");
-            } else if (error instanceof Error){
+      // if (api.client.isAxiosError<{ message: string }>(error)) {               //TODO: No se como hacer que tome el error de axios
+      //         setErrorMessage(error.response?.data.message || "Error al registrarse.");
+      //       } else 
+              if (error instanceof Error){
               setErrorMessage(error.message);
             } else {
               setErrorMessage("Error inesperado.");
