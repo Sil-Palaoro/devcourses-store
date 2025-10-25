@@ -1,6 +1,7 @@
 import type { Preview } from '@storybook/react-vite';
 import { AuthProvider } from "../src/contexts/AuthContext";
 import { MemoryRouter } from "react-router-dom";
+import "../src/styles/App.css";
 
 const preview: Preview = {
   decorators: [
