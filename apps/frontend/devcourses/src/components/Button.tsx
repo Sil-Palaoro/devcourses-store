@@ -1,33 +1,44 @@
 import React from "react";
 
+export const Labels = {
+    LOGIN: "Ingresar",
+    LOGOUT: "Cerrar sesión",
+    LOGININ: "Ingresando..",
+    REGISTER: "Registrarme",
+    LOADING: "Cargando.."
+} as const;
+
+export type Label = (typeof Labels)[keyof typeof Labels]; 
+
 interface ButtonProps {
-    onClick?: () => {};
+    onClick: () => void;
     isAuthenticated?: boolean;
-    label: string;
+    label: Label;
     isLoading?: boolean;
-    disabled: boolean;
+    disabled?: boolean;
 }
 
 export const Button = ({
     isLoading = false,
     label,
     disabled = false,
-     ...props
+    onClick
     }: ButtonProps): React.JSX.Element => {
     return (
         <button 
             type="button"
-            disabled={disabled}
+            disabled={disabled || isLoading}
+            onClick={() => onClick()}
             className={
                 `bg-gradient-neon 
                 text-black 
                 px-3 
                 py-1 
                 rounded-md 
-                ${disabled ? "opacity-50 cursor-not-allowed": "hover:opacity-90"} 
+                ${disabled ? "opacity-80 cursor-not-allowed": "hover:opacity-90"} 
                 transition-opacity 
                 shadow-neon`}
-            {...props}
+            
         >
           {label}
         </button>
