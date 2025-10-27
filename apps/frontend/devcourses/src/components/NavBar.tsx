@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { Button } from "./Button";
+import { useNavigate } from "react-router-dom";
 
 
 function NavBar() {
     const { userRole, logout, isAuthenticated } = useAuth();
+    const navigate = useNavigate();
+
+    const redirectToLogin = () => navigate('/login'); 
+
     return (
         <header className="fixed top-0 left-0 w-full z-50 bg-dark/95 backdrop-blur-sm border-b border-transparent shadow-md">
            <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
@@ -55,23 +61,12 @@ function NavBar() {
                           </li>
                         )}
                         <li>
-                          <button 
-                          onClick={logout}
-                          className="bg-gradient-neon text-black px-3 py-1 rounded-md hover:opacity-90 transition-opacity shadow-neon"
-                          >
-                            Cerrar Sesión
-                          </button>
+                          <Button label="Cerrar sesión" disabled={false} onClick={logout} />
                         </li>
                       </>
                       ): (
                         <li>
-                          <Link 
-                            to="/login" 
-                            title="Ingresar"
-                            className="bg-gradient-neon text-black px-3 py-1 rounded-md hover:opacity-90 transition-opacity shadow-neon"
-                          >
-                              Ingresar
-                          </Link>
+                          <Button label="Ingresar" disabled={false} onClick={redirectToLogin} />
                         </li>
                       )
                     }
@@ -85,3 +80,20 @@ function NavBar() {
 };
 
 export default NavBar;
+
+
+
+                         {/* <button 
+                          onClick={logout}
+                          className="bg-gradient-neon text-black px-3 py-1 rounded-md hover:opacity-90 transition-opacity shadow-neon"
+                          >
+                            Cerrar Sesión
+                          </button> */}
+
+                          {/* <Link 
+                            to="/login" 
+                            title="Ingresar"
+                            className="bg-gradient-neon text-black px-3 py-1 rounded-md hover:opacity-90 transition-opacity shadow-neon"
+                          >
+                              Ingresar
+                          </Link> */}

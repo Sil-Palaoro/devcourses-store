@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
 import NavBar from "./NavBar";
 import { MockAuthProvider } from "../mocks/MockAuthProvider";
+import * as ButtonStories from "./Button.stories.tsx";
 
 
 const meta = {
@@ -18,11 +19,9 @@ const meta = {
     parameters: {
         layout: 'fullscreen',
       },
-      // args: {
-      //   onLogin: fn(),
-      //   onLogout: fn(),
-      //   onCreateAccount: fn(),
-      // },
+      args: {
+        onClick: fn(),
+      },
 
 } satisfies Meta<typeof NavBar>;
 
@@ -36,11 +35,15 @@ export const LoggedInStudent: Story = {
         <MockAuthProvider
         isAuthenticated={true}
         userRole="student" 
+        // logout={fn()}
         >
             <Story />
         </MockAuthProvider>
       ) 
   ],
+  args: {
+    ...ButtonStories.LoggedIn.args,
+  }
 };
 
 export const LoggedInInstructor: Story = {
@@ -54,6 +57,9 @@ export const LoggedInInstructor: Story = {
         </MockAuthProvider>
       ) 
   ],
+  args: {
+    ...ButtonStories.LoggedIn.args,
+  }
 };
 
 export const AdminLoggedIn: Story = {
@@ -67,7 +73,42 @@ export const AdminLoggedIn: Story = {
         </MockAuthProvider>
       ) 
   ],
+  args: {
+    ...ButtonStories.LoggedIn.args,
+  }
 };
 
-export const LoggedOut: Story = {};
+export const LoggedOut: Story = {
+  args: {
+    ...ButtonStories.LoggedOut.args,
+  }
+};
 
+
+
+
+// import { action } from 'storybook/actions';
+
+
+
+      // actions: {
+      //   handles: ["click button"]
+      // },
+
+              // onClick: action('on-click'),
+        // redirectToLogin: fn(),
+        // logout: fn(),
+
+          //       logout={fn()}
+
+
+  // decorators: [
+  //    (Story) => (
+  //       <MockAuthProvider
+  //       isAuthenticated={false}
+  //       logout={fn()}
+  //       >
+  //           <Story />
+  //       </MockAuthProvider>
+  //     ) 
+  // ],
