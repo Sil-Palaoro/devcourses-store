@@ -1,8 +1,9 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { AdminRoute } from "./AdminRoute";
-// import Home from "../features/courses/Home";
+import Layout from "../components/Layout";
+// import Home from "../pages/Home";
 // import CourseDetail from "../features/courses/CourseDetail";
 // import Login from "../features/auth/Login";
 // import AdminPanel from "../features/admin/AdminPanel";
@@ -10,29 +11,49 @@ import { AdminRoute } from "./AdminRoute";
 
 export default function AppRoutes() {
     return (
-        <BrowserRouter>
             <Routes>
                 {/* 
-                <Route path="/" element={<Home />} /> 
-                <Route path="/courses/:id" element={<CourseDetail />} />
+                <Route 
+                  path="/" 
+                  element={
+                  <Layout>
+                    <Home />
+                  </Layout>
+                  } 
+                /> 
+
+                <Route 
+                  path="/courses/:id" 
+                  element={
+                    <Layout>
+                      <CourseDetail />
+                    </Layout>
+                  } 
+                />
+
                 <Route path="/login" element={<Login />} />
+
                 <Route
                   path="/cart"
                   element={
                     <ProtectedRoute>
-                      <Cart />
+                      <Layout>
+                        <Cart />
+                      </Layout>
                     </ProtectedRoute>
                   }
                 />
+
                 <Route
                   path="/admin/*"
                   element={
                     <AdminRoute>
-                      <AdminPanel />
+                      <Layout>
+                        <AdminPanel />
+                      </Layout>
                     </AdminRoute>
                   }
                 />*/}
             </Routes>
-        </BrowserRouter>
     )
 }
