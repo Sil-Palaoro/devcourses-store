@@ -11,7 +11,7 @@ export const Labels = {
 export type Label = (typeof Labels)[keyof typeof Labels]; 
 
 interface ButtonProps {
-    onClick: () => void;
+    onClick: (e: React.FormEvent) => void;
     isAuthenticated?: boolean;
     label: Label;
     isLoading?: boolean;
@@ -28,7 +28,7 @@ export const Button = ({
         <button 
             type="button"
             disabled={disabled || isLoading}
-            onClick={() => onClick()}
+            onClick={(e: React.FormEvent) => onClick(e)}
             className={
                 `bg-gradient-neon 
                 text-black 
