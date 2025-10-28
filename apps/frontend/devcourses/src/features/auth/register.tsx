@@ -48,7 +48,7 @@ function Register() {
     try {        
         if (passwordsValidation(password, password2)) {     
             const postResponse = await api.post<AxiosResponse>("/register", { name, surname, email, password });
-
+   
           if (postResponse.status === 201) {
             alert("El registro fue exitoso!");
             setErrorMessage(""); 
@@ -75,12 +75,11 @@ function Register() {
 
   return (
     <div >
-      <div className="max-w-md mx-auto bg-white p-6 rounded shadow">
-        <h1 className="text-2xl font-semibold mb-4">Registro</h1>
-        <form onSubmit={handleRegister} className="space-y-4">
+        <form className="space-y-4">
           <div>
-          <label className="block text-sm">Nombre</label>
-          <input className="w-full border rounded p-2"  
+          <input 
+            placeholder="Nombre"
+            className="w-full border border-fucsiaNeon/40 bg-zinc-800 text-white placeholder-gray-400 rounded p-2 focus:outline-none focus:ring-2 focus:ring-fucsiaNeon/60 transition" 
             type="text"
             maxLength={15}
             value={name}
@@ -89,8 +88,9 @@ function Register() {
           />
           </div>
           <div>
-          <label className="block text-sm">Apellido</label>
-          <input className="w-full border rounded p-2"  
+          <input 
+            placeholder="Apellido"
+            className="w-full border border-fucsiaNeon/40 bg-zinc-800 text-white placeholder-gray-400 rounded p-2 focus:outline-none focus:ring-2 focus:ring-fucsiaNeon/60 transition" 
             type="text"
             maxLength={15}
             value={surname}
@@ -99,9 +99,9 @@ function Register() {
           />
           </div>
           <div>
-          <label className="block text-sm">Email</label>
-          <input className="w-full border rounded p-2"  
-            type="text"
+          <input 
+            placeholder="Email"
+            className="w-full border border-fucsiaNeon/40 bg-zinc-800 text-white placeholder-gray-400 rounded p-2 focus:outline-none focus:ring-2 focus:ring-fucsiaNeon/60 transition"            type="text"
             maxLength={15}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -109,15 +109,19 @@ function Register() {
           />
           </div>
           <div>
-            <label className="block text-sm">Contraseña</label>
-            <input className="w-full border rounded p-2"            
+            <input 
+              placeholder="Contraseña"
+              className="w-full border border-fucsiaNeon/40 bg-zinc-800 text-white placeholder-gray-400 rounded p-2 focus:outline-none focus:ring-2 focus:ring-fucsiaNeon/60 transition"           
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <label className="block text-sm">Repita la contraseña</label>
-            <input className="w-full border rounded p-2" 
+          </div>
+          <div>
+            <input 
+              placeholder="Repita la contraseña"
+              className="w-full border border-fucsiaNeon/40 bg-zinc-800 text-white placeholder-gray-400 rounded p-2 focus:outline-none focus:ring-2 focus:ring-fucsiaNeon/60 transition"
               type="password"
               value={password2}
               onChange={(e) => setPassword2(e.target.value)}
@@ -133,10 +137,8 @@ function Register() {
 
             {errorMessage && <div className="text-red-600 mb-2">{errorMessage}</div>}
         </form>
-      </div>
     </div>
   );
 }
 
 export default Register;
-

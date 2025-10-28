@@ -37,12 +37,10 @@ function Login() {
 
     return (
       <>
-        <div className="max-w-md mx-auto bg-white p-6 rounded shadow">               
-            <h1 className="text-2xl font-semibold mb-4">Iniciar sesión</h1>
-            <form onSubmit={handleLogin} className="space-y-4">
+            <form className="space-y-4">
                 <div>
-                  <label className="block text-sm">Email</label>
-                  <input className="w-full border rounded p-2"
+                  <input 
+                    className="w-full border border-fucsiaNeon/40 bg-zinc-800 text-white placeholder-gray-400 rounded p-2 focus:outline-none focus:ring-2 focus:ring-fucsiaNeon/60 transition"
                     value={email}
                     placeholder="Email"
                     id="email"
@@ -52,16 +50,16 @@ function Login() {
                   />
                 </div>
                 <div>                
-                  <label className="block text-sm">Contraseña</label>
-                  <input className="w-full border rounded p-2"
-                  placeholder="Contraseña"
+                  <input 
+                    className="w-full border border-fucsiaNeon/40 bg-zinc-800 text-white placeholder-gray-400 rounded p-2 focus:outline-none focus:ring-2 focus:ring-fucsiaNeon/60 transition"
+                    placeholder="Contraseña"
                     value={password}
                     id="password"
                     type="password"
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />  
-                </div>                
+                </div>   
                 <Button 
                   onClick={handleLogin}
                   label={loading ? "Ingresando.." : "Ingresar"}
@@ -71,7 +69,6 @@ function Login() {
 
                 {error && <div className="text-red-600 mb-2">{error}</div>}         
             </form>
-        </div>
       </>
     );
 }

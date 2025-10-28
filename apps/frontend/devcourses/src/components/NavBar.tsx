@@ -1,14 +1,17 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { Button } from "./Button";
-import { useNavigate } from "react-router-dom";
+import { Modal } from "./Modal";
+import Login from "../features/auth/login";
+import Register from "../features/auth/register";
 
 
 function NavBar() {
     const { userRole, logout, isAuthenticated } = useAuth();
-    const navigate = useNavigate();
+    const [isLoginOpen, setIsLoginOpen] = useState(false);
+    const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
-    const redirectToLogin = () => navigate('/login'); 
 
     return (
         <header className="fixed top-0 left-0 w-full z-50 bg-dark/95 backdrop-blur-sm border-b border-transparent shadow-md">
@@ -37,19 +40,19 @@ function NavBar() {
                         >
                           Cursos
                       </Link>
-                    </li>
-                    <li>
-                      <Link 
-                        to="/cart" 
-                        title="Carrito"
-                        className="hover:text-fucsiaNeon transition-colors"
-                        >
-                          Carrito
-                      </Link>
-                    </li>   
+                    </li>                    
 
                     {isAuthenticated ? (
                       <>
+                        <li>
+                          <Link 
+                            to="/cart" 
+                            title="Carrito"
+                            className="hover:text-fucsiaNeon transition-colors"
+                            >
+                              Carrito
+                          </Link>
+                        </li>  
                         {userRole === "admin" && (
                           <li>
                             <Link 
@@ -59,15 +62,20 @@ function NavBar() {
                                 Admin
                             </Link>
                           </li>
-                        )}
+                        )} 
                         <li>
                           <Button label="Cerrar sesión" disabled={false} onClick={logout} />
                         </li>
                       </>
                       ): (
-                        <li>
-                          <Button label="Ingresar" disabled={false} onClick={redirectToLogin} />
-                        </li>
+                        <>
+                          <li>
+                            <Button label="Ingresar" disabled={false} onClick={() => setIsLoginOpen(true)} />
+                          </li>
+                          <li>
+                            <Button label="Registrarme" disabled={false} onClick={() => setIsRegisterOpen(true)}  />
+                          </li>
+                        </>
                       )
                     }
               
@@ -75,25 +83,17 @@ function NavBar() {
             </nav>
           </div>
           <div className="h-1 bg-gradient-neon"></div>
+
+          <Modal title="Iniciar sesión" isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)}>
+            <Login />
+          </Modal>
+
+          <Modal title="Registro" isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)}>
+            <Register />
+          </Modal>
+
         </header>
     );
 };
 
 export default NavBar;
-
-
-
-                         {/* <button 
-                          onClick={logout}
-                          className="bg-gradient-neon text-black px-3 py-1 rounded-md hover:opacity-90 transition-opacity shadow-neon"
-                          >
-                            Cerrar Sesión
-                          </button> */}
-
-                          {/* <Link 
-                            to="/login" 
-                            title="Ingresar"
-                            className="bg-gradient-neon text-black px-3 py-1 rounded-md hover:opacity-90 transition-opacity shadow-neon"
-                          >
-                              Ingresar
-                          </Link> */}
