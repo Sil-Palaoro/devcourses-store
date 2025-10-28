@@ -22,7 +22,6 @@ const meta = {
       args: {
         onClick: fn(),
       },
-
 } satisfies Meta<typeof NavBar>;
 
 export default meta;
@@ -35,7 +34,6 @@ export const LoggedInStudent: Story = {
         <MockAuthProvider
         isAuthenticated={true}
         userRole="student" 
-        // logout={fn()}
         >
             <Story />
         </MockAuthProvider>
@@ -83,32 +81,3 @@ export const LoggedOut: Story = {
     ...ButtonStories.LoggedOut.args,
   }
 };
-
-
-
-
-// import { action } from 'storybook/actions';
-
-
-
-      // actions: {
-      //   handles: ["click button"]
-      // },
-
-              // onClick: action('on-click'),
-        // redirectToLogin: fn(),
-        // logout: fn(),
-
-          //       logout={fn()}
-
-
-  // decorators: [
-  //    (Story) => (
-  //       <MockAuthProvider
-  //       isAuthenticated={false}
-  //       logout={fn()}
-  //       >
-  //           <Story />
-  //       </MockAuthProvider>
-  //     ) 
-  // ],
