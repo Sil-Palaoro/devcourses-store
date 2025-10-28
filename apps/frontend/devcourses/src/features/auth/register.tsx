@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import axios from "axios";
 import { AxiosResponse } from "axios";
+import { Button } from "../../components/Button";
+
 
 
 function Register() {
@@ -122,12 +124,13 @@ function Register() {
               required
             />
           </div>
-          <button 
-            className="w-full py-2 rounded bg-indigo-600 text-white"
+          <Button 
+            label={loading ? "Cargando.." : "Registrarme"}
+            onClick={handleRegister}
             disabled={loading}
-            >
-                {loading ? "Cargando..." : "Registrarme"}
-            </button>
+            isLoading={loading}
+            />
+
             {errorMessage && <div className="text-red-600 mb-2">{errorMessage}</div>}
         </form>
       </div>
