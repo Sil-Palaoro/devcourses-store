@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import axios from "axios";
+import { Button } from "../../components/Button";
 
 
 function Login() {
@@ -61,11 +62,13 @@ function Login() {
                     required
                   />  
                 </div>                
-                <button 
-                    className="w-full py-2 rounded bg-indigo-600 text-white"
-                    disabled={loading}>
-                        {loading ? "Ingresando..." : "Ingresar"}
-                </button>       
+                <Button 
+                  onClick={handleLogin}
+                  label={loading ? "Ingresando.." : "Ingresar"}
+                  disabled={loading}
+                  isLoading={loading}
+                  />             
+
                 {error && <div className="text-red-600 mb-2">{error}</div>}         
             </form>
         </div>
