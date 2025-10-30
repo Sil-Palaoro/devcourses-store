@@ -11,7 +11,7 @@ interface ContextArgs {
 }
 
 const meta = {
-    title: 'Components/Home',
+    title: 'Pages/Home',
     component: Home,
     tags: ['autodocs'],
     parameters: {
