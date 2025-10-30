@@ -5,12 +5,14 @@ export const Labels = {
     LOGOUT: "Cerrar sesión",
     LOGININ: "Ingresando..",
     REGISTER: "Registrarme",
-    LOADING: "Cargando.."
+    LOADING: "Cargando..",
+    KNOWMORE: "Ver más" 
 } as const;
 
 export type Label = (typeof Labels)[keyof typeof Labels]; 
 
 interface ButtonProps {
+    primary?: boolean;
     onClick: (e: React.FormEvent) => void;
     isAuthenticated?: boolean;
     label: Label;
@@ -19,28 +21,48 @@ interface ButtonProps {
 }
 
 export const Button = ({
+    primary = true,
     isLoading = false,
     label,
     disabled = false,
     onClick
     }: ButtonProps): React.JSX.Element => {
-    return (
-        <button 
-            type="button"
-            disabled={disabled || isLoading}
-            onClick={(e: React.FormEvent) => onClick(e)}
-            className={
-                `bg-gradient-neon 
+    const mode = primary ? `bg-gradient-neon 
                 text-black 
                 px-3 
                 py-1 
                 rounded-md 
                 ${disabled ? "opacity-80 cursor-not-allowed": "hover:opacity-90"} 
                 transition-opacity 
-                shadow-neon`}
-            
+                shadow-neon` 
+                : `bg-purpleNeon 
+                text-black 
+                py-1 
+                px-3 
+                rounded-lg 
+                text-sm 
+                ${disabled ? "opacity-80 cursor-not-allowed": "hover:bg-purple-500"}                 
+                transition
+                shadow-neon`;
+
+    return (
+        <button 
+            type="button"
+            disabled={disabled || isLoading}
+            onClick={(e: React.FormEvent) => onClick(e)}
+            className={mode}            
         >
           {label}
         </button>
     )
 }
+
+
+// `bg-gradient-neon 
+                // text-black 
+                // px-3 
+                // py-1 
+                // rounded-md 
+                // ${disabled ? "opacity-80 cursor-not-allowed": "hover:opacity-90"} 
+                // transition-opacity 
+                // shadow-neon

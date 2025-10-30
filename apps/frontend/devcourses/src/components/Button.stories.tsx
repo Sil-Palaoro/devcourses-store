@@ -55,3 +55,12 @@ export const Loading: Story = {
   },
 };
 
+export const KnowMore: Story = {
+  args: {
+    isLoading: false,
+    label: 'Ver más',
+    disabled: false,
+    primary: false
+  },
+};
+
