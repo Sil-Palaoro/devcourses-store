@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
-import NavBar from "./NavBar";
-import { MockAuthProvider } from "../mocks/MockAuthProvider";
-import * as ButtonStories from "./Button.stories.tsx";
+import NavBar from "./NavBar.js";
+import { MockAuthProvider } from "../mocks/MockAuthProvider.js";
+import * as ButtonStories from "./Button.stories.js";
 
 
 const meta = {

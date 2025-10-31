@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../../services/api";
+import api from "../../services/api.js";
 import axios from "axios";
 import { AxiosResponse } from "axios";
-import { Button } from "../../components/Button";
+import { Button } from "../../components/Button.js";
 
 
 

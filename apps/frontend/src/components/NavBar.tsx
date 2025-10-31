@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
-import { Button } from "./Button";
-import { Modal } from "./Modal";
-import Login from "../features/auth/login";
-import Register from "../features/auth/register";
+import { useAuth } from "../contexts/AuthContext.js";
+import { Button } from "./Button.js";
+import { Modal } from "./Modal.js";
+import Login from "../features/auth/login.js";
+import Register from "../features/auth/register.js";
 
 
 function NavBar() {

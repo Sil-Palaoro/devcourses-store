@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import api from "../services/api";
+import api from "../services/api.js";
 import { UserRole } from "@devcourses/domain";
-import { tokenDecoder } from "../utils/jwt-decoder";
+import { tokenDecoder } from "../utils/jwt-decoder.js";
 
 type AuthContextType = {
     userRole: UserRole | null;

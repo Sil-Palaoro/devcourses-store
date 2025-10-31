@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext.js";
 import axios from "axios";
-import { Button } from "../../components/Button";
+import { Button } from "../../components/Button.js";
 
 
 function Login() {

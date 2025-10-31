@@ -1,6 +1,6 @@
 import React from "react";
-import CourseList from "../components/CourseList";
-import { dataCourses } from "../mocks/course-mock";
+import CourseList from "../components/CourseList.js";
+import { dataCourses } from "../mocks/course-mock.js";
 
 const Home = () => {
     return (

@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
-import { Modal } from "./Modal";
-import Login from "../features/auth/login";
-import Register from "../features/auth/register";
+import { Modal } from "./Modal.js";
+import Login from "../features/auth/login.js";
+import Register from "../features/auth/register.js";
 
 const meta = {
     title: "Components/Modal",

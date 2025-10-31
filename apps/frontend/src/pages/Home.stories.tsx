@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
-import Home from "./Home";
-import Layout from "../components/Layout";
-import { MockAuthProvider } from "../mocks/MockAuthProvider";
+import Home from "./Home.js";
+import Layout from "../components/Layout.js";
+import { MockAuthProvider } from "../mocks/MockAuthProvider.js";
 import { UserRole } from "@devcourses/domain";
 
 interface ContextArgs {

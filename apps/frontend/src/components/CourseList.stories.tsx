@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import CourseList from './CourseList.js';
-import { dataCourses } from "../mocks/course-mock";
+import { dataCourses } from "../mocks/course-mock.js";
 
 
 const meta = {
