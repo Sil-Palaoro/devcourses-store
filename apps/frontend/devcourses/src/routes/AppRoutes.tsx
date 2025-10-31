@@ -1,10 +1,10 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { ProtectedRoute } from "./ProtectedRoute";
-import { AdminRoute } from "./AdminRoute";
-import Layout from "../components/Layout";
-// import Home from "../pages/Home";
-// import CourseDetail from "../features/courses/CourseDetail";
+import { ProtectedRoute } from "./ProtectedRoute.js";
+import { AdminRoute } from "./AdminRoute.js";
+import Layout from "../components/Layout.js";
+import Home from "../pages/Home.js";
+// import CourseDetailPage from "../pages/CourseDetailPage";
 // import Login from "../features/auth/Login";
 // import AdminPanel from "../features/admin/AdminPanel";
 // import Cart from "../features/cart/Cart";
@@ -12,7 +12,7 @@ import Layout from "../components/Layout";
 export default function AppRoutes() {
     return (
             <Routes>
-                {/* 
+                 
                 <Route 
                   path="/" 
                   element={
@@ -21,17 +21,16 @@ export default function AppRoutes() {
                   </Layout>
                   } 
                 /> 
-
+{/*
                 <Route 
                   path="/courses/:id" 
                   element={
                     <Layout>
-                      <CourseDetail />
+                      <CourseDetailPage course={} />
                     </Layout>
                   } 
                 />
 
-                <Route path="/login" element={<Login />} />
 
                 <Route
                   path="/cart"
@@ -53,7 +52,11 @@ export default function AppRoutes() {
                       </Layout>
                     </AdminRoute>
                   }
-                />*/}
+                />
+                
+                <Route path="/login" element={<Login />} />
+
+                */}
             </Routes>
     )
 }
