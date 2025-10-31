@@ -3,7 +3,13 @@ import api from "../services/api.js";
 import { UserRole } from "@devcourses/domain";
 import { tokenDecoder } from "../utils/jwt-decoder.js";
 
+type DecodedToken = {
+    userId: string;
+    role: UserRole;
+}
+
 type AuthContextType = {
+    userId: string | null;
     userRole: UserRole | null;
     token: string | null;
     loading: boolean;
@@ -26,23 +32,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [token, setToken] = useState<string | null>(() => localStorage.getItem("dc_token"));
     const [userRole, setUserRole] = useState<UserRole | null>(null);
     const [loading, setLoading] = useState(true);
+    const [userId, setUserId] = useState<string | null>(null);
 
     useEffect(() => {
         const init = async () => {
             if (token) {
                 try {
-                    //TODO: Probar si funciona de esta forma
-                    const decodedUserRole = tokenDecoder(token)
-                    // const me = await api.get<UserRole>("/:id");
-                    // setUserRole(me);
-                    setUserRole(decodedUserRole);
-                    localStorage.setItem("dc_userRole", JSON.stringify(decodedUserRole));
+                    const decoded: DecodedToken = tokenDecoder(token)
+                    setUserId(decoded.userId);
+                    setUserRole(decoded.role);
+                    localStorage.setItem("dc_userRole", JSON.stringify(decoded.role));
+                    localStorage.setItem("dc_userId", JSON.stringify(decoded.userId))
                 } catch (err) {
                     console.warn("Token inválido o expirado, logout automático");
                     setToken(null);
                     setUserRole(null);
+                    setUserId(null);
                     localStorage.removeItem("dc_token");
                     localStorage.removeItem("dc_userRole");                   
+                    localStorage.removeItem("dc_userId"); 
                 }
             }
             setLoading(false);
@@ -57,6 +65,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setToken(postResponse.token);
             localStorage.setItem("dc_token", postResponse.token);
             localStorage.setItem("dc_userRole", JSON.stringify(userRole));
+            localStorage.setItem("dc_userId", JSON.stringify(userId));
         } finally {
             setLoading(false);
         };
@@ -65,11 +74,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const logout = () => {
         setToken(null);
         setUserRole(null);
+        setUserId(null);
         localStorage.removeItem("dc_token");
         localStorage.removeItem("dc_userRole");
+        localStorage.removeItem("dc_userId");
     };
 
     const value: AuthContextType = {
+        userId,
         userRole,
         token, 
         loading,
