@@ -6,7 +6,8 @@ export const Labels = {
     LOGININ: "Ingresando..",
     REGISTER: "Registrarme",
     LOADING: "Cargando..",
-    KNOWMORE: "Ver más" 
+    KNOWMORE: "Ver más",
+    ADDTOCART: "Añadir al carrito"
 } as const;
 
 export type Label = (typeof Labels)[keyof typeof Labels]; 
@@ -56,13 +57,3 @@ export const Button = ({
         </button>
     )
 }
-
-
-// `bg-gradient-neon 
-                // text-black 
-                // px-3 
-                // py-1 
-                // rounded-md 
-                // ${disabled ? "opacity-80 cursor-not-allowed": "hover:opacity-90"} 
-                // transition-opacity 
-                // shadow-neon

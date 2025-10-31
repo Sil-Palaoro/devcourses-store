@@ -64,3 +64,13 @@ export const KnowMore: Story = {
   },
 };
 
+
+export const AddToCart: Story = {
+  args: {
+    isLoading: false,
+    label: 'Añadir al carrito',
+    disabled: false,
+    primary: false
+  },
+};
+
