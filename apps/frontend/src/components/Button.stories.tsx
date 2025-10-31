@@ -74,3 +74,12 @@ export const AddToCart: Story = {
   },
 };
 
+export const AddingToCart: Story = {
+  args: {
+    isLoading: true,
+    label: 'Agregando..',
+    disabled: true,
+    primary: false
+  },
+};
+

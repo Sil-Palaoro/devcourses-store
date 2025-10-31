@@ -7,7 +7,8 @@ export const Labels = {
     REGISTER: "Registrarme",
     LOADING: "Cargando..",
     KNOWMORE: "Ver más",
-    ADDTOCART: "Añadir al carrito"
+    ADDTOCART: "Añadir al carrito",
+    ADDINGTOCART: "Agregando..",
 } as const;
 
 export type Label = (typeof Labels)[keyof typeof Labels]; 
