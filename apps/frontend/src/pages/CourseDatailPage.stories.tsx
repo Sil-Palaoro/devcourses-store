@@ -3,6 +3,8 @@ import CourseDetailPage from "./CourseDetailPage.js";
 import Layout from "../components/Layout.js";
 import { MockAuthProvider } from "../mocks/MockAuthProvider.js";
 import { UserRole, Course } from "@devcourses/domain";
+// import * as ButtonStories from "../components/Button.stories.js";
+
 
 const courseMock: Course = {
     id: "2",
@@ -44,7 +46,6 @@ const meta: Meta<StoryArgs> = {
     ],
     args: {
         course: courseMock,
-        onClick: ()=> alert("Se clickeó 'Añadir al carrito'"),
     },
 } 
 
@@ -78,3 +79,10 @@ export const CourseDetailPageLoggedInAdmin: Story = {
     userRole: "admin"
   }
 };
+
+// export const CourseDetailPageLoadingButton: Story = {
+//     args: {
+//         isAuthenticated: false,
+//         ...ButtonStories.AddingToCart.args,
+//     },
+// };
