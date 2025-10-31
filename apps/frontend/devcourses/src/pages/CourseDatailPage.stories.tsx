@@ -1,21 +1,29 @@
-import { Meta, StoryObj, StoryContext } from "@storybook/react-vite";
-import type { ReactRenderer } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import CourseDetailPage from "./CourseDetailPage.js";
-import { fn } from "storybook/test";
 import Layout from "../components/Layout.js";
 import { MockAuthProvider } from "../mocks/MockAuthProvider.js";
 import { UserRole, Course } from "@devcourses/domain";
 
-interface ContextArgs {
+const courseMock: Course = {
+    id: "2",
+    title: "Python nivel intermedio",
+    description: "Aprende Python nivel intermedio - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet orci elementum tellus vulputate sodales. Cras ornare elementum ullamcorper. Etiam ligula elit, mollis vitae tempor ac, varius ullamcorper mauris. ",
+    price: 30000,
+    categoryId: "2",
+    courseLevel: "intermediate",
+    published: true,
+    instructorId: "1",
+    tag: "python"
+}
+
+interface StoryArgs {
+    course: Course,
     isAuthenticated?: boolean;
     userRole?: UserRole;
+    onClick?: () =>void;
 }
 
-interface StoryArgs extends ContextArgs {
-    course: Course
-}
-
-const meta = {
+const meta: Meta<StoryArgs> = {
     title: 'Pages/CourseDetailPage',
     component: CourseDetailPage,
     tags: ['autodocs'],
@@ -23,7 +31,7 @@ const meta = {
         layout: 'fullscreen'
     },
     decorators: [
-        (Story, context: StoryContext<StoryArgs>) => (
+        (Story, context) => (
             <MockAuthProvider
                 isAuthenticated={context.args.isAuthenticated}
                 userRole={context.args.userRole}
@@ -34,26 +42,39 @@ const meta = {
             </MockAuthProvider>
         )
     ],
-//   args: { onClick: fn() },
-} satisfies Meta<typeof CourseDetailPage>;
+    args: {
+        course: courseMock,
+        onClick: ()=> alert("Se clickeó 'Añadir al carrito'"),
+    },
+} 
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const CourseDetailPageLoggedOut: Story = {
     args: {
-       course: {
-        id: "2",
-        title: "Python nivel intermedio",
-        description: "Aprende Python nivel intermedio - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet orci elementum tellus vulputate sodales. Cras ornare elementum ullamcorper. Etiam ligula elit, mollis vitae tempor ac, varius ullamcorper mauris. ",
-        price: 30000,
-        categoryId: "2",
-        courseLevel: "intermediate",
-        published: true,
-        instructorId: "1",
-        tag: "python"
-        },
         isAuthenticated: false,
     },
 };
 
+export const CourseDetailPageLoggedInStudent: Story = {
+  args: {
+    
+    isAuthenticated: true,
+    userRole: "student"
+  }
+};
+
+export const CourseDetailPageLoggedInInstructor: Story = {
+  args: {    
+    isAuthenticated: true,
+    userRole: "instructor",
+  }
+};
+
+export const CourseDetailPageLoggedInAdmin: Story = {
+  args: {    
+    isAuthenticated: true,
+    userRole: "admin"
+  }
+};
