@@ -1,8 +1,7 @@
 import React from "react";
 import { Course } from "@devcourses/domain";
-import { Button } from "./Button";
-
-                //TODO: Agregar onClick con navigate a CardDetailPage
+import { Button } from "./Button.js";
+import { useNavigate } from "react-router-dom";
 
 
 interface CourseCardProps {
@@ -10,6 +9,8 @@ interface CourseCardProps {
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
+    const navigate = useNavigate();
+
     return (
         <div className="bg-darkLight border border-purpleNeon rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow">
             <h2 className="text-lg font-semibold mb-2">{course.title}</h2>
