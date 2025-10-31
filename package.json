@@ -6,6 +6,10 @@
   "scripts": {
     "test": "vitest"  
   },
+  "workspaces": [
+    "./apps/backend", 
+    "./apps/frontend", 
+    "./domain"],
   "keywords": [],
   "author": "",
   "license": "ISC",
