@@ -9,6 +9,9 @@ export const Labels = {
     KNOWMORE: "Ver más",
     ADDTOCART: "Añadir al carrito",
     ADDINGTOCART: "Agregando..",
+    REMOVEITEM: "Quitar",
+    CONFIRMBUY: "Confirmar compra",
+    EXPLORECOURSES: "Explorar cursos",
 } as const;
 
 export type Label = (typeof Labels)[keyof typeof Labels]; 

@@ -47,7 +47,7 @@ export const Register: Story = {
   },
 };
 
-export const Loading: Story = {
+export const LoadingPrimary: Story = {
   args: {
     isLoading: true,
     label: 'Cargando..',
@@ -83,3 +83,39 @@ export const AddingToCart: Story = {
   },
 };
 
+export const RemoveItem: Story = {
+  args: {
+    isLoading: false,
+    label: 'Quitar',
+    disabled: false,
+    primary: false
+  },
+};
+
+
+export const ConfirmBuy: Story = {
+  args: {
+    isLoading: false,
+    label: 'Confirmar compra',
+    disabled: false,
+  },
+};
+
+export const ExploreCourses: Story = {
+  args: {
+    isLoading: false,
+    label: 'Explorar cursos',
+    disabled: false,
+    primary: false
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    isLoading: true,
+    label: 'Cargando..',
+    disabled: true,
+    primary: false,
+
+  },
+};
