@@ -1,4 +1,5 @@
 import api from "./api";
+import { Cart } from "@devcourses/domain";
 
 interface CartService {
     addItem: (userId: string, 
@@ -6,14 +7,15 @@ interface CartService {
         price: number,
         quantity?: number) => Promise<unknown>;
     createCart: (userId: string) => Promise<unknown>;
-    getByUserId: (userId: string) => Promise<unknown>;
+    getByUserId: (userId: string) => Promise<Cart | null>;
+    removeItem: (userId: string, cartItemId: string) => Promise<Cart | null>;
 }
 
 export const cartService: CartService = {
     async addItem(
-        userId: string, 
-        courseId: string,
-        price: number,
+        userId, 
+        courseId,
+        price,
         quantity = 1
      ) {
         return api.patch("/cart/add-item", {
@@ -24,7 +26,7 @@ export const cartService: CartService = {
         });
      },
 
-     async createCart(userId: string) {
+     async createCart(userId) {
         return api.post("/cart", {
             userId,
             items: [],
@@ -32,7 +34,11 @@ export const cartService: CartService = {
         });
      },
 
-     async getByUserId(userId: string) {
+     async getByUserId(userId) {
         return api.get(`/cart/by-user-id/${userId}`)
+     },
+
+     async removeItem(userId, cartItemId) {
+        return api.patch("cart/remove-item", { userId, cartItemId });
      },
 }
