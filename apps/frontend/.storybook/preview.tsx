@@ -1,5 +1,6 @@
 import type { Preview } from '@storybook/react-vite';
 import { AuthProvider } from "../src/contexts/AuthContext";
+import { CartProvider } from "../src/contexts/CartContext";
 import { MemoryRouter } from "react-router-dom";
 import "../src/styles/App.css";
 
@@ -8,7 +9,9 @@ const preview: Preview = {
     (Story) => (
       <MemoryRouter>
         <AuthProvider>
-          <Story />
+          <CartProvider>
+            <Story />
+          </CartProvider>
         </AuthProvider>
       </MemoryRouter>
     ),
