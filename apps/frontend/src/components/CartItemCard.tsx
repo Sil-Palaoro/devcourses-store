@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Cart, CartItem } from "@devcourses/domain";
-import { Button } from "./Button.js";
+import { Button } from "./Button";
+import { useNavigate } from "react-router-dom";
+
 
 //TODO: cambiar el curso Id por el title del curso
 
@@ -11,6 +13,7 @@ interface CartItemCardProps {
 
 const CartItemCard: React.FC<CartItemCardProps> = ({ cartItem, onRemoveItem }) => {
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     return (
         <div className="bg-darkLight border border-purpleNeon rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow">
@@ -23,7 +26,10 @@ const CartItemCard: React.FC<CartItemCardProps> = ({ cartItem, onRemoveItem }) =
                 <Button 
                     primary={false} 
                     label={loading ? "Cargando..": "Quitar"} 
-                    onClick={()=> onRemoveItem(cartItem.id)} />     
+                    onClick={()=> {
+                        onRemoveItem(cartItem.id);
+                        navigate("/cart");
+                        }} />     
             </div>
         </div>
     );
