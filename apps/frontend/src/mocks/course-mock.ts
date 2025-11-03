@@ -33,4 +33,16 @@ export const dataCourses: Course[] = [
     }
 ];
 
+export const courseMock: Course = {
+    id: "3",
+    title: "SQL para principiantes",
+    description: "Aprende SQL desde 0 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet orci elementum tellus vulputate sodales. Cras ornare elementum ullamcorper. Etiam ligula elit, mollis vitae tempor ac, varius ullamcorper mauris. ",
+    price: 30000,
+    categoryId: "3",
+    courseLevel: "beginner",
+    published: true,
+    instructorId: "1",
+    tag: "sql"
+};
+
 export const emptyDataCourses: Course[] = []

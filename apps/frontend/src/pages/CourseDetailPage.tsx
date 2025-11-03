@@ -3,17 +3,18 @@ import { Course } from "@devcourses/domain";
 import { Button } from "../components/Button";
 import { useAuth } from "../contexts/AuthContext";
 import { cartService } from "../services/cartService";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { courseService } from "../services/courseService";
+import { useAuthModals } from "../contexts/AuthModalContext";
 
 
 const CourseDetailPage: React.FC = () => {
     const { userId, isAuthenticated } = useAuth();
+    const { openLoginModal } = useAuthModals();
     const [course, setCourse] = useState<Course | null>(null);
     const [loading, setLoading] = useState(false);
     const [loadingCourse, setLoadingCourse] = useState(true);
     const [message, setMessage] = useState("");
-    const navigate = useNavigate();
     const { id } = useParams();
 
     useEffect(() => {
@@ -37,7 +38,7 @@ const CourseDetailPage: React.FC = () => {
     
     const addToCart = async () => {
         if (!isAuthenticated || !userId) {
-            navigate("/login");
+            openLoginModal();
             return;
         }
 

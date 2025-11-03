@@ -1,15 +1,16 @@
 "use client";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext.js";
+import { useAuth } from "../../contexts/AuthContext";
+import { useAuthModals } from "../../contexts/AuthModalContext";
 import axios from "axios";
-import { Button } from "../../components/Button.js";
+import { Button } from "../../components/Button";
 
 
 function Login() {
     const { login } = useAuth();
     const navigate = useNavigate();
-
+    const { openRegisterModal } = useAuthModals();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState<string | null>(null);
@@ -65,7 +66,14 @@ function Login() {
                   label={loading ? "Ingresando.." : "Ingresar"}
                   disabled={loading}
                   isLoading={loading}
-                  />             
+                />   
+                <div>
+                  <p className="text-sm text-center mt-3">¿No tienes cuenta?{' '}</p>
+                  <button 
+                    onClick={openRegisterModal}
+                    className="text-fucsiaNeon hover:underline"
+                  >Registrate aquí</button>
+                </div>          
 
                 {error && <div className="text-red-600 mb-2">{error}</div>}         
             </form>

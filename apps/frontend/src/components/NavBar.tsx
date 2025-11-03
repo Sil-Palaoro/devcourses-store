@@ -1,17 +1,12 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext.js";
-import { Button } from "./Button.js";
-import { Modal } from "./Modal.js";
-import Login from "../features/auth/login.js";
-import Register from "../features/auth/register.js";
+import { useAuth } from "../contexts/AuthContext";
+import { useAuthModals } from "../contexts/AuthModalContext";
+import { Button } from "./Button";
 
 
 function NavBar() {
     const { userRole, logout, isAuthenticated } = useAuth();
-    const [isLoginOpen, setIsLoginOpen] = useState(false);
-    const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-
+    const { openLoginModal, openRegisterModal } = useAuthModals();
 
     return (
         <header className="fixed top-0 left-0 w-full z-50 bg-dark/95 backdrop-blur-sm border-b border-transparent shadow-md">
@@ -70,10 +65,10 @@ function NavBar() {
                       ): (
                         <>
                           <li>
-                            <Button label="Ingresar" disabled={false} onClick={() => setIsLoginOpen(true)} />
+                            <Button label="Ingresar" disabled={false} onClick={openLoginModal} />
                           </li>
                           <li>
-                            <Button label="Registrarme" disabled={false} onClick={() => setIsRegisterOpen(true)}  />
+                            <Button label="Registrarme" disabled={false} onClick={openRegisterModal}  />
                           </li>
                         </>
                       )
@@ -83,15 +78,6 @@ function NavBar() {
             </nav>
           </div>
           <div className="h-1 bg-gradient-neon"></div>
-
-          <Modal title="Iniciar sesión" isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)}>
-            <Login />
-          </Modal>
-
-          <Modal title="Registro" isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)}>
-            <Register />
-          </Modal>
-
         </header>
     );
 };

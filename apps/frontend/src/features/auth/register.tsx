@@ -1,10 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../../services/api.js";
+import api from "../../services/api";
 import axios from "axios";
 import { AxiosResponse } from "axios";
-import { Button } from "../../components/Button.js";
+import { Button } from "../../components/Button";
+import { useAuthModals } from "../../contexts/AuthModalContext";
+
 
 
 
@@ -16,6 +18,7 @@ function Register() {
   const [password2, setPassword2] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const { openLoginModal } = useAuthModals();
   const navigate = useNavigate();
 
   const redirectToLogin = () => navigate('/login'); 
@@ -133,7 +136,14 @@ function Register() {
             onClick={handleRegister}
             disabled={loading}
             isLoading={loading}
-            />
+          />
+          <div>
+            <p className="text-sm text-center mt-3">¿Ya tienes cuenta?{' '}</p>
+            <button 
+              onClick={openLoginModal}
+              className="text-fucsiaNeon hover:underline"
+            >Inicia sesión</button>
+          </div>  
 
             {errorMessage && <div className="text-red-600 mb-2">{errorMessage}</div>}
         </form>

@@ -1,22 +1,18 @@
+import * as router from "react-router-dom";
+import { vi } from "vitest";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import CourseDetailPage from "./CourseDetailPage.js";
 import Layout from "../components/Layout.js";
 import { MockAuthProvider } from "../mocks/MockAuthProvider.js";
 import { UserRole, Course } from "@devcourses/domain";
-// import * as ButtonStories from "../components/Button.stories.js";
+import * as courseServiceImport from "../services/courseService.js";
+import { courseMock } from "../mocks/course-mock.js";
 
+(courseServiceImport as any).courseService.getById = (id: string) => {
+   console.log("Mock getById called with id:", id);
+   return Promise.resolve(courseMock);
+  }
 
-const courseMock: Course = {
-    id: "2",
-    title: "Python nivel intermedio",
-    description: "Aprende Python nivel intermedio - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet orci elementum tellus vulputate sodales. Cras ornare elementum ullamcorper. Etiam ligula elit, mollis vitae tempor ac, varius ullamcorper mauris. ",
-    price: 30000,
-    categoryId: "2",
-    courseLevel: "intermediate",
-    published: true,
-    instructorId: "1",
-    tag: "python"
-}
 
 interface StoryArgs {
     course: Course,
@@ -38,15 +34,12 @@ const meta: Meta<StoryArgs> = {
                 isAuthenticated={context.args.isAuthenticated}
                 userRole={context.args.userRole}
             >
-                <Layout>
-                    <Story />
-                </Layout>
+              <Layout>
+                <Story />
+              </Layout>
             </MockAuthProvider>
         )
     ],
-    args: {
-        course: courseMock,
-    },
 } 
 
 export default meta;
@@ -80,9 +73,16 @@ export const CourseDetailPageLoggedInAdmin: Story = {
   }
 };
 
-// export const CourseDetailPageLoadingButton: Story = {
-//     args: {
-//         isAuthenticated: false,
-//         ...ButtonStories.AddingToCart.args,
-//     },
-// };
+
+
+// (courseServiceImport as any).courseService.getById = async () => courseMock;
+// (router as any).useParams = () => ({ id: courseMock.id });
+
+// vi.mock("react-router-dom", async (importOriginal) => {
+//   const actual = await importOriginal<typeof import("react-router-dom")>();
+//   return {
+//     ...actual,
+//     useParams: () => ({ id: courseMock.id }),
+//   };
+// });
+// vi.spyOn(router, "useParams").mockReturnValue({ id: courseMock.id });

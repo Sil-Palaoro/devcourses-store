@@ -3,7 +3,12 @@ import { fn } from "storybook/test";
 import Home from "./Home.js";
 import Layout from "../components/Layout";
 import { MockAuthProvider } from "../mocks/MockAuthProvider";
+import { dataCourses } from "../mocks/course-mock";
 import { UserRole } from "@devcourses/domain";
+import * as courseServiceImport from "../services/courseService";
+
+(courseServiceImport as any).courseService.getAllCourses = async () => dataCourses;
+
 
 interface ContextArgs {
     isAuthenticated?: boolean;
@@ -63,3 +68,4 @@ export const HomeLoggedInAdmin: Story = {
     userRole: "admin"
   }
 };
+
