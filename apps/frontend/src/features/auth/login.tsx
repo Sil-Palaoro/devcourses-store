@@ -10,11 +10,12 @@ import { Button } from "../../components/Button";
 function Login() {
     const { login } = useAuth();
     const navigate = useNavigate();
-    const { openRegisterModal } = useAuthModals();
+    const { openRegisterModal, closeModals } = useAuthModals();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
+
     
 
     const handleLogin = async (e: React.FormEvent) => {
@@ -23,10 +24,12 @@ function Login() {
         setError(null);
       try {
         await login(email, password);
+        closeModals();
         navigate("/");
       } catch (error: unknown) {
         setLoading(false);
         if (axios.isAxiosError<{ message: string }>(error)) {
+          console.error("Login error:", error)
           setError(error?.response?.data?.message || "Error en la solicitud.");
         } else if (error instanceof Error){
           setError(error.message);
