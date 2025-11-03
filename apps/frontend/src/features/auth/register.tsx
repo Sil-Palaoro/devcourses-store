@@ -50,7 +50,7 @@ function Register() {
         setErrorMessage("");
     try {        
         if (passwordsValidation(password, password2)) {     
-            const postResponse = await api.post<AxiosResponse>("/register", { name, surname, email, password });
+            const postResponse = await api.post<AxiosResponse>("/users/register", { name, surname, email, password });
    
           if (postResponse.status === 201) {
             alert("El registro fue exitoso!");
