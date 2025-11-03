@@ -9,11 +9,11 @@ import { useAuthModals } from "../contexts/AuthModalContext";
 
 
 const CourseDetailPage: React.FC = () => {
-    const { userId, isAuthenticated } = useAuth();
+    const { userId, isAuthenticated, userRole } = useAuth();
     const { openLoginModal } = useAuthModals();
     const [course, setCourse] = useState<Course | null>(null);
-    const [loading, setLoading] = useState(false);
-    const [loadingCourse, setLoadingCourse] = useState(true);
+    const [loading, setLoading] = useState(true);
+    // const [loadingCourse, setLoadingCourse] = useState(true);
     const [message, setMessage] = useState("");
     const { id } = useParams();
 
@@ -26,14 +26,23 @@ const CourseDetailPage: React.FC = () => {
             } catch (err: any) {
                 setMessage("No se pudo obtener el curso")
             } finally {
-                setLoadingCourse(false);
+                setLoading(false);
             }
         }
         fetchCourse();
     }, [id])
 
-    if (loadingCourse) return <p className="text-center mt-10">Cargando curso...</p>;
-    if (message) return <p className="text-center text-red-500 mt-10">{message}</p>;
+    useEffect(() => {
+      console.log("Auth debug →", {
+        isAuthenticated,
+        userId,
+        userRole,
+        token: localStorage.getItem("dc_token"),
+      });
+    }, [isAuthenticated, userId]);
+
+    if (loading) return <p className="text-center mt-10">Cargando curso...</p>;
+    if (message) return <p className="text-center text-gray-500 mt-10">{message}</p>;
     if (!course) return <p className="text-center text-red-500 mt-10">Curso no encontrado</p>
     
     const addToCart = async () => {
