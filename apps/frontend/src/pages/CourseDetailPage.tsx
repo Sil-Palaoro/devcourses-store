@@ -3,7 +3,7 @@ import { Course } from "@devcourses/domain";
 import { Button } from "../components/Button";
 import { useAuth } from "../contexts/AuthContext";
 import { cartService } from "../services/cartService";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { courseService } from "../services/courseService";
 import { useAuthModals } from "../contexts/AuthModalContext";
 
@@ -16,6 +16,7 @@ const CourseDetailPage: React.FC = () => {
     // const [loadingCourse, setLoadingCourse] = useState(true);
     const [message, setMessage] = useState("");
     const { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCourse = async () => {
@@ -56,14 +57,15 @@ const CourseDetailPage: React.FC = () => {
 
         try {
             await cartService.addItem(userId, course.id, course.price);
-
             setMessage("Curso añadido al carrito exitosamente")
+            navigate("/cart");
         } catch (error: any) {
             if(error.response?.data?.message?.includes("no tiene un carrito")) {
                 try {
                     await cartService.createCart(userId);
                     await cartService.addItem(userId, course.id, course.price);
-                    setMessage("Carrito creado y curso añadido al carrito exitosamente")
+                    setMessage("Carrito creado y curso añadido al carrito exitosamente");
+                    navigate("/cart");
                 } catch (err) {
                    console.error(err);
                    setMessage("Error al crear el carrito") 
