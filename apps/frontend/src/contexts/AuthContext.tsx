@@ -35,6 +35,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [userId, setUserId] = useState<string | null>(null);
 
     useEffect(() => {
+        const token = localStorage.getItem("dc_token");
+
         const init = async () => {
             if (token) {
                 try {
@@ -61,11 +63,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const login = async (email: string, password: string) => {
         setLoading(true);
         try {
-            const postResponse = await api.post<{ token: string }>("/login", { email, password });
-            setToken(postResponse.token);
-            localStorage.setItem("dc_token", postResponse.token);
-            localStorage.setItem("dc_userRole", JSON.stringify(userRole));
-            localStorage.setItem("dc_userId", JSON.stringify(userId));
+            const postResponse = await api.post<{ token: string }>("/users/login", { email, password });
+            const token = postResponse.token
+            const decoded: DecodedToken = tokenDecoder(token)
+            setToken(token);
+            setUserId(decoded.userId);
+            setUserRole(decoded.role);
+            localStorage.setItem("dc_token", token);
+            localStorage.setItem("dc_userRole", JSON.stringify(decoded.role));
+            localStorage.setItem("dc_userId", JSON.stringify(decoded.userId));
         } finally {
             setLoading(false);
         };
