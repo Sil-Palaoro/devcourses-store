@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { Cart } from "@devcourses/domain";
 import { cartService } from "../services/cartService";
 import { useAuth } from "./AuthContext";
+import { useNavigate } from "react-router-dom";
 
 interface CartContextValue {
     cart: Cart | null;
@@ -17,22 +18,36 @@ export const CartContext = createContext<CartContextValue | undefined>(undefined
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const { userId } = useAuth();
     const [cart, setCart] = useState<Cart | null>(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setloading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate();
+
 
     const fetchCart  = async () => {
-        if(!userId) return;
 
+        if(!userId) return;
+    
         try {
-            setLoading(true);
             const cartData = await cartService.getByUserId(userId);
             setCart(cartData);
         } catch (err: any) {
-            setError("No se pudo obtener el carrito");
-        } finally {
-            setLoading(false)
+            if(err.response?.data?.message?.includes("no tiene un carrito")) {
+                try {
+                    await cartService.createCart(userId);                                
+                    navigate("/cart");
+                } catch (error) {
+                   console.error(error);
+                    setError("No se pudo obtener el carrito");
+                };
+            } 
+        }finally {
+            setloading(false)
         };
     };
+
+    useEffect(() => {
+        fetchCart();
+    }, [userId]);
 
     const removeItem = async (cartItemId: string) => {
         if (!userId) return;
@@ -41,9 +56,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (!(updatedCart instanceof Error)) setCart(updatedCart);
     };
 
-    useEffect(() => {
-        fetchCart();
-    }, [userId]);
 
     return (
         <CartContext.Provider value={{ cart, loading, error, fetchCart, removeItem, setCart}}>
