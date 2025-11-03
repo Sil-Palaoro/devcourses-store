@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useAuthModals } from "../contexts/AuthModalContext";
 import { Button } from "./Button";
@@ -7,6 +7,12 @@ import { Button } from "./Button";
 function NavBar() {
     const { userRole, logout, isAuthenticated } = useAuth();
     const { openLoginModal, openRegisterModal } = useAuthModals();
+    const navigate = useNavigate();
+
+    const handleLogOut = (): void => {
+      logout();
+      navigate("/")
+    };
 
     return (
         <header className="fixed top-0 left-0 w-full z-50 bg-dark/95 backdrop-blur-sm border-b border-transparent shadow-md">
@@ -29,7 +35,7 @@ function NavBar() {
                     </li>          
                     <li>
                       <Link 
-                        to="#courses" 
+                        to="/#courses" 
                         title="Cursos"
                         className="hover:text-fucsiaNeon transition-colors"
                         >
@@ -59,7 +65,7 @@ function NavBar() {
                           </li>
                         )} 
                         <li>
-                          <Button label="Cerrar sesión" disabled={false} onClick={logout} />
+                          <Button label="Cerrar sesión" disabled={false} onClick={handleLogOut} />
                         </li>
                       </>
                       ): (
