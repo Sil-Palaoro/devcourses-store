@@ -8,13 +8,13 @@ import { CartProvider } from "./contexts/CartContext";
 function App() {
   return (
     <AuthProvider>
-      <AuthModalProvider>
-        <CartProvider>
-          <BrowserRouter>
-            <AppRoutes />
-          </BrowserRouter>
-        </CartProvider>
-      </AuthModalProvider>
+      <BrowserRouter>
+        <AuthModalProvider>
+          <CartProvider>
+              <AppRoutes />
+          </CartProvider>
+        </AuthModalProvider>
+      </BrowserRouter>
     </AuthProvider>
   )
 }
