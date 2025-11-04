@@ -41,13 +41,3 @@ export async function addItemToCart({ dependencies, payload }: AddItemToCartData
 
     return updatedCart;
 }
-
-
-
-
-    // const updatedCart = {
-    //     ...cart,
-    //     items: [...cart.items, newItem],
-    // };
-
-    // await dependencies.cartService.update(cart.id, updatedCart)
