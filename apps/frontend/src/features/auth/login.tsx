@@ -25,7 +25,6 @@ function Login() {
       try {
         await login(email, password);
         closeModals();
-        navigate("/");
       } catch (error: unknown) {
         setLoading(false);
         if (axios.isAxiosError<{ message: string }>(error)) {
