@@ -34,6 +34,7 @@ export * from "./cart/update-cart.js";
 export * from "./cart/delete-cart.js";
 export * from "./cart/add-item-to-cart.js";
 export * from "./cart/remove-item-from-cart.js";
+export * from "./cart/add-item-or-create-cart.js";
 
 //order use cases
 //payment use cases
