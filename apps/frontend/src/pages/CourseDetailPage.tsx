@@ -6,6 +6,7 @@ import { cartService } from "../services/cartService";
 import { useParams, useNavigate } from "react-router-dom";
 import { courseService } from "../services/courseService";
 import { useAuthModals } from "../contexts/AuthModalContext";
+import { useCart } from "../contexts/CartContext";
 
 
 const CourseDetailPage: React.FC = () => {
@@ -13,10 +14,10 @@ const CourseDetailPage: React.FC = () => {
     const { openLoginModal } = useAuthModals();
     const [course, setCourse] = useState<Course | null>(null);
     const [loading, setLoading] = useState(true);
-    // const [loadingCourse, setLoadingCourse] = useState(true);
     const [message, setMessage] = useState("");
     const { id } = useParams();
     const navigate = useNavigate();
+    const { fetchCart } = useCart();
 
     useEffect(() => {
         const fetchCourse = async () => {
@@ -33,14 +34,6 @@ const CourseDetailPage: React.FC = () => {
         fetchCourse();
     }, [id])
 
-    useEffect(() => {
-      console.log("Auth debug →", {
-        isAuthenticated,
-        userId,
-        userRole,
-        token: localStorage.getItem("dc_token"),
-      });
-    }, [isAuthenticated, userId]);
 
     if (loading) return <p className="text-center mt-10">Cargando curso...</p>;
     if (message) return <p className="text-center text-gray-500 mt-10">{message}</p>;
@@ -57,6 +50,7 @@ const CourseDetailPage: React.FC = () => {
 
         try {
             await cartService.addItem(userId, course.id, course.price);
+            await fetchCart();
             setMessage("Curso añadido al carrito exitosamente")
             navigate("/cart");
         } catch (error: any) {
@@ -64,6 +58,7 @@ const CourseDetailPage: React.FC = () => {
                 try {
                     await cartService.createCart(userId);
                     await cartService.addItem(userId, course.id, course.price);
+                    await fetchCart();
                     setMessage("Carrito creado y curso añadido al carrito exitosamente");
                     navigate("/cart");
                 } catch (err) {
