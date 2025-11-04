@@ -1,10 +1,10 @@
 import { describe, expect, test, vi } from "vitest";
 import { cartServiceMock } from "../../services/mocks/cart-service-mock.integration";
-import { addItemtOrCreateCart } from "./add-item-or-create-cart";
+import { addItemOrCreateCart } from "./add-item-or-create-cart";
 
 vi.mock("uuid", () => ({ v4: () => "mocked-uuid" }));
 
-describe("addItemtOrCreateCart", async () =>{
+describe("addItemOrCreateCart", async () =>{
 
     test("Given the userId, the courseId and priceSnapshot, should add a CartItem to the Cart if it exists", async () => {
 
@@ -15,7 +15,7 @@ describe("addItemtOrCreateCart", async () =>{
             priceSnapshot: 25000
         };
         
-        const updatedCart = await addItemtOrCreateCart({
+        const updatedCart = await addItemOrCreateCart({
             dependencies: { cartService: cartServiceMock },
             payload: payload,
         });
@@ -51,7 +51,7 @@ describe("addItemtOrCreateCart", async () =>{
           priceSnapshot: 30000,
         };
 
-        const result = await addItemtOrCreateCart({
+        const result = await addItemOrCreateCart({
             dependencies: { cartService: cartServiceMock },
             payload: payload,
           });

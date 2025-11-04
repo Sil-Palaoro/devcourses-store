@@ -1,11 +1,10 @@
 import { CartService } from "../../services/cart-service";
-import { Cart } from "../../entities/cart";
 import { CartItem } from "../../entities/cartItem";
 import { addItemToCart } from "./add-item-to-cart";
 import { createCart } from "./create-cart";
 
 
-interface addItemtOrCreateCartData {
+interface addItemOrCreateCartData {
     dependencies: { cartService: CartService},
     payload: {
         userId: string; 
@@ -15,7 +14,7 @@ interface addItemtOrCreateCartData {
     }
 } 
 
-export async function addItemtOrCreateCart({ dependencies, payload }: addItemtOrCreateCartData) {
+export async function addItemOrCreateCart({ dependencies, payload }: addItemOrCreateCartData) {
     const { v4: uuid } = await import("uuid");
     const { userId, courseId, quantity, priceSnapshot } = payload;
     
