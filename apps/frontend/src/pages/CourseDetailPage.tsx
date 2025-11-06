@@ -23,7 +23,7 @@ const CourseDetailPage: React.FC = () => {
         const fetchCourse = async () => {
             try {
                 if (!id) return;
-                const courseData: Course | null = await courseService.getById(id);
+                const courseData: Course | null = await courseService.getCourseById(id);
                 setCourse(courseData);
             } catch (err: any) {
                 setMessage("No se pudo obtener el curso")
