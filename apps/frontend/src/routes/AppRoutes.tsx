@@ -5,7 +5,7 @@ import { AdminRoute } from "./AdminRoute.js";
 import Layout from "../components/Layout.js";
 import Home from "../pages/Home.js";
 import CourseDetailPage from "../pages/CourseDetailPage";
-// import AdminPanel from "../features/admin/AdminPanel";
+import AdminPanel from "../pages/AdminPanel";
 import Cart from "../pages/CartPage";
 
 export default function AppRoutes() {
@@ -41,7 +41,7 @@ export default function AppRoutes() {
                     </ProtectedRoute>
                   }
                 />
-{/*
+
                 <Route
                   path="/admin/*"
                   element={
@@ -53,7 +53,7 @@ export default function AppRoutes() {
                   }
                 />
                 
-                */}
+               
             </Routes>
     )
 }
