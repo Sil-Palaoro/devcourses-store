@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AdminUsers } from "../components/admin/AdminUsers";
-// import { AdminCourses } from "../components/admin/AdminCourses";
+import { AdminCourses } from "../components/admin/AdminCourses";
 
 const AdminPanel: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"users" | "courses">("users");
@@ -36,7 +36,7 @@ const AdminPanel: React.FC = () => {
         </div>
         <div className="bg-[#120022] rounded-2xl p-6 shadow-[0_0_12px_#d946ef88]">
             {activeTab === "users" && <AdminUsers />}
-            {/* {activeTab === "courses" && <AdminCourses />} */}
+            {activeTab === "courses" && <AdminCourses />}
         </div>
       </div>
     </div>
