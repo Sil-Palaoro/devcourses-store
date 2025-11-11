@@ -1,0 +1,50 @@
+name: devcourses-store
+
+services:
+  db:
+    image: postgres:16
+    container_name: postgres-container
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER"]
+      interval: 30s
+      timeout: 120s
+      retries: 5
+    networks:
+      - devcourses-net
+
+
+  backend:
+    build:
+      dockerfile: backend-container.dockerfile
+      context: .
+    image: devcourses-store-backend
+    container_name: backend-container
+    restart: unless-stopped
+    env_file: ./apps/backend/.env
+    ports:
+      - "8080:4000"
+    volumes:
+      - devcourses-store-backend-data:/devcourses-store/data
+    depends_on:
+      - db
+    networks:
+      - devcourses-net
+
+volumes:
+  postgres_data:
+    driver: local
+  devcourses-store-backend-data:
+    driver: local
+
+networks:
+  devcourses-net:
+    driver: bridge
