@@ -54,6 +54,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
         const updatedCart = await cartService.removeItem(userId, cartItemId);
         if (!(updatedCart instanceof Error)) setCart(updatedCart);
+        fetchCart();
     };
 
 
