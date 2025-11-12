@@ -1,5 +1,5 @@
 import { UserService } from "../../services/user-service";
-import { User, SafeUser, UpdateUserDTO } from "../../entities/user";
+import { SafeUser, UpdateUserDTO } from "../../entities/user";
 import { toSafeUser } from "../../utils/to-safe-user";
 
 

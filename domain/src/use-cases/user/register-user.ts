@@ -1,6 +1,5 @@
 import { UserService } from "../../services/user-service";
 import { createUser } from "./create-user";
-import { hashPassword } from "../../utils/crypto/hash-password";
 import { CreateUserDTO } from "../../entities/user";
 
 interface RegisterUserData {

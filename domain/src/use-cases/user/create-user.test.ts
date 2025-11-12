@@ -1,7 +1,7 @@
 import { describe, expect, test, vi } from "vitest";
 import { userServiceMock } from "../../services/mocks/user-service-mock.integration";
 import { createUser } from "./create-user";
-import { User, CreateUserDTO } from "../../entities/user";
+import { CreateUserDTO } from "../../entities/user";
 
 vi.mock("../../utils/crypto/hash-password", () => ({
     hashPassword: vi.fn(async(p:string) => `hashed-${p}`)
