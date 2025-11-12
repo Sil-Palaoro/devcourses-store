@@ -26,6 +26,31 @@ export interface Course extends Entity {
     published: boolean;
     instructorId: Entity["id"];
     tag: Tag;
-    // createdAt: Date;
-    // updatedAt: Date;
+    createdAt: Date;
+    updatedAt: Date;
 };
+
+export interface CreateCourseDTO {
+    title: string;
+    description: string;
+    price: number;
+    categoryId?: Entity["id"];
+    courseLevel: CourseLevel;
+    published: boolean;
+    instructorId?: Entity["id"];
+    tag: Tag;
+}
+
+export interface UpdateCourseDTO {
+    id: string,
+    data:{
+        title?: string;
+        description?: string;
+        price?: number;
+        categoryId?: Entity["id"];
+        courseLevel?: CourseLevel;
+        published?: boolean;
+        instructorId?: Entity["id"];
+        tag?: Tag;
+    }
+}
