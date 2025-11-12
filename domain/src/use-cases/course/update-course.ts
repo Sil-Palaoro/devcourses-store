@@ -1,12 +1,10 @@
 import { CourseService } from "../../services/course-service";
-import { Course } from "../../entities/course";
+import { UpdateCourseDTO } from "../../entities/course";
 
 
 interface UpdateCourseData {
     dependencies: {courseService: CourseService};
-    payload: {
-        id: string,
-        data: Partial<Course>}
+    payload: UpdateCourseDTO
 };
 
 export async function updateCourse({dependencies, payload}: UpdateCourseData) {   
