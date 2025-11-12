@@ -10,7 +10,7 @@ import { getCourseList,
     CourseLevel
   } from "@devcourses/domain";
 import { prismaCourseServiceImplementation } from "../services/prisma-course-service-implementation";
-import { createCourseSchema } from "../validators/course.validator";
+import { createCourseSchema, updateCourseSchema } from "../validators/course.validator";
 
 
 export class CourseController {
@@ -108,19 +108,23 @@ export class CourseController {
 
     static async createCourse(req: Request, res: Response) {
         try {
-          const { v4: uuid } = await import("uuid");
-
           const validatedCourse = createCourseSchema.parse(req.body)  
-          const course = { id: uuid(), ...validatedCourse};
           
           await createCourse({ 
               dependencies: { courseService: prismaCourseServiceImplementation }, 
-              payload: course });
+              payload: validatedCourse });
           
           return res.status(201).json({ message: "Course created successfully"});
 
         } catch (error: any) {
-            res.status(500).json({ message: error.message});
+          if (error.name === "ZodError") {
+            return res.status(400).json({
+              message: "Datos inválidos",
+              errors: error.issues,
+            })
+          }
+
+          res.status(500).json({ message: error.message});
         }
     }
 
@@ -128,13 +132,13 @@ export class CourseController {
   static async updateCourse(req: Request, res: Response) {
         try {
           const id = req.params.id!;
-          const data = req.body;
+          const validatedData = updateCourseSchema.parse(req.body);
 
           const updatedCourse = await updateCourse({ 
             dependencies: { courseService: prismaCourseServiceImplementation }, 
             payload: {
               id: id, 
-              data: data} 
+              data: validatedData} 
             });
 
           if (updatedCourse instanceof Error) {
@@ -142,6 +146,13 @@ export class CourseController {
           }
           res.status(200).json(updatedCourse);
         } catch (error: any) {
+          if (error.name === "ZodError") {
+            return res.status(400).json({
+              message: "Datos inválidos",
+              errors: error.issues,
+            })
+          }
+
           res.status(500).json({ message: error.message });
         }
     }
