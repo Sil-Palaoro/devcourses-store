@@ -26,6 +26,8 @@ export const Default: Story = {
             published: true,
             instructorId: "1",
             tag: "javascript",
+            createdAt: new Date(),
+            updatedAt: new Date(),
         }
     }
 };

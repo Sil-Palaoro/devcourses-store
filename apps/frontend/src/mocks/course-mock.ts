@@ -10,6 +10,8 @@ export const dataCourses: Course[] = [
     published: true,
     instructorId: "1",
     tag: "javascript",
+    createdAt: new Date(),
+    updatedAt: new Date(),
     },
     {id: "2",
     title: "Python nivel intermedio",
@@ -19,7 +21,9 @@ export const dataCourses: Course[] = [
     courseLevel: "intermediate",
     published: true,
     instructorId: "1",
-    tag: "python"
+    tag: "python",
+    createdAt: new Date(),
+    updatedAt: new Date(),
     },
     {id: "3",
     title: "SQL para principiantes",
@@ -29,7 +33,9 @@ export const dataCourses: Course[] = [
     courseLevel: "beginner",
     published: true,
     instructorId: "1",
-    tag: "sql"
+    tag: "sql",
+    createdAt: new Date(),
+    updatedAt: new Date(),
     }
 ];
 
@@ -42,7 +48,9 @@ export const courseMock: Course = {
     courseLevel: "beginner",
     published: true,
     instructorId: "1",
-    tag: "sql"
+    tag: "sql",
+    createdAt: new Date(),
+    updatedAt: new Date(),
 };
 
 export const emptyDataCourses: Course[] = []
