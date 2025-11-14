@@ -39,6 +39,19 @@ services:
     networks:
       - devcourses-net
 
+  frontend:
+    build:
+      dockerfile: frontend-container.dockerfile
+      context: .
+    image: devcourses-store-frontend
+    container_name: frontend-container
+    restart: unless-stopped
+    env_file: ./apps/frontend/.env
+    ports:
+      - "8081:5173"
+    depends_on: 
+      - backend
+    
 volumes:
   postgres_data:
     driver: local
