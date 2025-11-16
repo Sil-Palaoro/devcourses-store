@@ -43,10 +43,12 @@ services:
     build:
       dockerfile: frontend-container.dockerfile
       context: .
+      args:
+          VITE_API_BASE_URL: $VITE_API_BASE_URL
+    env_file: ./apps/frontend/.env
     image: devcourses-store-frontend
     container_name: frontend-container
     restart: unless-stopped
-    env_file: ./apps/frontend/.env
     ports:
       - "8081:5173"
     depends_on: 

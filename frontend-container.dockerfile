@@ -1,6 +1,9 @@
 FROM node:22-slim AS builder
 WORKDIR /devcourses-store
 
+ARG VITE_API_BASE_URL
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
+
 COPY tsconfig*.json package-lock.json package.json ./
 COPY domain/package*.json ./domain/
 COPY apps/frontend/package*.json ./apps/frontend/
