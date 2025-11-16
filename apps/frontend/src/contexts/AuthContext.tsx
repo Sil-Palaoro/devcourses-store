@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import api from "../services/api.js";
+import { AxiosResponse } from "axios";
 import { UserRole } from "@devcourses/domain";
 import { tokenDecoder } from "../utils/jwt-decoder.js";
 
@@ -14,7 +15,7 @@ type AuthContextType = {
     token: string | null;
     loading: boolean;
     login: (email: string, password: string) => Promise<void>;
-    register?: (payload: any) => Promise<void>;
+    register: (name: string, surname: string, email: string, password: string) => Promise<void>;
     logout: () => void;
     isAuthenticated: boolean;
     isAdmin: boolean;
@@ -77,6 +78,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         };
     };
 
+    const register = async(name: string, surname: string, email: string, password: string) => {
+        setLoading(true);
+        try {
+            await api.post<AxiosResponse>("/users/register", { name, surname, email, password });
+        } finally {
+            setLoading(false);
+        };
+
+    };
+
     const logout = () => {
         setToken(null);
         setUserRole(null);
@@ -92,6 +103,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         token, 
         loading,
         login,
+        register,
         logout,
         isAuthenticated: !!token,
         isAdmin: userRole === "admin",

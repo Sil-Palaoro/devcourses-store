@@ -1,27 +1,22 @@
 "use client";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import api from "../../services/api";
 import axios from "axios";
-import { AxiosResponse } from "axios";
+import { useAuth } from "../../contexts/AuthContext";
 import { Button } from "../../components/Button";
 import { useAuthModals } from "../../contexts/AuthModalContext";
 
 
-
-
 function Register() {
+  const { register } = useAuth();
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const { openLoginModal } = useAuthModals();
-  const navigate = useNavigate();
+  const { openLoginModal, closeModals } = useAuthModals();
 
-  const redirectToLogin = () => navigate('/login'); 
 
   const passwordsValidation = (password: string, password2: string ) => {
     if (password.length < 6 ||
@@ -31,14 +26,14 @@ function Register() {
         !/[a-z]/.test(password)
         ) {
           setLoading(false);
-          setErrorMessage(
+          setError(
             "La contraseña debe tener entre 6 y 12 caracteres y contener números, mayúsculas y minúsculas."
           );
         } else if (password !== password2) {
           setLoading(false);
-          setErrorMessage("Las contraseñas no coinciden.");
+          setError("Las contraseñas no coinciden.");
         } else {
-          setErrorMessage("");
+          setError("");
           return true;
         }
   };
@@ -47,31 +42,31 @@ function Register() {
   const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
-        setErrorMessage("");
+        setError("");
     try {        
         if (passwordsValidation(password, password2)) {     
-            const postResponse = await api.post<AxiosResponse>("/users/register", { name, surname, email, password });
-   
-          if (postResponse.status === 201) {
-            alert("El registro fue exitoso!");
-            setErrorMessage(""); 
-            setName("");
-            setSurname("");         
-            setEmail("");
-            setPassword("");
-            setPassword2("");
-            redirectToLogin(); 
-          }    
-          }
+          await register(name, surname, email, password); 
+          
+          console.log("registro exitoso");
+          alert("El registro fue exitoso!");
+          setError(""); 
+          setName("");
+          setSurname("");         
+          setEmail("");
+          setPassword("");
+          setPassword2("");
+          closeModals(); 
+          openLoginModal();              
+        }
     } catch (error: unknown) {
       setLoading(false);
 
       if (axios.isAxiosError<{ message: string }>(error)) {               
-              setErrorMessage(error.response?.data.message || "Error al registrarse.");
+              setError(error.response?.data.message || "Error al registrarse.");
             } else if (error instanceof Error){
-              setErrorMessage(error.message);
+              setError(error.message);
             } else {
-              setErrorMessage("Error inesperado.");
+              setError("Error inesperado.");
             }
     };
   };
@@ -145,7 +140,7 @@ function Register() {
             >Inicia sesión</button>
           </div>  
 
-            {errorMessage && <div className="text-red-600 mb-2">{errorMessage}</div>}
+            {error && <div className="text-red-600 mb-2">{error}</div>}
         </form>
     </div>
   );
