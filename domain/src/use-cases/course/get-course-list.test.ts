@@ -18,6 +18,8 @@ describe("getCourseList", async () =>{
             published: true,
             instructorId: "1",
             tag: "javascript",
+            createdAt: expect.any(Date),
+            updatedAt: expect.any(Date),
             },
             {id: "2",
             title: "Python nivel intermedio",
@@ -27,7 +29,9 @@ describe("getCourseList", async () =>{
             courseLevel: "intermediate",
             published: true,
             instructorId: "1",
-            tag: "python"
+            tag: "python",
+            createdAt: expect.any(Date),
+            updatedAt: expect.any(Date),
             },
             {id: "3",
             title: "SQL para principiantes",
@@ -37,7 +41,9 @@ describe("getCourseList", async () =>{
             courseLevel: "beginner",
             published: true,
             instructorId: "1",
-            tag: "sql"
+            tag: "sql",
+            createdAt: expect.any(Date),
+            updatedAt: expect.any(Date),
             }
         ])
     })

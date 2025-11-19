@@ -19,7 +19,9 @@ describe("getCoursesByTag", async () =>{
             courseLevel: "beginner",
             published: true,
             instructorId: "1",
-            tag: "javascript"
+            tag: "javascript",
+            createdAt: expect.any(Date),
+            updatedAt: expect.any(Date),
             },            
         ])
     })
@@ -38,7 +40,9 @@ describe("getCoursesByTag", async () =>{
             courseLevel: "intermediate",
             published: true,
             instructorId: "1",
-            tag: "python"
+            tag: "python",
+            createdAt: expect.any(Date),
+            updatedAt: expect.any(Date),
             },
         ])
     })

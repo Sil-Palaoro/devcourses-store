@@ -20,6 +20,8 @@ describe("getCourse", async () =>{
             published: true,
             instructorId: "1",
             tag: "javascript",
+            createdAt: expect.any(Date),
+            updatedAt: expect.any(Date),
         })
     })
 

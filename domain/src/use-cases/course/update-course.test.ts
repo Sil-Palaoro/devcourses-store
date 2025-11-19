@@ -23,7 +23,9 @@ describe("updateCourse", async () =>{
             courseLevel: "beginner",
             published: false,
             instructorId: "1",
-            tag: "sql"
+            tag: "sql",
+            createdAt: expect.any(Date),
+            updatedAt: expect.any(Date),
         })
     })
 
