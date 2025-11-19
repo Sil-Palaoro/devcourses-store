@@ -21,6 +21,7 @@ export const MockAuthProvider: React.FC<MockAuthProviderProps> = ({
         token: isAuthenticated ? "mock-token" : null,
         loading: false,
         login: async () => {},
+        register: async () => {},
         logout: () => {},
         isAuthenticated,
         isAdmin: userRole === "admin",
