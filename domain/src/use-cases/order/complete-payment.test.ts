@@ -1,6 +1,5 @@
 import { describe, expect, test, vi } from "vitest";
 import { completePayment } from "./complete-payment";
-import { orderServiceMockUnit } from "../../services/mocks/order-service-mock.unit";
 import { orderServiceMockIntegration } from "../../services/mocks/order-service-mock.integration";
 
 vi.mock("uuid", () => ({ v4: () => "mocked-uuid" }));
