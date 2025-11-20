@@ -7,15 +7,7 @@ vi.mock("uuid", () => ({ v4: () => "mocked-uuid" }));
 
 describe("cancelOrder", async () =>{
 
-    test("Given the orderId, the order should be canceled", async () => {
-      // Simula comportamiento real de updateStatus
-        orderServiceMockIntegration.updateStatus = vi.fn(async (id, status) => {
-          const order = await orderServiceMockIntegration.getById(id);
-          if (!order) return undefined;
-          order.status = status;
-          return order;
-        });
-        
+    test("Given the orderId, the order should be canceled", async () => { 
         const payload = {
             orderId: "2",
             paymentId: "2",

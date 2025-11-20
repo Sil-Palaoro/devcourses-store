@@ -8,13 +8,6 @@ vi.mock("uuid", () => ({ v4: () => "mocked-uuid" }));
 describe("refundOrder", async () =>{
 
     test("Given the orderId and paymentId, the order should be updated to 'refunded' status", async () => {
-        orderServiceMockIntegration.updateStatus = vi.fn(async (id, status) => {
-          const order = await orderServiceMockIntegration.getById(id);
-          if (!order) return undefined;
-          order.status = status;
-          return order;
-        });
-        
         const payload = {
             orderId: "1",
             paymentId: "2",
