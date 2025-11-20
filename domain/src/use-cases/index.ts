@@ -41,9 +41,13 @@ export * from "./order/purchase-course.js";
 export * from "./order/get-orders-for-user.js";
 export * from "./order/cancel-order.js";
 export * from "./order/refund-order.js";
-export * from "./order/complete-payment.js";
 
 
-//payment use cases
+//payment use-cases
+export * from "./payment/complete-payment.js";
+export * from "./payment/create-payment.js";
+
+
+
 //enrollment use cases
 
