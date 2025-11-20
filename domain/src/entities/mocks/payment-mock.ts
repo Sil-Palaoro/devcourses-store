@@ -1,4 +1,14 @@
-import { Payment } from "../payment";
+import { Payment, Provider } from "../payment";
+
+export const mockPaymentBase = {
+    orderId: "1",
+    userId: "1",
+    amount: 25000,
+    currency: "ARS",
+    provider: "MercadoPago" as Provider, 
+    createdAt: new Date(),
+    updatedAt: new Date(),
+};
 
 export const mockPayment: Payment = {
     id: "1",
