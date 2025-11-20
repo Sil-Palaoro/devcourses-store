@@ -36,7 +36,14 @@ export * from "./cart/add-item-to-cart.js";
 export * from "./cart/remove-item-from-cart.js";
 export * from "./cart/add-item-or-create-cart.js";
 
-//order use cases
+//order use-cases
+export * from "./order/purchase-course.js";
+export * from "./order/get-orders-for-user.js";
+export * from "./order/cancel-order.js";
+export * from "./order/refund-order.js";
+export * from "./order/complete-payment.js";
+
+
 //payment use cases
 //enrollment use cases
 
