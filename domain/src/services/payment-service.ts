@@ -4,7 +4,7 @@ import { ReadOnlyService } from "../utils/types/service";
 export interface PaymentService extends ReadOnlyService<Payment>{
     createPayment: (data: Payment) => Promise<Payment>;
     completePayment: (paymentId: string, providerPaymentId: string) => Promise<Payment>;
-    failPayment: (paymentId: string, reason?: string) => Promise<Payment>;
+    failPayment: (paymentId: string, providerPaymentId: string) => Promise<Payment>;
     refundPayment: (paymentId: string) => Promise<Payment>;
 
     getPaymentsForOrder: (orderId: string) => Promise<Payment[]>;
