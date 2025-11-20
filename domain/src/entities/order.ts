@@ -1,4 +1,5 @@
 import type { Entity } from "../utils/types/entity";
+import { OrderItem, CreateOrderItemDTO } from "./orderItem";
 
 
 export const OrderStatusOptions = {
@@ -17,9 +18,18 @@ export interface Order extends Entity {
     totalAmount: number;
     currency: "ARS";
     status: OrderStatus;
-    paymentId: string;
+    paymentId?: string;
     paymentMethod: string;
+    items: OrderItem[];
     createdAt: Date;
     updatedAt: Date;
 }
 
+export interface CreateOrderDTO {
+    userId: string,
+    totalAmount: number,
+    currency: "ARS",
+    paymentId?: string
+    paymentMethod: string,
+    items: CreateOrderItemDTO[],
+}

@@ -5,3 +5,8 @@ export interface OrderItem extends Entity {
     courseId: Entity["id"];
     price: number;          
 }
+
+export interface CreateOrderItemDTO {
+    courseId: Entity["id"];
+    price: number;
+}
