@@ -30,4 +30,13 @@ describe("getEnrollmentsByUser", async () =>{
             },
         ])
     })
+
+    test("Given an userId without enrollments, should return an empty list", async () => {
+        const result = await getEnrollmentsByUser({
+            dependencies: { enrollmentService: enrollmentServiceMockIntegration },
+            payload: { userId: "99"}}
+            ); 
+
+        expect(result).toStrictEqual([])
+    })
 });
