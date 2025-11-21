@@ -51,5 +51,8 @@ export * from "./payment/fail-payment.js";
 
 //enrollment use-cases
 export * from "./enrollment/enroll-user-in-course.js";
+export * from "./enrollment/get-enrollments-by-user.js";
+export * from "./enrollment/get-enrollments-by-course.js";
+
 
 
