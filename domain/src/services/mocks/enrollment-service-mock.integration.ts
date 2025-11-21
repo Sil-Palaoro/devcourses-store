@@ -9,10 +9,12 @@ export const enrollmentServiceMockIntegration: EnrollmentService = {
     create: vi.fn(),
     update: vi.fn(),
     delete: vi.fn(),    
-    getEnrollMentsByUser: async (userId: string) => {                        
+    getEnrollmentsByUser: async (userId: string) => {                        
         return mockEnrollments.filter((e: Enrollment) => (e.userId == userId));
     },
-    getEnrollmentsByCourse: vi.fn(), 
+    getEnrollmentsByCourse: async (courseId: string) => {                        
+        return mockEnrollments.filter((e: Enrollment) => (e.courseId == courseId));
+    },
     updateProgress: vi.fn(), 
     markAsCompleted: vi.fn(), 
 }
