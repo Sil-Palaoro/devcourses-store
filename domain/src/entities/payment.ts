@@ -22,11 +22,10 @@ export interface Payment extends Entity {
     orderId: Entity["id"];
     userId: Entity["id"];
     provider: Provider;
-    providerPaymentId?: Entity["id"];
+    providerPaymentId?: string;
     status: PaymentStatus;
     amount: number;    
     currency: string;   
-    // rawResponse: JSON;
     createdAt: Date;
     updatedAt: Date;
 }
