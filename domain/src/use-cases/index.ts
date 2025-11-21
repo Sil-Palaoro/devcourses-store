@@ -49,5 +49,7 @@ export * from "./payment/create-payment.js";
 export * from "./payment/fail-payment.js";
 
 
-//enrollment use cases
+//enrollment use-cases
+export * from "./enrollment/enroll-user-in-course.js";
+
 
