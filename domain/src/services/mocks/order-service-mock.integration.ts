@@ -7,7 +7,7 @@ export const orderServiceMockIntegration: OrderService = {
         getAll: async () => mockOrders,
         getById: async (id: string) => mockOrders.find((u) => u.id == id ),    
         createOrder: vi.fn(),
-        completeOrder: vi.fn(),
+        // completeOrder: vi.fn(),
         cancelOrder: vi.fn(),
         refundOrder: vi.fn(),
         updateStatus: vi.fn(async (id, status) => {
@@ -16,7 +16,7 @@ export const orderServiceMockIntegration: OrderService = {
             order.status = status;
             return order;
         }),
-        addItemsToOrder: vi.fn(),
+        // addItemsToOrder: vi.fn(),
         getOrdersForUser: async (userId: string) => {
             const orders = mockOrders.filter((u) => u.userId == userId );
             return orders;     
