@@ -7,7 +7,7 @@ export const enrollmentServiceMockUnit: EnrollmentService = {
     create: vi.fn(),
     update: vi.fn(),
     delete: vi.fn(),    
-    enrollUserInCourse: vi.fn(), 
+    // enrollUserInCourse: vi.fn(), 
     getEnrollMentsByUser: vi.fn(), 
     getEnrollmentsByCourse: vi.fn(), 
     updateProgress: vi.fn(), 
