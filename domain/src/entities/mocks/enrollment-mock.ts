@@ -42,5 +42,14 @@ export const mockEnrollments: Enrollment[] = [
     status: "completed",
     enrolledAt: new Date(),
     completedAt: new Date(),
+},
+{
+    id: "4",
+    courseId: "4",
+    userId: "3",
+    progress: 0,
+    status: "active",
+    enrolledAt: new Date(),
+    completedAt: new Date(),
 }
 ]
