@@ -10,7 +10,7 @@ export async function getEnrollmentsByUser({dependencies, payload}: GetEnrollmen
     const { enrollmentService } = dependencies;
     const { userId } = payload;
 
-    const enrollments = await enrollmentService.getEnrollMentsByUser(userId)
+    const enrollments = await enrollmentService.getEnrollmentsByUser(userId)
     if (!enrollments) return [];
 
     return enrollments;

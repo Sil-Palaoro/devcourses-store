@@ -14,7 +14,7 @@ describe("enrollUserInCourse", () => {
         vi.spyOn(userServiceMock, "getById");
         vi.spyOn(courseServiceMock, "getById");
 
-        vi.spyOn(enrollmentServiceMockUnit, "getEnrollMentsByUser").mockResolvedValue([]);
+        vi.spyOn(enrollmentServiceMockUnit, "getEnrollmentsByUser").mockResolvedValue([]);
 
         const result = await enrollUserInCourse({
             dependencies: {

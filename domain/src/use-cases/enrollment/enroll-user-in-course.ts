@@ -26,7 +26,7 @@ export async function enrollUserInCourse({ dependencies, payload }: EnrollUserIn
     const course = await courseService.getById(courseId);
     if (!course) return new Error("El curso no existe");
 
-    const previousEnrollment = await enrollmentService.getEnrollMentsByUser(userId);
+    const previousEnrollment = await enrollmentService.getEnrollmentsByUser(userId);
     
     if (previousEnrollment.find((e) => e.courseId === courseId)) {
         return new Error("El usuario ya está inscripto");
