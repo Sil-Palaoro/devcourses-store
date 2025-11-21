@@ -12,16 +12,19 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  name      String
-  surname   String
-  email     String   @unique
-  password  String
-  role      Role     @default(student)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  courses   Course[] @relation("InstructorCourses")
-  cart      Cart?
+  id          String   @id @default(uuid())
+  name        String
+  surname     String
+  email       String   @unique
+  password    String
+  role        Role     @default(student)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  courses     Course[] @relation("InstructorCourses")
+  cart        Cart?
+  order       Order[]
+  enrollments Enrollment[]
+  payments    Payment[]
 }
 
 enum Role {
@@ -73,7 +76,8 @@ model Course {
   cartItems    CartItem[]
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
-
+  enrollments  Enrollment[]
+  OrderItem    OrderItem[]
   @@index([categoryId])
 }
 
@@ -116,9 +120,9 @@ model Order {
   user          User       @relation(fields: [userId], references: [id])
   totalAmount   Int
   currency      Currency   @default(ARS)
-  status        OrderStatus @default("pending")
+  status        OrderStatus @default(pending)
   paymentId     String?
-  payment       Payment @relation(fields: [paymentId], references: [id])
+  payment       Payment?
   paymentMethod String
   items         OrderItem[]
   createdAt     DateTime   @default(now())
@@ -149,14 +153,14 @@ enum PaymentStatus {
 
 model Payment {
   id                String @id @default(uuid())
-  orderId           String
+  orderId           String @unique
   userId            String
   provider          Provider
   providerPaymentId String? @unique
   status            PaymentStatus
   amount            Int
   currency          Currency @default(ARS)
-  order             Order  @relation(fields: [orderId], references: [id])
+  order             Order @relation(fields: [orderId], references: [id])
   user              User   @relation(fields: [userId], references: [id])
   createdAt         DateTime   @default(now())
   updatedAt         DateTime   @updatedAt
@@ -173,7 +177,7 @@ model Enrollment {
   userId        String
   courseId      String
   progress      Int?
-  status        EnrollmentStatus @default("active")
+  status        EnrollmentStatus @default(active)
   user          User   @relation(fields: [userId], references: [id])
   course        Course @relation(fields: [courseId], references: [id])
   enrolledAt    DateTime   @default(now())
