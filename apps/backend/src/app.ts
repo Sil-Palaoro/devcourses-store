@@ -4,6 +4,7 @@ import userRouter from "./routes/user.routes";
 import coursesRouter from "./routes/course.routes";
 import categoriesRouter from "./routes/category.routes";
 import cartRouter from "./routes/cart.routes";
+import orderRouter from "./routes/order.routes";
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.use("/api/users", userRouter);
 app.use("/api/courses", coursesRouter);
 app.use("/api/categories", categoriesRouter);
 app.use("/api/cart", cartRouter);
+app.use("/api/orders", orderRouter);
+
 
 
 app.use((err: any, req:any, res:any, next:any) => {
