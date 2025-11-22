@@ -1,6 +1,6 @@
 import { OrderService } from "@devcourses/domain";
 import db from "../lib/prisma";
-// import { orderMapper } from "../lib/mappers";
+import { orderMapper } from "../lib/mappers";
 
 
 export const prismaOrderServiceImplementation: OrderService = {
@@ -9,9 +9,9 @@ export const prismaOrderServiceImplementation: OrderService = {
               include: { items: true },
         });
     },
-    async getById(id) {
+    async getById(orderId) {
         const order = await db.order.findUnique({ 
-            where: { id: id },
+            where: { id: orderId },
             include: { items: true },
         })
         return order ?? undefined;
@@ -32,8 +32,8 @@ export const prismaOrderServiceImplementation: OrderService = {
         return ;
     },
     async updateStatus(orderId, status) {
-        const existingorder = await db.order.findUnique({ where: { id: orderId } });
-        if (!existingorder) return undefined;
+        const existingOrder = await db.order.findUnique({ where: { id: orderId } });
+        if (!existingOrder) return undefined;
 
         const updatedorder = await db.order.update({ 
             where: {id: orderId}, 
@@ -49,7 +49,7 @@ export const prismaOrderServiceImplementation: OrderService = {
 
         const updatedorder = await db.order.update({ 
             where: {id: orderId}, 
-            data: orderMapper.toPrismaUpdate(status),
+            data: orderMapper.toPrismaUpdate({ status: "cancelled" }),
             include: { items: true },
        });
         return orderMapper.toDomain(updatedorder);
@@ -61,7 +61,7 @@ export const prismaOrderServiceImplementation: OrderService = {
 
         const updatedorder = await db.order.update({ 
             where: {id: orderId}, 
-            data: orderMapper.toPrismaUpdate(status),
+            data: orderMapper.toPrismaUpdate({ status: "refunded" }),
             include: { items: true },
        });
         return orderMapper.toDomain(updatedorder);
