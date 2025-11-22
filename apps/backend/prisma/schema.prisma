@@ -121,7 +121,7 @@ model Order {
   totalAmount   Int
   currency      Currency   @default(ARS)
   status        OrderStatus @default(pending)
-  paymentId     String?
+  paymentId     String? @db.VarChar(255) 
   payment       Payment?
   paymentMethod String
   items         OrderItem[]

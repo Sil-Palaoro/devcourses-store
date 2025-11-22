@@ -18,7 +18,7 @@ export interface Order extends Entity {
     totalAmount: number;
     currency: "ARS";
     status: OrderStatus;
-    paymentId?: string;
+    paymentId?: string | null;
     paymentMethod: string;
     items: OrderItem[];
     createdAt: Date;
