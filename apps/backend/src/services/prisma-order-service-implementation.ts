@@ -18,7 +18,7 @@ export const prismaOrderServiceImplementation: OrderService = {
     },
     async getOrdersForUser(userId) {
         const orders = await db.order.findMany({ 
-            where: { userId },
+            where: { userId: userId },
             include: { items: true },
         });
         return orders ?? undefined;
@@ -27,9 +27,8 @@ export const prismaOrderServiceImplementation: OrderService = {
         const created = await db.order.create({
             data: orderMapper.toPrismaCreate(data),
             include: { items: true },
-        });
-        orderMapper.toDomain(created);        
-        return ;
+        });               
+        return orderMapper.toDomain(created); 
     },
     async updateStatus(orderId, status) {
         const existingOrder = await db.order.findUnique({ where: { id: orderId } });
@@ -37,7 +36,7 @@ export const prismaOrderServiceImplementation: OrderService = {
 
         const updatedorder = await db.order.update({ 
             where: {id: orderId}, 
-            data: orderMapper.toPrismaUpdate(status),
+            data: orderMapper.toPrismaUpdate({ status: status }),
             include: { items: true },
         });
         return orderMapper.toDomain(updatedorder);

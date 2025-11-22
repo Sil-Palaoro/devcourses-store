@@ -33,6 +33,6 @@ export async function purchaseCourse({ dependencies, payload }: PurchaseCourseDa
         createdAt: new Date(),
         updatedAt: new Date(),
     };
-    
-    return await dependencies.orderService.createOrder(order);
+    const createdOrder = await dependencies.orderService.createOrder(order);
+    return createdOrder;
 }
