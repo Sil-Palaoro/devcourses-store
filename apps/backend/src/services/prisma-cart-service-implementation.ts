@@ -1,6 +1,6 @@
 import { CartService } from "@devcourses/domain";
 import db from "../lib/prisma";
-import { cartMapper } from "../lib/mappers";
+import { cartMapper } from "../lib/mappers/cart.mapper";
 
 
 export const prismaCartServiceImplementation: CartService = {

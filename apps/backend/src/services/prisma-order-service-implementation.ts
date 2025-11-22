@@ -1,6 +1,6 @@
 import { OrderService } from "@devcourses/domain";
 import db from "../lib/prisma";
-import { orderMapper } from "../lib/mappers";
+import { orderMapper } from "../lib/mappers/order.mapper";
 
 
 export const prismaOrderServiceImplementation: OrderService = {
