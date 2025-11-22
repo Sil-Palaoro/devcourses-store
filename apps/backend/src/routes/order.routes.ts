@@ -17,7 +17,7 @@ const STUDENT: UserRole = "student";
 //     OrderController.getAllOrders
 // );
 router.get(
-    "/for-user/:id", 
+    "/for-user/:userId", 
     authMiddleware, 
     authorizeRoles(ADMIN, STUDENT), 
     OrderController.getOrdersForUser
