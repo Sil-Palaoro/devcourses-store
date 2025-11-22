@@ -43,7 +43,7 @@ export class OrderController {
             res.status(200).json(order);
 
         } catch (error: any) {
-            res.status(500).json({ message: error.mesagge})
+            res.status(500).json({ message: error.message})
         }
     }
 
