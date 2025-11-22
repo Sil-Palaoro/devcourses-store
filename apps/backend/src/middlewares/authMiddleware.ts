@@ -45,7 +45,7 @@ export const authMiddleware = (
         const payload = decoded as CustomJwtPayload;
         
         req.user = {
-            id: payload.decoded,
+            id: payload.id,
             role: payload.role,
         };
 
