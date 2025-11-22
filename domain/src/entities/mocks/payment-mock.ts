@@ -1,10 +1,11 @@
+import { Currency } from "../cart";
 import { Payment, Provider } from "../payment";
 
 export const mockPaymentBase = {
     orderId: "1",
     userId: "1",
     amount: 25000,
-    currency: "ARS",
+    currency: "ARS" as Currency,
     provider: "MercadoPago" as Provider, 
     createdAt: new Date(),
     updatedAt: new Date(),
@@ -15,7 +16,7 @@ export const mockPayment: Payment = {
     orderId: "1",
     userId: "1",
     amount: 25000,
-    currency: "ARS",
+    currency: "ARS" as Currency,
     provider: "MercadoPago", 
     status: "pending",
     createdAt: new Date(),
@@ -27,7 +28,7 @@ export const mockPayments: Payment[] = [{
     orderId: "2",
     userId: "1",
     amount: 25000,
-    currency: "ARS",
+    currency: "ARS" as Currency,
     provider: "MercadoPago", 
     status: "pending",
     createdAt: new Date(),
@@ -38,7 +39,7 @@ export const mockPayments: Payment[] = [{
     orderId: "3",
     userId: "1",
     amount: 30000,
-    currency: "ARS",
+    currency: "ARS" as Currency,
     provider: "MercadoPago", 
     status: "pending",
     createdAt: new Date(),
@@ -49,7 +50,7 @@ export const mockPayments: Payment[] = [{
     orderId: "4",
     userId: "1",
     amount: 35000,
-    currency: "ARS",
+    currency: "ARS" as Currency,
     provider: "MercadoPago", 
     status: "pending",
     createdAt: new Date(),

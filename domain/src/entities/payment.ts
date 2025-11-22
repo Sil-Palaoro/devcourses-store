@@ -25,7 +25,7 @@ export interface Payment extends Entity {
     providerPaymentId?: string;
     status: PaymentStatus;
     amount: number;    
-    currency: string;   
+    currency: "ARS";   
     createdAt: Date;
     updatedAt: Date;
 }
