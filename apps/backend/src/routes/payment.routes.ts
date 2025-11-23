@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { PaymentController } from "../controllers/payment.controller";
-import { MercadoPagoWebhookController } from "../controllers/mercadopago-webhook.controller";
+import { MercadoPagoWebhookController } from "../controllers/mercadopago-webhook.controller"
 import { authMiddleware } from "../middlewares/authMiddleware";
 import { authorizeRoles } from "../middlewares/roleMiddleware";
 import { UserRole } from "@devcourses/domain";
