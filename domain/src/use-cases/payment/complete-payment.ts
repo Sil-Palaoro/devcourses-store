@@ -8,7 +8,7 @@ interface CompletePaymenteData {
     payload: { 
         orderId: string,
         paymentId: string,
-        providerPaymentId: string,
+        providerPaymentId?: string,
     }
 }
 

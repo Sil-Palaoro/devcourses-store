@@ -22,7 +22,7 @@ export interface Payment extends Entity {
     orderId: Entity["id"];
     userId: Entity["id"];
     provider: Provider;
-    providerPaymentId?: string;
+    providerPaymentId?: string | null;
     status: PaymentStatus;
     amount: number;    
     currency: "ARS";   

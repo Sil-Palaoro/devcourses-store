@@ -10,7 +10,7 @@ interface FailPaymentData {
     payload: {
         orderId: string,
         paymentId: string,
-        providerPaymentId: string
+        providerPaymentId?: string
     }
 }
 
