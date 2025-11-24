@@ -69,10 +69,7 @@ export class CheckoutController {
                 amount: total,
             });
 
-            return res.status(200).json({ 
-                checkoutUrl: mpPayment.checkoutUrl, 
-                // providerPaymentId: mpPayment.providerPaymentId 
-            });
+            return res.status(200).json({ checkoutUrl: mpPayment.checkoutUrl });
             }
 
         } catch (error: any) {
