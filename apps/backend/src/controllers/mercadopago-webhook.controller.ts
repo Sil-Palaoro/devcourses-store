@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { prismaPaymentServiceImplementation } from "../services/prisma-payment-service-implementation";
 import { prismaOrderServiceImplementation } from "../services/prisma-order-service-implementation";
+import { mercadoPagoPaymentService } from "../services/providers/mercadopago-payment-service";
+import { MercadoPagoPaymentResponse } from "../types/MercadoPagoPaymentResponse.type";
 import { completePayment, failPayment } from "@devcourses/domain";
 import axios from "axios";
 import crypto from "crypto";
@@ -67,30 +69,28 @@ export class MercadoPagoWebhookController {
 
             //PRODUCTION MODE
 
-            //Respuesta de MercadoPago: action (payment.updated), data(id)
-            const { action, data } = req.body;
+            //Respuesta de MercadoPago: type, data(id)
+            const { type, data } = req.body;
+
+            if (type !== "payment") {
+                return res.status(200).json({ message: "Evento ignorado"});
+            }
+
             const paymentProviderId = data?.id;
 
             if (!paymentProviderId) {
-                return res.status(400).json({ message: "No provider payment id"});
+                return res.status(400).json({ message: "Falta providerPaymentId"});
             }
 
-            const mpResponse = await axios.get(
-                `https://api.mercadopago.com/v1/payment/${paymentProviderId}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`
-                    },
-                }
-            );
+            const rawResponse = await mercadoPagoPaymentService.getPaymentData(paymentProviderId);
+            const mpResponse = rawResponse as MercadoPagoPaymentResponse;
 
-            const mpPayment = mpResponse.data;
+            const status = mpResponse.status;
+            const orderId = mpResponse.external_reference;   
+            const internalPaymentId  = mpResponse.metadata.paymentId;
 
-            const status = mpPayment.status;
-            const external_reference = mpPayment.external_reference;    //equivale a mi orderId
-            const paymentId = mpPayment.metadata.paymentId;
-
-            if(!external_reference || !paymentId) {
+            if(!orderId || !internalPaymentId) {
+                console.warn("No vino metadata.paymentId, no puedo continuar");
                 return res.status(400).json({ message: "Metadata faltante"});
             }
 
@@ -101,8 +101,8 @@ export class MercadoPagoWebhookController {
                         orderService: prismaOrderServiceImplementation
                     },
                     payload: {
-                        orderId: external_reference,
-                        paymentId: paymentId,
+                        orderId: orderId,
+                        paymentId: internalPaymentId,
                         providerPaymentId: paymentProviderId
                     }
                 });
@@ -117,8 +117,8 @@ export class MercadoPagoWebhookController {
                         orderService: prismaOrderServiceImplementation
                     },
                     payload: {
-                        orderId: external_reference,
-                        paymentId: paymentId,
+                        orderId: orderId,
+                        paymentId: internalPaymentId,
                         providerPaymentId: paymentProviderId
                     }
                 });
@@ -128,12 +128,11 @@ export class MercadoPagoWebhookController {
                 }
             }
             
-            return res.sendStatus(200);
+            return res.status(200).json({ message: "Webhook procesado correctamente"});
 
         } catch (error: any) {
-            console.error(error);
+            console.error("Error en webhook:", error);
             return res.status(500).json({ message: error.message })
         };
     }
 };
-
