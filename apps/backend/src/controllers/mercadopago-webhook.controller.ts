@@ -3,6 +3,8 @@ import { prismaPaymentServiceImplementation } from "../services/prisma-payment-s
 import { prismaOrderServiceImplementation } from "../services/prisma-order-service-implementation";
 import { completePayment, failPayment } from "@devcourses/domain";
 import axios from "axios";
+import crypto from "crypto";
+
 
 export class MercadoPagoWebhookController {
     static async listen(req: Request, res: Response) {
@@ -26,6 +28,10 @@ export class MercadoPagoWebhookController {
                 if (!paymentId || !orderId) {
                     return res.status(400).json({ message: "paymentId y orderId son obligatorios en test mode" });
                 };
+                
+                console.log("Webhook simulation:", { simulatedStatus, orderId, paymentId, providerPaymentId });
+
+
                 if (simulatedStatus === "approved") {
                     await completePayment({
                         dependencies: {
@@ -35,7 +41,7 @@ export class MercadoPagoWebhookController {
                         payload: {
                             orderId,
                             paymentId,
-                            providerPaymentId: providerPaymentId ?? "SIMULATED_MP_ID"
+                            providerPaymentId: providerPaymentId ?? `SIMULATED_MP_${crypto.randomUUID()}`
                         }
                     });
 
@@ -48,7 +54,7 @@ export class MercadoPagoWebhookController {
                         payload: {
                             orderId,
                             paymentId,
-                            providerPaymentId: providerPaymentId ?? "SIMULATED_Rejected_MP_ID"
+                            providerPaymentId: providerPaymentId ?? `SIMULATED_MP_${crypto.randomUUID()}`
                         }
                     });
                 }
