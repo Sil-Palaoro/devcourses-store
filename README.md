@@ -3,20 +3,24 @@
 **DevCourses Store** es un proyecto **full-stack e-commerce** para la venta de **cursos de programación online**.  
 Está desarrollado como **trabajo final** del curso Fullstack Nivel 2 en **Academia ForIT**.
 
-El proyecto implementa una **arquitectura limpia**, separación de capas de dominio, infraestructura y aplicación, y aplica **principios de TDD** en el dominio.
+El proyecto implementa una **arquitectura limpia**, separación de capas de dominio, infraestructura y aplicación, y aplica **principios de TDD** en el dominio. Incluye **autenticación**, carrito de compras, flujo completo de **checkout real** con **MercadoPago**, y está construido con T**ypeScript en todo el stack**.
 
 ---
 
 ## 🚀 Características principales
 - 🟦 **TypeScript** en todo el stack
-- ✅ **TDD (Test-Driven Development)** con Vitest
 - 🧩 **Clean Architecture** para un código escalable y mantenible
-- 🛍️ **Carrito de compras** y gestión de cursos seleccionados
-- 💳 Flujo básico de **checkout** (mock de pagos)
+- ✅ **TDD (Test-Driven Development)** con Vitest en el Dominio
+- 🔐 **Autenticación con JWT** y **roles de usuario** (admin, student, instructor)
+- 🛍️ **Carrito de compras** y gestión de cursos seleccionados con persistencia
+- 💳 **Checkout completo con MercadoPago**:
+  - Creación de órdenes
+  - Generación de preferencias MP
+  - Pagos reales
+  - **Webhooks funcionales** para actualizar orden y pago
 - 🌐 **API REST** construida con **Node.js + Express + Prisma + PostgreSQL**
 - ⚛️ **Frontend independiente**: SPA con **React + Vite + TypeScript**
 - 🐳 **Docker** y **Docker Compose** para contenedorización y despliegue consistente
-- 🔐 **Autenticación con JWT** y **roles de usuario** (admin, student, instructor)
 - 🧱 **Tests unitarios y de integración** en el dominio
 
 
@@ -24,6 +28,26 @@ El proyecto implementa una **arquitectura limpia**, separación de capas de domi
 Su objetivo principal es mostrar una **implementación escalable y mantenible de un e-commerce educativo**, no una plataforma completa de dictado de cursos.
 
 ---
+
+## 📦 Flujo de Checkout implementado
+
+El flujo completo ya está funcionando con MercadoPago:
+
+1. **El usuario confirma la compra**  
+2. **El backend crea la orden** y genera la preferencia de pago en MP  
+3. **MercadoPago redirige al usuario al checkout**  
+4. Al finalizar, MP envía **webhooks** a tu endpoint  
+5. El backend:
+   - Verifica el pago  
+   - Ejecuta `completePayment` (dominio)  
+   - Actualiza la orden → `paid`  
+   - Marca el pago → `completed`  
+6. El frontend puede consultar el estado actualizado
+
+Toda la lógica de negocio está implementada dentro del **dominio**, manteniendo las dependencias aisladas con interfaces.
+
+---
+
 
 ## 📂 Estructura del proyecto
 
@@ -38,9 +62,11 @@ devcourses-store/
 |   |   ├── services/
 |   |   └── utils/
 ├── apps/
-|   ├── backend/
+|   ├── backend/                → API REST + infraestructura
 |   |   ├── package.json
 │   │   ├── tsconfig.json 
+|   |   └── prisma/
+│   │   │   └── schema.prisma
 |   |   └── src/
 │   │   │   ├── lib/ 
 │   │   │   ├── routes/  
@@ -51,16 +77,23 @@ devcourses-store/
 │   │   │   ├── tests-collection-postman/  
 │   │   │   ├── server.ts  
 │   │   │   └── app.ts  
-|   ├── frontend/ 
-│   │   ├── devcourses/  
-│   │   │   ├── tsconfig.json 
-│   │   │   ├── package.json 
-│   │   │   ├── public/ 
-|   │   |   └── src/
-│   │   │   │   ├── components/ 
-│   │   │   │   ├── app.tsx  
-│   │   │   │   └── main.tsx  
-├── docker/ 
+|   ├── frontend/               → SPA React + Vite
+│   │   ├── tsconfig.json 
+│   │   ├── package.json 
+│   |   └── src/
+│   │   │  ├── components/ 
+│   │   │  ├── contexts/ 
+│   │   │  ├── features/ 
+│   │   │  ├── mocks/ 
+│   │   │  ├── routes/ 
+│   │   │  ├── services/ 
+│   │   │  ├── pages/ 
+│   │   │  ├── styles/ 
+│   │   │  ├── utils/ 
+│   │   │  ├── App.tsx 
+│   │   │  └── main.tsx
+├── backend-conatiner.dockerfile
+├── frontend-conatiner.dockerfile
 ├── docker-compose.yml
 ├── .gitignore
 ├── tsconfig.json
@@ -73,8 +106,9 @@ devcourses-store/
 
 ## 🛠️ Tecnologías
 
-- **Dominio:** TypeScript + TDD
+- **Dominio:** TypeScript + TDD + Clean Architecture  
 - **Backend:** Node.js + Express + Prisma + PostgreSQL
+- **Pagos:** MercadoPago (checkout + webhooks)  
 - **Frontend:** React + Vite + TypeScript
 - **Testing:** Vitest 
 - **Contenedores:** Docker & Docker Compose
@@ -94,7 +128,7 @@ cd devcourses-store
 
 🔸 2. Levantar la base de datos PostgreSQL
 
-Si tenés Docker Compose, podés levantar el servicio de base de datos fácilmente (todavía por implementarse):
+Si tenés Docker Compose, podés levantar el servicio de base de datos fácilmente:
 
 ```
 docker-compose up -d
@@ -108,7 +142,7 @@ Si preferís levantarlo manualmente:
 docker run --name devcourses-db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=<tu-password> -e POSTGRES_DB=devcourses -p 5432:5432 -d postgres
 ```
 
-🔸 3. Instalar dependencias
+🔸 3. Instalar dependencias manualmente (sin Docker compose)
 
 Instalá las dependencias de la raíz y de cada paquete:
 
@@ -131,7 +165,7 @@ Luego ejecutá las migraciones:
 
 ```
 cd apps/backend
-npx prisma migrate dev
+npm run prisma:migrate
 ```
 
 Y opcionalmente, generá el cliente de Prisma:
@@ -146,14 +180,14 @@ npx prisma generate
 npm run dev
 ```
 
-Por defecto se levanta en http://localhost:3000
+Por defecto se levanta en http://localhost:4000
 
 🔸 6. Ejecutar el frontend
 
 En otra terminal:
 
 ```
-cd apps/frontend/devcourses
+cd apps/frontend
 npm run dev
 ```
 
@@ -174,7 +208,7 @@ El proyecto sigue los principios de **Clean Architecture**, separando:
 | **Presentation**           | Interfaz de usuario (SPA)                                           | `apps/frontend/`          |
 
 
-
+El dominio desconoce completamente Express, Prisma, MP, JWT, etc.
 Esto facilita el testing, la mantenibilidad y la extensibilidad del sistema.
 
 ---
@@ -182,7 +216,10 @@ Esto facilita el testing, la mantenibilidad y la extensibilidad del sistema.
 ## 🧪 Testing
 
 El proyecto utiliza **Vitest** para pruebas unitarias y de integración.
-Los tests del dominio cubren entidades, casos de uso y servicios mockeados.
+Los tests están escritos en Vitest, enfocados principalmente en:
+- Entidades
+- Casos de uso
+- Servicios mockeados del dominio
 
 Para ejecutar las pruebas:
 
@@ -196,8 +233,17 @@ npm test
 
 ## 🚧 Estado del proyecto
 
-Actualmente en **fase media de desarrollo**.  
-Se irán agregando **issues**, **features** y **tests** progresivamente.
+Actualmente en **fase final de desarrollo**.  
+
+- ✔️ Carrito  
+- ✔️ Login + roles  
+- ✔️ CRUD de cursos  
+- ✔️ Checkout completo con MercadoPago  
+- ✔️ Webhooks funcionales  
+- ✔️ Arquitectura limpia implementada  
+- ⬜ Tests de integración end-to-end (próximo paso)  
+- ⬜ Mejoras de UI en el frontend  
+
 
 ---
 
