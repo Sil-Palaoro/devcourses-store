@@ -6,6 +6,7 @@ import categoriesRouter from "./routes/category.routes";
 import cartRouter from "./routes/cart.routes";
 import orderRouter from "./routes/order.routes";
 import paymentRouter from "./routes/payment.routes";
+import checkoutRouter from "./routes/checkout.routes";
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use("/api/categories", categoriesRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/payments", paymentRouter);
+app.use("/api/checkout", checkoutRouter);
 
 
 

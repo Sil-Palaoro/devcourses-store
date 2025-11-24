@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { PaymentController } from "../controllers/payment.controller";
+import { CheckoutController } from "../controllers/checkout.controller";
+import { MercadoPagoWebhookController } from "../controllers/mercadopago-webhook.controller";
 import { authMiddleware } from "../middlewares/authMiddleware";
 import { authorizeRoles } from "../middlewares/roleMiddleware";
 import { UserRole } from "@devcourses/domain";
@@ -14,21 +15,11 @@ router.post(
     "/", 
     authMiddleware, 
     authorizeRoles(STUDENT, ADMIN), 
-    PaymentController.createPayment
+    CheckoutController.start
 );
 
 router.post(
-    "/complete", 
-    authMiddleware, 
-    authorizeRoles(STUDENT, ADMIN), 
-    PaymentController.completePayment
+    "/webhook/mercadopago",
+    MercadoPagoWebhookController.listen
 );
-
-router.post(
-    "/fail", 
-    authMiddleware, 
-    authorizeRoles(STUDENT, ADMIN), 
-    PaymentController.failPayment
-);
-
 export default router;
