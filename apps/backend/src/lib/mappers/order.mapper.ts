@@ -32,7 +32,7 @@ export const orderMapper = {
         if(order.totalAmount) data.totalAmount = order.totalAmount;
         if(order.currency) data.currency = order.currency;
         if(order.status) data.status = order.status;
-        if(order.paymentId) data.paymentId = order.paymentId;
+        if(order.paymentId !== undefined) data.paymentId = order.paymentId;
         if(order.paymentMethod) data.paymentMethod = order.paymentMethod;
 
         if (order.items&& order.items.length > 0){

@@ -28,7 +28,7 @@ export async function failPayment({ dependencies, payload }: FailPaymentData): P
     const failedPayment = await paymentService.failPayment(paymentId, providerPaymentId);
     if (!failedPayment) return new Error("No se pudo marcar el pago como fallido");
 
-    const updatedOrder = await orderService.updateStatus(orderId, "failed");
+    const updatedOrder = await orderService.updateStatus(orderId, "failed", failedPayment.id);
 
     if (!updatedOrder) return new Error("No se pudo actualizar el status de la orden");
 

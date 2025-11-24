@@ -30,15 +30,16 @@ export const prismaOrderServiceImplementation: OrderService = {
         });               
         return orderMapper.toDomain(created); 
     },
-    async updateStatus(orderId, status) {
+    async updateStatus(orderId, status, paymentId) {
         const existingOrder = await db.order.findUnique({ where: { id: orderId } });
         if (!existingOrder) return undefined;
 
         const updatedorder = await db.order.update({ 
             where: {id: orderId}, 
-            data: orderMapper.toPrismaUpdate({ status: status }),
+            data: orderMapper.toPrismaUpdate({ status, paymentId }),
             include: { items: true },
         });
+
         return orderMapper.toDomain(updatedorder);
     },
 
