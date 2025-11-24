@@ -10,10 +10,3 @@ export interface PaymentService extends ReadOnlyService<Payment>{
     getPaymentsForOrder: (orderId: string) => Promise<Payment[]>;
     getPaymentsForUser: (userId: string) => Promise<Payment[]>;
 };
-
-
-// import { OrderStatus } from "src/entities/order";
-
-    // processPayment: (paymentData: string) => Promise<Payment | undefined>;
-    // validateWebHook: (webHookPayload: string) => void;
-    // updatePaymentStatus: (paymentId: string, status: OrderStatus) => void;
