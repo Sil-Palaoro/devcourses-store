@@ -29,6 +29,17 @@ export const mercadoPagoPaymentService: ProviderPaymentService = {
         };
     },
 
+    async getPaymentData(providerPaymentId): Promise<MercadoPagoPaymentResponse> {
+        const url = `https://api.mercadopago.com/v1/payments/${providerPaymentId}`;
+        const response = await axios.get(url, {
+            headers: {
+                    Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`
+            }
+        });
+
+        return response.data as MercadoPagoPaymentResponse;
+    },
+
     async getPaymentStatus(providerPaymentId) {
         const response = await axios.get(
             `https://api.mercadopago.com/v1/payments/${providerPaymentId}`,
