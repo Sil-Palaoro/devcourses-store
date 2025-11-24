@@ -1,8 +1,9 @@
 import axios from "axios";
 import { ProviderPaymentService } from "@devcourses/domain";
+import { MercadoPagoPaymentResponse } from "../../types/MercadoPagoPaymentResponse.type";
 
 export const mercadoPagoPaymentService: ProviderPaymentService = {
-    async createPayment({ paymentId, orderId, amount, currency}) {
+    async createPayment({ paymentId, orderId, amount}) {
         const response = await axios.post(
             "https://api.mercadopago.com/checkout/preferences",
             {
@@ -14,7 +15,7 @@ export const mercadoPagoPaymentService: ProviderPaymentService = {
                     },
                 ],
                 external_reference: orderId,
-                metadata: { paymentId },
+                metadata: { paymentId: paymentId },
             },
             {
                 headers: {
