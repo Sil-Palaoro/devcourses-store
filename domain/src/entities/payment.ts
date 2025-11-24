@@ -42,5 +42,4 @@ export interface CreatePaymentProviderDTO {
     orderId: string,
     userId: string,
     amount: number,
-    currency: "ARS", 
 }

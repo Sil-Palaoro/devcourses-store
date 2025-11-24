@@ -31,7 +31,6 @@ export class PaymentDomainService {
             userId: data.userId,
             orderId: data.orderId,
             amount: data.amount,
-            currency: data.currency
         });
 
         return {
