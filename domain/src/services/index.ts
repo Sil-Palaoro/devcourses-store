@@ -5,3 +5,6 @@ export * from "./cart-service.js";
 export * from "./enrollment-service.js";
 export * from "./order-service.js";
 export * from "./payment-service.js";
+export * from "./provider-payment-service.js";
+export * from "./payment-domain-service.js";
+

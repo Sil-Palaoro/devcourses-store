@@ -47,6 +47,7 @@ export * from "./order/refund-order.js";
 export * from "./payment/complete-payment.js";
 export * from "./payment/create-payment.js";
 export * from "./payment/fail-payment.js";
+export * from "./payment/sync-payment-status.js";
 
 
 //enrollment use-cases
