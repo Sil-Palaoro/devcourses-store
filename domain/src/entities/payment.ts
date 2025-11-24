@@ -36,3 +36,11 @@ export interface CreatePaymentDTO {
     userId: Entity["id"];
     provider: Provider; 
 }
+
+export interface CreatePaymentProviderDTO {
+    paymentId: string,
+    orderId: string,
+    userId: string,
+    amount: number,
+    currency: "ARS", 
+}
