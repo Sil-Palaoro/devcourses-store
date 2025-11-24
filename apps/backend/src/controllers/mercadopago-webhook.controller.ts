@@ -7,6 +7,60 @@ import axios from "axios";
 export class MercadoPagoWebhookController {
     static async listen(req: Request, res: Response) {
         try {
+            //TEST MODE: si viene simulatedStatus, usamos datos del body
+            console.log("BODY RECIBIDO:", req.body);
+
+            if (req.body.simulatedStatus) {
+                console.log("Simulando webhook de MP..");
+
+                const { paymentId, providerPaymentId, orderId } = req.body;
+
+                const { simulatedStatus } = req.body ?? {};
+
+                if (!simulatedStatus) {
+                  return res.status(400).json({
+                    message: "simulatedStatus is required for test requests"
+                  });
+                }
+
+                if (!paymentId || !orderId) {
+                    return res.status(400).json({ message: "paymentId y orderId son obligatorios en test mode" });
+                };
+                if (simulatedStatus === "approved") {
+                    await completePayment({
+                        dependencies: {
+                            paymentService: prismaPaymentServiceImplementation,
+                            orderService: prismaOrderServiceImplementation
+                        },
+                        payload: {
+                            orderId,
+                            paymentId,
+                            providerPaymentId: providerPaymentId ?? "SIMULATED_MP_ID"
+                        }
+                    });
+
+                } else if (simulatedStatus === "rejected") {
+                    await failPayment({
+                        dependencies: {
+                            paymentService: prismaPaymentServiceImplementation,
+                            orderService: prismaOrderServiceImplementation
+                        },
+                        payload: {
+                            orderId,
+                            paymentId,
+                            providerPaymentId: providerPaymentId ?? "SIMULATED_Rejected_MP_ID"
+                        }
+                    });
+                }
+
+                return res.status(200).json({ ok: true, simulated: true });
+            }
+
+
+
+
+            //PRODUCTION MODE
+
             //Respuesta de MercadoPago: action (payment.updated), data(id)
             const { action, data } = req.body;
             const paymentProviderId = data?.id;
