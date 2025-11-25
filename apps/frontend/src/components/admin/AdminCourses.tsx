@@ -103,8 +103,13 @@ export const AdminCourses: React.FC = () => {
 
   const handleDelete = async (id: string) => {
     if (window.confirm("¿Eliminar este curso?")) {
-      await courseService.deleteCourse(id);
-      setCourses((prev) => prev.filter((c) => c.id !== id));
+      try {
+        await courseService.deleteCourse(id);
+        setCourses((prev) => prev.filter((c) => c.id !== id));
+      } catch (error) {
+        alert(`Error al borrar el curso: ${error}`)
+      }
+
     }
   };
 
