@@ -167,7 +167,13 @@ export class CourseController {
           });
         res.status(200).json({ message: "Course deleted successfully"});
       } catch (error: any) {
-        res.status(500).json({ message: error.message });
+        if (error.code === "P2003") {
+          res.status(500).json({ 
+            message: `No se puede borrar este curso porque tiene órdenes o inscripciones asociadas. Podés despublicarlo (published = false) si querés ocultarlo. Error: ${error.message}` 
+          });
+        } else {
+          res.status(500).json({ message: error.message });
+        }
       }
     }
 }

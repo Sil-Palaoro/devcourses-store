@@ -32,7 +32,10 @@ export const prismaCourseServiceImplementation: CourseService = {
         return updatedCourse;
     },
     async delete(id) {
-        await db.course.delete({ where: { id: id } });
+        await db.course.update({ 
+            where: { id: id },
+            data: { published: false }
+        });
         return;
     }
 }
