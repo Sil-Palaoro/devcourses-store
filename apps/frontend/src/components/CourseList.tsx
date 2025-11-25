@@ -31,9 +31,12 @@ const CourseList: React.FC<CourseListProps> = ({ courses }) => {
                     <div className="border-t border-accent/40 mb-8" />
 
                     <div className="space-y-6">
-                        {courses.map((course) => (
-                            <CourseCard key={course.id} course={course} />
-                        ))}
+                        {courses
+                            .filter(course => course.published)
+                            .map(course => (
+                                <CourseCard key={course.id} course={course} />
+                            ))
+                        }
                     </div>
                 </section>
             ))}
