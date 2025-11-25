@@ -33,7 +33,7 @@ const Home: React.FC = () => {
       {/* ------------------------ HERO -------------------------------- */}
       <section id="home" className="relative h-[60vh] flex items-center justify-center scroll-mt-28">
         <img
-          src="src/public/hero-bg-4.avif"
+          src="/hero-bg-4.avif"
           alt="Background hero"
           className="absolute inset-0 w-full h-full object-cover opacity-90 blur-sm"
         />
