@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
-import { CategoriesNames, createCourse, CreateCourseDTO } from "@devcourses/domain";
+import { CategoriesNames, createCourse, CreateCourseDTO, CreateUserDTO, registerUser } from "@devcourses/domain";
 import { prismaCourseServiceImplementation } from "../src/services/prisma-course-service-implementation";
-
+import { prismaUserServiceImplementation } from "../src/services/prisma-user-service-implementation";
 
 const db = new PrismaClient();
 
@@ -96,6 +96,21 @@ async function main() {
     }
 
     console.log("Courses seeded");
+
+    const adminUser: CreateUserDTO = {
+        name: "Sil",
+        surname: "Admin",
+        email: "siladmin@gmail.com",
+        password: "Pass1234",
+        role: "admin"
+    }
+
+    await registerUser({
+            dependencies: { userService: prismaUserServiceImplementation }, 
+            payload: adminUser 
+        });     
+
+    console.log("Admin seeded");
 
 }
 
