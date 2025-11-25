@@ -117,6 +117,48 @@ devcourses-store/
 
 ---
 
+
+## 🎨 Vista previa del Frontend
+
+A continuación algunas capturas principales de la aplicación:
+
+
+| Home | Cursos | Carrito |
+|------|--------|---------|
+| ![](apps/frontend/public/home.png) | ![](apps/frontend/public/courses.png) | ![](apps/frontend/public/cart.png) |
+
+| Checkout | Register | Panel Admin |
+|----------|--------|--------------|
+| ![](apps/frontend/public/payment-successful.png) | ![](apps/frontend/public/register.png) | ![](apps/frontend/public/admin-panel.png) |
+
+
+---
+
+
+## 🧩 Funcionalidades del Frontend
+
+- SPA construida con React + Vite + TypeScript
+
+- Navegación con React Router
+
+- Gestión del carrito con estado global + persistencia
+
+- Render dinámico de cursos agrupados por nivel
+
+- Protección de rutas según rol (admin / student / instructor)
+
+- Manejo de errores y loaders
+
+- Diseño responsive mobile → desktop
+
+- Panel de Administración de cursos y usuarios 
+
+- Integración completa con el backend (login, cursos, carrito, checkout)
+
+
+---
+
+
 ## ⚙️ Cómo ejecutar el proyecto localmente
 
 🔸 1. Clonar el repositorio
