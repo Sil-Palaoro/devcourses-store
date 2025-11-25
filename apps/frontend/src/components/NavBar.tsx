@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 import { useAuth } from "../contexts/AuthContext";
 import { useAuthModals } from "../contexts/AuthModalContext";
 import { Button } from "./Button";
@@ -12,29 +13,42 @@ function NavBar() {
         <header className="fixed top-0 left-0 w-full z-50 bg-dark/95 backdrop-blur-sm border-b border-transparent shadow-md">
            <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
             <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-neon drop-shadow-[0_0_10px_rgba(255,0,255,0.5)] hover:text-fucsiaNeon transition-colors">
-                <Link to="/" title="DevCourses Store">
+                <HashLink 
+                  to="/#home" 
+                  title="DevCourses Store"
+                >
                   DevCourses Store
-                </Link>
+                </HashLink>
             </h1>
             <nav>
                 <ul className="flex items-center gap-6 text-sm font-medium">
                     <li >
-                      <Link 
+                      <HashLink 
                         title="Home" 
-                        to="/" 
+                        to="/#home" 
                         className="hover:text-fucsiaNeon transition-colors"
                         >
                           Home
-                      </Link>
+                      </HashLink>
                     </li>          
                     <li>
-                      <Link 
-                        to="/#courses" 
+                      <HashLink smooth 
+                        to="/#courses"  
                         title="Cursos"
                         className="hover:text-fucsiaNeon transition-colors"
                         >
                           Cursos
-                      </Link>
+                      </HashLink>
+                    </li>   
+
+                    <li>
+                      <HashLink smooth 
+                        to="/#about-us"  
+                        title="Sobre Nosotros"
+                        className="hover:text-fucsiaNeon transition-colors"
+                        >
+                          Conocenos
+                      </HashLink>
                     </li>                    
 
                     {isAuthenticated ? (

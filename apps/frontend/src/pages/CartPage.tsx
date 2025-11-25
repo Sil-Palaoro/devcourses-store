@@ -32,10 +32,17 @@ const CartPage: React.FC = () => {
                         cartItems={cart.items} 
                         onRemoveItem={removeItem} 
                     />
-                    <div className="flex justify-between items-center mt-6 border-t border-gray-700 pt-4">
+                    <div className=" mt-6 border-t border-gray-700 pt-4">
+                        <p className="text-xl font-semibold mb-6">
+                            Método de pago: MercadoPago
+                        </p>
+                    </div>
+                    <div className="flex justify-between items-center">
                         <p className="text-xl font-semibold">
                             Total: ${total?.toFixed(2)}
                         </p>
+                        <br/>
+
                         <Button 
                             label={loading ? "Cargando.." : "Confirmar compra"} 
                             onClick={() => navigate("/checkout")} 

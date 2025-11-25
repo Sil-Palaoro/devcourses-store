@@ -8,6 +8,12 @@ import { courseService } from "../services/courseService";
 import { useAuthModals } from "../contexts/AuthModalContext";
 import { useCart } from "../contexts/CartContext";
 
+const levelLabels: Record<string, string> = {
+    beginner: "Inicial",
+    intermediate: "Intermedio",
+    advanced: "Avanzado"
+};
+
 
 const CourseDetailPage: React.FC = () => {
     const { userId, isAuthenticated, userRole } = useAuth();
@@ -81,10 +87,10 @@ const CourseDetailPage: React.FC = () => {
     return (
         <main className="max-w-6xl mx-auto py-8 px-4">
             <h1 className="text-3xl font-bold mb-4">{course.title}</h1>
-            <p>Nivel del curso: {course.courseLevel}</p>
-            <p>Lenguaje: {course.tag}</p>
+            <p className="text-lg mb-4">Nivel del curso: {levelLabels[course.courseLevel]}</p>
+            <p className="text-lg mb-4">Lenguaje: {course.tag}</p>
             <p className="text-gray-400 mb-8">{course.description}</p>
-            <p>Precio: $ {course.price}</p>
+            <p className="text-lg mb-4">Precio: $ {course.price}</p>
             <Button 
                 primary={false} 
                 label={loading ? "Agregando.." : "Añadir al carrito"} 
