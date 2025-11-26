@@ -173,6 +173,7 @@ cd devcourses-store
 Si tenés Docker Compose, podés levantar el proyecto fácilmente:
 
 🔸 1. Armar tus .env
+
 Debes tener un archivo .env en el root y en la carpeta apps/frontend y con tus propias variables de entorno. Ej:
 
 En el root:
@@ -198,6 +199,7 @@ En apps/frontend/.env
 VITE_API_BASE_URL="http://localhost:8080/api"
 ```
 
+
 🔸 2. Levantar el container
 
 
@@ -206,6 +208,7 @@ docker-compose up -d
 ```
 
 Esto iniciará un contenedor con los tres servicios usando las variables de entorno definidas en los .env.
+
 
 🔸 3. Armar y poblar base de datos
 
@@ -250,6 +253,7 @@ apps/frontend/.env
 VITE_API_BASE_URL="http://localhost:4000/api"
 ```
 
+
 🔸 2. Instalar dependencias manualmente 
 
 Instalá las dependencias de la raíz y de cada paquete:
@@ -271,6 +275,7 @@ Asegurate de transpilar el domain para que el frontend y backend puedan usar las
 cd domain
 npm run build
 ```
+
 
 🔸 4. Configurar Prisma y la base de datos
 
@@ -294,6 +299,7 @@ npm run dev
 ```
 
 Por defecto se levanta en http://localhost:4000
+
 
 🔸 6. Ejecutar el frontend
 
