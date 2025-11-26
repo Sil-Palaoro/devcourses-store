@@ -168,7 +168,7 @@ git clone https://github.com/Sil-Palaoro/devcourses-store.git
 cd devcourses-store
 ```
 
-# Con Docker Compose
+### Con Docker Compose
 
 Si tenés Docker Compose, podés levantar el proyecto fácilmente:
 
@@ -218,7 +218,7 @@ npm run seed
 ```
 
 
-# Instalación manual
+### Instalación manual
 
 
 🔸 1. Requisitos previos 
