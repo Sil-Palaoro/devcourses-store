@@ -63,7 +63,7 @@ enum Tag {
 
 model Course {
   id           String      @id @default(uuid())
-  title        String
+  title        String      @unique
   description  String
   price        Int
   categoryId   String
