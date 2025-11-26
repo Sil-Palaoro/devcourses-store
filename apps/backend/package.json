@@ -10,7 +10,7 @@
     "prisma:migrate": "prisma migrate dev --name init",
     "test:prepare": "prisma generate --schema=prisma/schema.test.prisma && prisma db push --schema=prisma/schema.test.prisma",
     "test": "npm run test:prepare && vitest",
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "node dist/prisma/seed.js"
   },
   "keywords": [],
   "author": "",
