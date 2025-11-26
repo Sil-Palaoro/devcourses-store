@@ -161,49 +161,120 @@ A continuación algunas capturas principales de la aplicación:
 
 ## ⚙️ Cómo ejecutar el proyecto localmente
 
-🔸 1. Clonar el repositorio
+🔸 Clonar el repositorio
 
 ```
 git clone https://github.com/Sil-Palaoro/devcourses-store.git
 cd devcourses-store
 ```
 
-🔸 2. Levantar la base de datos PostgreSQL
+# Con Docker Compose
 
-Si tenés Docker Compose, podés levantar el servicio de base de datos fácilmente:
+Si tenés Docker Compose, podés levantar el proyecto fácilmente:
+
+🔸 1. Armar tus .env
+Debes tener un archivo .env en el root y en la carpeta apps/frontend y con tus propias variables de entorno. Ej:
+
+En el root:
+
+```
+#Para docker:
+# Database
+DB_USER=<tu-usuario-postgres>
+DB_PASSWORD=<tu-password-postgres>
+DB_NAME=devcoursesdb
+DB_PORT=5432
+
+
+# Prisma / backend DB URL
+DATABASE_URL="postgresql://<tu-usuario-postgres>:<tu-password-postgres>@db:5432/devcoursesdb?schema=public"
+
+```
+
+En apps/frontend/.env
+
+```
+# Para docker: Frontend
+VITE_API_BASE_URL="http://localhost:8080/api"
+```
+
+🔸 2. Levantar el container
+
 
 ```
 docker-compose up -d
 ```
 
-Esto iniciará un contenedor con PostgreSQL usando las variables de entorno definidas en .env.
+Esto iniciará un contenedor con los tres servicios usando las variables de entorno definidas en los .env.
 
-Si preferís levantarlo manualmente:
+🔸 3. Armar y poblar base de datos
+
+Para tener la base lista para usar, con un ususario admin creado y algunos cursos ya listos para probar, corre los siguientes comandos.
 
 ```
-docker run --name devcourses-db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=<tu-password> -e POSTGRES_DB=devcourses -p 5432:5432 -d postgres
+docker compose exec backend bash
+cd apps/backend
+npm run seed
 ```
 
-🔸 3. Instalar dependencias manualmente (sin Docker compose)
+
+# Instalación manual
+
+
+🔸 1. Requisitos previos 
+
+Si preferís levantarlo manualmente, debes tener ya en ejecución Postgres localmente y crear una base de datos con el nombre "devcoursesdb". 
+
+Asegurate de tener los archivos .env dentro de apps/backend/ y apps/frontend/ 
+
+En los archivos .env del backend y frontend debes tener algo así:
+
+apps/backend/.env
+
+```
+DATABASE_URL="postgresql://<tu-usuario-postgres>:<tu-password-postgres>@localhost:5432/devcoursesdb?schema=public"
+PORT=4000
+
+POSTGRES_USER=<tu-usuario-postgres>
+POSTGRES_PASSWORD=<tu-password-postgres>
+POSTGRES_DB=devcoursesdb
+DB_PORT=5432
+
+SECRET_KEY="una_clave_segura_y_larga"
+
+```
+
+apps/frontend/.env
+
+```
+VITE_API_BASE_URL="http://localhost:4000/api"
+```
+
+🔸 2. Instalar dependencias manualmente 
 
 Instalá las dependencias de la raíz y de cada paquete:
 
 ```
 npm install
-cd apps/backend && npm install
-cd ../frontend/devcourses && npm install
+cd domain && npm install
+cd ../apps/backend && npm install
+cd ../frontend && npm install
+```
+
+
+🔸 3. Transpilar código typescript a javascrip del dominio
+
+Asegurate de transpilar el domain para que el frontend y backend puedan usar las entidades, servicios y casos de uso del domain 
+
+
+```
+cd domain
+npm run build
 ```
 
 🔸 4. Configurar Prisma y la base de datos
 
-Asegurate de tener un archivo .env dentro de apps/backend/ con la URL de conexión a tu base de datos:
-
-```
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/devcourses"
-JWT_SECRET="tu_clave_secreta"
-```
-
-Luego ejecutá las migraciones:
+Ejecutá las migraciones:
 
 ```
 cd apps/backend
@@ -285,6 +356,7 @@ Actualmente en **fase final de desarrollo**.
 - ✔️ Arquitectura limpia implementada  
 - ⬜ Tests de integración end-to-end (próximo paso)  
 - ⬜ Mejoras de UI en el frontend  
+- ⬜ Mejoras en el Admin Panel
 
 
 ---
