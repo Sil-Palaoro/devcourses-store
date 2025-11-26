@@ -14,7 +14,7 @@ COPY apps/backend ./apps/backend
 COPY apps/backend/prisma ./apps/backend/prisma
 
 RUN npm run build --prefix ./domain
-RUN npm run prisma:generate --prefix ./apps/backend
+RUN npm run prisma:migrate --prefix ./apps/backend
 RUN npm run build --prefix ./apps/backend 
 
 
