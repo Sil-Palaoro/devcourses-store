@@ -188,7 +188,7 @@ DB_PORT=5432
 
 
 # Prisma / backend DB URL
-DATABASE_URL="postgresql://<tu-usuario-postgres>:<tu-password-postgres>@db:5432/devcoursesdb?schema=public"
+DATABASE_URL=postgresql://<tu-usuario-postgres>:<tu-password-postgres>@db:5432/devcoursesdb?schema=public
 
 ```
 
@@ -212,13 +212,17 @@ Esto iniciará un contenedor con los tres servicios usando las variables de ento
 
 🔸 3. Armar y poblar base de datos
 
-Para tener la base lista para usar, con un ususario admin creado y algunos cursos ya listos para probar, corre los siguientes comandos.
+Para tener la base lista para usar, con un usuario admin creado y algunos cursos ya listos para probar, corré los siguientes comandos.
 
 ```
 docker compose exec backend bash
 cd apps/backend
+npx prisma migrate deploy
+cd prisma
 npm run seed
 ```
+
+Los datos del usuario Admin se encuentran en el archivo seed.ts.
 
 
 ### Instalación manual
@@ -235,7 +239,7 @@ En los archivos .env del backend y frontend debes tener algo así:
 apps/backend/.env
 
 ```
-DATABASE_URL="postgresql://<tu-usuario-postgres>:<tu-password-postgres>@localhost:5432/devcoursesdb?schema=public"
+DATABASE_URL=postgresql://<tu-usuario-postgres>:<tu-password-postgres>@localhost:5432/devcoursesdb?schema=public
 PORT=4000
 
 POSTGRES_USER=<tu-usuario-postgres>
@@ -292,16 +296,29 @@ Y opcionalmente, generá el cliente de Prisma:
 npx prisma generate
 ```
 
-🔸 5. Ejecutar el backend
+🔸 5. Armar y poblar base de datos
+
+Para tener la base lista para usar, con un usuario admin creado y algunos cursos ya listos para probar, corre los siguientes comandos.
 
 ```
+cd apps/backend/prisma
+npm run seed
+```
+
+Los datos del usuario Admin se encuentran en el archivo seed.ts.
+
+
+🔸 6. Ejecutar el backend
+
+```
+cd..
 npm run dev
 ```
 
 Por defecto se levanta en http://localhost:4000
 
 
-🔸 6. Ejecutar el frontend
+🔸 7. Ejecutar el frontend
 
 En otra terminal:
 
