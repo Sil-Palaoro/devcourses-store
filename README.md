@@ -192,6 +192,13 @@ DATABASE_URL=postgresql://<tu-usuario-postgres>:<tu-password-postgres>@db:5432/d
 
 ```
 
+En apps/backend/.env
+
+```
+DATABASE_URL=postgresql://<tu-usuario-postgres>:<tu-password-postgres>@db:5432/devcoursesdb?schema=public
+PORT=4000
+```
+
 En apps/frontend/.env
 
 ```
@@ -251,7 +258,7 @@ SECRET_KEY="una_clave_segura_y_larga"
 
 ```
 
-apps/frontend/.env
+En apps/frontend/.env
 
 ```
 VITE_API_BASE_URL="http://localhost:4000/api"
