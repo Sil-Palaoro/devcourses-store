@@ -211,7 +211,7 @@ VITE_API_BASE_URL="http://localhost:8080/api"
 
 
 ```
-docker-compose up -d
+docker compose up -d
 ```
 
 Esto iniciará un contenedor con los tres servicios usando las variables de entorno definidas en los .env.
